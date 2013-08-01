@@ -1,0 +1,4 @@
+timsa_control_fletes:
+    resource: "@TimsaControlFletesBundle/Resources/config/routing.yml"
+    prefix:   /
+

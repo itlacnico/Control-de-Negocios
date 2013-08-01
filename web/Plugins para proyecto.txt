@@ -1,0 +1,17 @@
+Formas
+
+http://bootsnipp.com/snipps/compact-contact-form
+
+Tablas con figuras
+
+http://bootsnipp.com/snipps/table-with-users
+
+ajax optimizado
+
+http://uk013.gondor.co/
+
+http://vitalets.github.io/x-editable/
+
+Visualizacion de imagenes al subir
+
+http://blueimp.github.io/jQuery-File-Upload/

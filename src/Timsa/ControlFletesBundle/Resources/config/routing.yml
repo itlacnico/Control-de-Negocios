@@ -1,0 +1,27 @@
+_homepage:
+    pattern:  /
+    defaults: { _controller: TimsaControlFletesBundle:Principal:index }
+
+_operadores:
+    pattern: /operador
+    defaults: { _controller: TimsaControlFletesBundle:Operador:index }
+
+_socios:
+    pattern: /socio
+    defaults: { _controller: TimsaControlFletesBundle:Socio:index }
+
+_economicos:
+    pattern: /economico
+    defaults: {_controller: TimsaControlFletesBundle:Economico:index }
+
+_clientes:
+    pattern: /cliente
+    defaults: {_controller: TimsaControlFletesBundle:Cliente:index }
+
+_cuotas:
+    pattern: /cuota
+    defaults: {_controller: TimsaControlFletesBundle:Cuota:index }
+
+_fletes:
+    pattern: /flete
+    defaults: {_controller: TimsaControlFletesBundle:Flete:index }
