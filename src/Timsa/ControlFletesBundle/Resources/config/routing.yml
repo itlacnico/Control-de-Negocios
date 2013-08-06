@@ -6,6 +6,10 @@ _operadores:
     pattern: /operador
     defaults: { _controller: TimsaControlFletesBundle:Operador:index }
 
+_crearOperador:
+    pattern: /operador/crear
+    defaults: {_controller: TimsaControlFletesBundle:Operador:create}
+
 _socios:
     pattern: /socio
     defaults: { _controller: TimsaControlFletesBundle:Socio:index }

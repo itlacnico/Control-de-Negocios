@@ -142,9 +142,17 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\PrincipalController::indexAction',  '_route' => '_homepage',);
         }
 
-        // _operadores
-        if ($pathinfo === '/operador') {
-            return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\OperadorController::indexAction',  '_route' => '_operadores',);
+        if (0 === strpos($pathinfo, '/operador')) {
+            // _operadores
+            if ($pathinfo === '/operador') {
+                return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\OperadorController::indexAction',  '_route' => '_operadores',);
+            }
+
+            // _crearOperador
+            if ($pathinfo === '/operador/crear') {
+                return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\OperadorController::createAction',  '_route' => '_crearOperador',);
+            }
+
         }
 
         // _socios

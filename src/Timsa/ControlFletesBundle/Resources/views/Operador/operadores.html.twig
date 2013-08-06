@@ -3,14 +3,18 @@
 {% block header %}
 
 <div class="page-header">
-  <h1>Operadores</h1>
+  <h1 >Operadores</h1>
 </div>
 
- {% endblock %}
+<div>
+	<img class="col-lg-3 col-lg-offset-4" src="{{ asset('images/logo.png') }}">
+</div>
+
+{% endblock %}
 
 {% block content %}
 	<div class="container">
-		<img src="{{ asset('images/logo.png') }}"> <br>
-		<a href=""><button class="btn btn-default btn-large">Crear Flete</button></a>
+		
+		<a href="{{ path('_crearOperador') }}"><button class="btn btn-default btn-large">Crear Operador</button></a>
 	</div>
 {% endblock %}

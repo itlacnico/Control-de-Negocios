@@ -1,0 +1,47 @@
+{% extends 'TimsaControlFletesBundle::layout.html.twig' %}
+
+{% block header %}
+
+<div class="page-header">
+  <h1>{{action}}</h1>
+</div>
+
+ {% endblock %}
+
+{% block content %}
+	<div class="container">
+
+		{{form_start(form, {'attr': {'class': 'well col-lg-5'  }} ) }}
+			{{form_errors(form)}}
+
+			<div class="form-group">
+				{{form_label(form.nombre,  'Nombre'  )}}
+				{{form_widget(form.nombre, {'attr':{'class' : 'form-control'}}) }}
+			</div>
+
+			<div class="form-group">
+				{{form_label(form.telefono,  'Telefono'  )}}
+				{{form_widget(form.telefono, {'attr':{'class' : 'form-control'}}) }}
+			</div>
+
+			<div class="form-group">
+				{{form_label(form.CURP,  'CURP'  )}}
+				{{form_widget(form.CURP, {'attr':{'class' : 'form-control'}}) }}
+			</div>
+
+
+			<div class="form-group">
+				{{form_label(form.RC,  'R.C.'  )}}
+				{{form_widget(form.RC, {'attr':{'class' : 'form-control'}}) }}
+			</div>
+
+
+
+			 {{ form_rest(form) }}
+			 <button type="submit" class="btn btn-default">Submit</button>
+			 <a href="{{path('_operadores')}}"><button type="reset" class="btn btn-danger"> Volver</button></a>
+		{{form_end(form)}}
+
+	</div>
+
+{% endblock %}
