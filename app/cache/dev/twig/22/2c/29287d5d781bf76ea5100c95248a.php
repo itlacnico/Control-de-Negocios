@@ -43,6 +43,15 @@ class __TwigTemplate_222c29287d5d781bf76ea5100c95248a extends Twig_Template
         // line 6
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("css/bootstrap.css"), "html", null, true);
         echo "\" type=\"text/css\" rel=\"stylesheet\" />
+    <link href=\"";
+        // line 7
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("css/bootstrap-glyphicons.css"), "html", null, true);
+        echo "\" type=\"text/css\" rel=\"stylesheet\" />
+    <link href=\"";
+        // line 8
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("css/docs.css"), "html", null, true);
+        echo "\" type=\"text/css\" rel=\"stylesheet\" />
+
     <style type=\"text/css\">
     \tfooter {
     \t   position:absolute;
@@ -55,36 +64,36 @@ class __TwigTemplate_222c29287d5d781bf76ea5100c95248a extends Twig_Template
 ";
     }
 
-    // line 18
+    // line 21
     public function block_body($context, array $blocks = array())
     {
-        // line 19
+        // line 22
         echo "\t";
         $this->displayBlock('navigationBar', $context, $blocks);
-        // line 59
-        echo "
-\t";
-        // line 60
-        $this->displayBlock('header', $context, $blocks);
         // line 62
         echo "
 \t";
         // line 63
-        $this->displayBlock('content', $context, $blocks);
+        $this->displayBlock('header', $context, $blocks);
         // line 65
         echo "
 \t";
         // line 66
+        $this->displayBlock('content', $context, $blocks);
+        // line 68
+        echo "
+\t";
+        // line 69
         $this->displayBlock('footer', $context, $blocks);
-        // line 71
+        // line 74
         echo "
 ";
     }
 
-    // line 19
+    // line 22
     public function block_navigationBar($context, array $blocks = array())
     {
-        // line 20
+        // line 23
         echo "
 \t\t<div class=\"navbar navbar-inverse\">
 
@@ -96,7 +105,7 @@ class __TwigTemplate_222c29287d5d781bf76ea5100c95248a extends Twig_Template
 \t\t\t</button>
 
 \t\t  <a class=\"navbar-brand\" href=\"";
-        // line 30
+        // line 33
         echo $this->env->getExtension('routing')->getPath("_homepage");
         echo "\">  <img src=\"";
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("images/logo.png"), "html", null, true);
@@ -105,33 +114,33 @@ class __TwigTemplate_222c29287d5d781bf76ea5100c95248a extends Twig_Template
 \t\t  <div class=\"navbar-responsive-collapse\">
 \t\t\t  <ul class=\"nav navbar-nav\">
 \t\t\t    <li><a href=\"";
-        // line 34
+        // line 37
         echo $this->env->getExtension('routing')->getPath("_operadores");
         echo "\">Operadores</a></li>
 \t\t\t    <li><a href=\"";
-        // line 35
+        // line 38
         echo $this->env->getExtension('routing')->getPath("_socios");
         echo "\">Socios</a></li>
 \t\t\t    <li><a href=\"";
-        // line 36
+        // line 39
         echo $this->env->getExtension('routing')->getPath("_economicos");
         echo "\">Economicos</a></li>
 \t\t\t    <li><a href=\"";
-        // line 37
+        // line 40
         echo $this->env->getExtension('routing')->getPath("_clientes");
         echo "\">Clientes</a></li>
 \t\t\t    <li><a href=\"";
-        // line 38
+        // line 41
         echo $this->env->getExtension('routing')->getPath("_cuotas");
-        echo "\">Cuotas</a></li>
+        echo "\">Tarifario</a></li>
 \t\t\t    <li><a href=\"";
-        // line 39
+        // line 42
         echo $this->env->getExtension('routing')->getPath("_fletes");
         echo "\">Fletes</a></li>
 \t\t\t  </ul>
 
 \t\t\t  <ul class=\"nav navbar-nav pull-right\">
-                <li><button type=\"button\" class=\"btn btn-default navbar-btn\">Log out</button></li>
+                <li><button type=\"button\" class=\"btn btn-default navbar-btn\">Actualizar</button></li>
                 <li class=\"dropdown\">
                   <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">Preferencias <b class=\"caret\"></b></a>
                   <ul class=\"dropdown-menu\">
@@ -139,7 +148,7 @@ class __TwigTemplate_222c29287d5d781bf76ea5100c95248a extends Twig_Template
                     <li><a href=\"#\">Economicos</a></li>
                     <li><a href=\"#\">Socios</a></li>
                     <li class=\"divider\"></li>
-                    <li><a href=\"#\">Separated link</a></li>
+                    <li><a href=\"#\"><i class=\"icon-user icon-white\"></i>Log out</a></li>
                   </ul>
                 </li>
               </ul>
@@ -149,39 +158,39 @@ class __TwigTemplate_222c29287d5d781bf76ea5100c95248a extends Twig_Template
 \t";
     }
 
-    // line 60
-    public function block_header($context, array $blocks = array())
-    {
-        // line 61
-        echo "\t";
-    }
-
     // line 63
-    public function block_content($context, array $blocks = array())
+    public function block_header($context, array $blocks = array())
     {
         // line 64
         echo "\t";
     }
 
     // line 66
-    public function block_footer($context, array $blocks = array())
+    public function block_content($context, array $blocks = array())
     {
         // line 67
+        echo "\t";
+    }
+
+    // line 69
+    public function block_footer($context, array $blocks = array())
+    {
+        // line 70
         echo "\t\t<footer class=\"well\">
 \t\t\t<h4 class=\"col-lg-6\"><span class=\"badge primary\">Transportes Integrados de Michoacan SA de CV</span></h4>
 \t\t</footer>
 \t";
     }
 
-    // line 74
+    // line 77
     public function block_javascripts($context, array $blocks = array())
     {
-        // line 75
+        // line 78
         echo "\t<script type=\"text/javascript\" src=\"";
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/jquery-2.0.3.min.js"), "html", null, true);
         echo "\"></script>
 \t<script type=\"text/javascript\" src=\"";
-        // line 76
+        // line 79
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/bootstrap.js"), "html", null, true);
         echo "\"></script>
 ";
@@ -199,6 +208,6 @@ class __TwigTemplate_222c29287d5d781bf76ea5100c95248a extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  185 => 76,  180 => 75,  177 => 74,  170 => 67,  167 => 66,  163 => 64,  160 => 63,  156 => 61,  153 => 60,  129 => 39,  125 => 38,  121 => 37,  117 => 36,  113 => 35,  109 => 34,  100 => 30,  88 => 20,  85 => 19,  80 => 71,  78 => 66,  75 => 65,  73 => 63,  70 => 62,  68 => 60,  65 => 59,  62 => 19,  59 => 18,  44 => 6,  40 => 5,  37 => 4,  34 => 3,);
+        return array (  194 => 79,  189 => 78,  186 => 77,  179 => 70,  176 => 69,  172 => 67,  169 => 66,  165 => 64,  162 => 63,  138 => 42,  134 => 41,  130 => 40,  126 => 39,  122 => 38,  118 => 37,  109 => 33,  97 => 23,  94 => 22,  89 => 74,  87 => 69,  84 => 68,  82 => 66,  79 => 65,  77 => 63,  74 => 62,  71 => 22,  68 => 21,  52 => 8,  48 => 7,  44 => 6,  40 => 5,  37 => 4,  34 => 3,);
     }
 }

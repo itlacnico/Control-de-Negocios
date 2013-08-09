@@ -1,0 +1,13 @@
+ login:
+            pattern:  ^/login$
+            security: false
+
+        secured_area:
+            pattern:    ^/
+            anonymous:  ~
+            form_login:
+                login_path: login
+                check_path: login_check
+            logout:
+                path:   _demo_logout
+                target: _demo

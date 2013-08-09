@@ -20,12 +20,12 @@ class OperadorController extends Controller{
 	}
 
 	public function createAction(){
+
 		$operador 	= new Operador();
-		$operador->setNombre("Raul");
 		$form 		= $this->createForm(
-										new OperadorType(), 
+										new OperadorType(),
 										$operador, 
-										array('action' => $this->generateUrl('_homepage'))
+										array('action' => $this->generateUrl('_procesar', array('tipo'=>'Operador')))
 										);
 
 		return $this->render("TimsaControlFletesBundle:Operador:form_operador.html.twig",

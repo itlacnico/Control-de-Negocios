@@ -5,3 +5,12 @@ Timsa\ControlFletesBundle\Entity\Operador:
         fecha_ingreso:
            - NotBlank: ~
            - Type: \DateTime
+        telefono:
+           - Length:
+               min: 7
+               max: 12
+               minMessage: El numero de telefono es demasiado pequeño.
+               maxMessage: El numero de telefono tiene demasiados caracteres.
+           - Regex:
+               pattern: "/\d+/"
+               message: Your name cannot contain a number

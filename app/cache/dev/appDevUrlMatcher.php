@@ -133,54 +133,68 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
-        // _homepage
-        if (rtrim($pathinfo, '/') === '') {
-            if (substr($pathinfo, -1) !== '/') {
-                return $this->redirect($pathinfo.'/', '_homepage');
-            }
-
-            return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\PrincipalController::indexAction',  '_route' => '_homepage',);
+        // login
+        if ($pathinfo === '/login') {
+            return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\SecurityController::loginAction',  '_route' => 'login',);
         }
 
-        if (0 === strpos($pathinfo, '/operador')) {
-            // _operadores
-            if ($pathinfo === '/operador') {
-                return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\OperadorController::indexAction',  '_route' => '_operadores',);
+        if (0 === strpos($pathinfo, '/main')) {
+            // login_check
+            if ($pathinfo === '/main/login_check') {
+                return array('_route' => 'login_check');
             }
 
-            // _crearOperador
-            if ($pathinfo === '/operador/crear') {
-                return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\OperadorController::createAction',  '_route' => '_crearOperador',);
+            // _homepage
+            if ($pathinfo === '/main') {
+                return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\PrincipalController::indexAction',  '_route' => '_homepage',);
             }
 
-        }
+            if (0 === strpos($pathinfo, '/main/operador')) {
+                // _operadores
+                if ($pathinfo === '/main/operador') {
+                    return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\OperadorController::indexAction',  '_route' => '_operadores',);
+                }
 
-        // _socios
-        if ($pathinfo === '/socio') {
-            return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\SocioController::indexAction',  '_route' => '_socios',);
-        }
+                // _crearOperador
+                if ($pathinfo === '/main/operador/crear') {
+                    return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\OperadorController::createAction',  '_route' => '_crearOperador',);
+                }
 
-        // _economicos
-        if ($pathinfo === '/economico') {
-            return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\EconomicoController::indexAction',  '_route' => '_economicos',);
-        }
-
-        if (0 === strpos($pathinfo, '/c')) {
-            // _clientes
-            if ($pathinfo === '/cliente') {
-                return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\ClienteController::indexAction',  '_route' => '_clientes',);
             }
 
-            // _cuotas
-            if ($pathinfo === '/cuota') {
-                return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\CuotaController::indexAction',  '_route' => '_cuotas',);
+            // _socios
+            if ($pathinfo === '/main/socio') {
+                return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\SocioController::indexAction',  '_route' => '_socios',);
             }
 
-        }
+            // _economicos
+            if ($pathinfo === '/main/economico') {
+                return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\EconomicoController::indexAction',  '_route' => '_economicos',);
+            }
 
-        // _fletes
-        if ($pathinfo === '/flete') {
-            return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\FleteController::indexAction',  '_route' => '_fletes',);
+            if (0 === strpos($pathinfo, '/main/c')) {
+                // _clientes
+                if ($pathinfo === '/main/cliente') {
+                    return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\ClienteController::indexAction',  '_route' => '_clientes',);
+                }
+
+                // _cuotas
+                if ($pathinfo === '/main/cuota') {
+                    return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\CuotaController::indexAction',  '_route' => '_cuotas',);
+                }
+
+            }
+
+            // _fletes
+            if ($pathinfo === '/main/flete') {
+                return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\FleteController::indexAction',  '_route' => '_fletes',);
+            }
+
+            // _procesar
+            if (0 === strpos($pathinfo, '/main/procesar') && preg_match('#^/main/procesar/(?P<tipo>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => '_procesar')), array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\ProcesarController::indexAction',));
+            }
+
         }
 
         // _welcome
