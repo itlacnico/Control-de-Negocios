@@ -1,20 +1,32 @@
 {% extends 'TimsaControlFletesBundle::layout.html.twig' %}
 
-{% block header %}
+{% block title %}
+	Operadores
+{% endblock %}
 
-<div class="page-header">
-  <h1 >Operadores</h1>
-</div>
-
-<div>
-	<img class="col-lg-3 col-lg-offset-4" src="{{ asset('images/logo.png') }}">
-</div>
-
+{% block cabecera %}
+Operadores
 {% endblock %}
 
 {% block content %}
-	<div class="container">
-		
-		<a href="{{ path('_crearOperador') }}"><button class="btn btn-default btn-large">Crear Operador</button></a>
+	<div class="col-lg-4">
+		<ul class="nav nav-pills nav-stacked" style="max-width: 300px;">
+		  <li class="active"><a href="">Operadores</a></li>
+		  <li><a href="">Operadores Libres</a></li>
+		  <li><a href="">Operadores Ocupados</a></li>
+		  <li><a href="">Crear Operador</a></li>
+		</ul>
+
+		<a href="{{ path('_crearOperador') }}"><button class="btn">Crear Operador</button></a>
 	</div>
+
+	<div class="col-lg-8">
+		{% for operador in operadores %}
+			<h1>{{operador.nombre}}</h1>
+		{% else %}
+			<h1>No existen Operadores</h1>
+		{% endfor %}
+	</div>
+
+		
 {% endblock %}

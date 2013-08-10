@@ -16,7 +16,20 @@ class OperadorController extends Controller{
 		$em->persist($operador);
 		$em->flush();
 		*/
-		return $this->render("TimsaControlFletesBundle:Operador:operadores.html.twig");
+
+		$operadores = $this->getDoctrine()
+						->getRepository('TimsaControlFletesBundle:Operador')
+						->findAll();
+
+			if (!$operadores) {
+				throw $this->createNotFoundException(
+				'No operadores found'
+				);
+			}
+
+		return $this->render("TimsaControlFletesBundle:Operador:operadores.html.twig",
+							array("operadores" => $operadores ,)
+							);
 	}
 
 	public function createAction(){

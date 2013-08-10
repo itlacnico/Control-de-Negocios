@@ -10,7 +10,8 @@ class __TwigTemplate_4b8d92a58a2152928c9f40fe9768f62e extends Twig_Template
         $this->parent = $this->env->loadTemplate("TimsaControlFletesBundle::layout.html.twig");
 
         $this->blocks = array(
-            'header' => array($this, 'block_header'),
+            'title' => array($this, 'block_title'),
+            'cabecera' => array($this, 'block_cabecera'),
             'content' => array($this, 'block_content'),
         );
     }
@@ -26,35 +27,65 @@ class __TwigTemplate_4b8d92a58a2152928c9f40fe9768f62e extends Twig_Template
     }
 
     // line 3
-    public function block_header($context, array $blocks = array())
+    public function block_title($context, array $blocks = array())
     {
         // line 4
-        echo "
-<div class=\"page-header\">
-  <h1 >Operadores</h1>
-</div>
-
-<div>
-\t<img class=\"col-lg-3 col-lg-offset-4\" src=\"";
-        // line 10
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("images/logo.png"), "html", null, true);
-        echo "\">
-</div>
-
+        echo "\tOperadores
 ";
     }
 
-    // line 15
+    // line 7
+    public function block_cabecera($context, array $blocks = array())
+    {
+        // line 8
+        echo "Operadores
+";
+    }
+
+    // line 11
     public function block_content($context, array $blocks = array())
     {
-        // line 16
-        echo "\t<div class=\"container\">
-\t\t
+        // line 12
+        echo "\t<div class=\"col-lg-4\">
+\t\t<ul class=\"nav nav-pills nav-stacked\" style=\"max-width: 300px;\">
+\t\t  <li class=\"active\"><a href=\"\">Operadores</a></li>
+\t\t  <li><a href=\"\">Operadores Libres</a></li>
+\t\t  <li><a href=\"\">Operadores Ocupados</a></li>
+\t\t  <li><a href=\"\">Crear Operador</a></li>
+\t\t</ul>
+
 \t\t<a href=\"";
-        // line 18
+        // line 20
         echo $this->env->getExtension('routing')->getPath("_crearOperador");
-        echo "\"><button class=\"btn btn-default btn-large\">Crear Operador</button></a>
+        echo "\"><button class=\"btn\">Crear Operador</button></a>
 \t</div>
+
+\t<div class=\"col-lg-8\">
+\t\t";
+        // line 24
+        $context['_parent'] = (array) $context;
+        $context['_seq'] = twig_ensure_traversable((isset($context["operadores"]) ? $context["operadores"] : $this->getContext($context, "operadores")));
+        $context['_iterated'] = false;
+        foreach ($context['_seq'] as $context["_key"] => $context["operador"]) {
+            // line 25
+            echo "\t\t\t<h1>";
+            echo twig_escape_filter($this->env, $this->getAttribute((isset($context["operador"]) ? $context["operador"] : $this->getContext($context, "operador")), "nombre"), "html", null, true);
+            echo "</h1>
+\t\t";
+            $context['_iterated'] = true;
+        }
+        if (!$context['_iterated']) {
+            // line 27
+            echo "\t\t\t<h1>No existen Operadores</h1>
+\t\t";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['operador'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 29
+        echo "\t</div>
+
+\t\t
 ";
     }
 
@@ -70,6 +101,6 @@ class __TwigTemplate_4b8d92a58a2152928c9f40fe9768f62e extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  55 => 18,  51 => 16,  48 => 15,  40 => 10,  32 => 4,  29 => 3,);
+        return array (  86 => 29,  79 => 27,  71 => 25,  66 => 24,  59 => 20,  49 => 12,  46 => 11,  41 => 8,  38 => 7,  33 => 4,  30 => 3,);
     }
 }
