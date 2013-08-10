@@ -10,23 +10,43 @@ Operadores
 
 {% block content %}
 	<div class="col-lg-4">
-		<ul class="nav nav-pills nav-stacked" style="max-width: 300px;">
-		  <li class="active"><a href="">Operadores</a></li>
-		  <li><a href="">Operadores Libres</a></li>
-		  <li><a href="">Operadores Ocupados</a></li>
-		  <li><a href="">Crear Operador</a></li>
+		<ul class="nav nav-pills nav-stacked" style="max-width: 300px;" id="myTab">
+		  <li class="active"><a href="#mostrar_operadores" data-toggle="tab">Operadores</a></li>
+		  <li><a href="" data-toggle="tab">Operadores Libres</a></li>
+		  <li><a href="" data-toggle="tab">Operadores Ocupados</a></li>
+		  <li><a href="#crear" data-toggle="tab">Crear Operador</a></li>
 		</ul>
 
 		<a href="{{ path('_crearOperador') }}"><button class="btn">Crear Operador</button></a>
 	</div>
 
+	<div class="tab-content">
+		<div class="tab-pane" id="crear">
+			Crear
+		</div>
+		<div class="tab-pane" id="mostrar_operadores">
+			Mostrar
+		</div>
+	</div>
+
 	<div class="col-lg-8">
-		{% for operador in operadores %}
-			<h1>{{operador.nombre}}</h1>
-		{% else %}
-			<h1>No existen Operadores</h1>
-		{% endfor %}
+			{% for operador in operadores %}
+				<h1>{{operador.nombre}}</h1>
+			{% else %}
+				<h1>No existen Operadores</h1>
+			{% endfor %}
 	</div>
 
 		
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script>
+	  $(function (e) {
+	  	e.preventDefault();
+	    $('#myTab a:last').tab('show');
+	  })
+	</script>
+
 {% endblock %}
