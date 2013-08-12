@@ -17,10 +17,13 @@ class ProcesarController extends Controller{
 					$form = $this->createForm(new OperadorType(), $operador);
 
 					$form->handleRequest($request);
-					
 
 					if ($form->isValid()) {
-					    // the validation passed, do something with the $author object
+					    // the validation passed, do something with the $operador object
+
+					    $em = $this->getDoctrine()->getManager();
+					    $em->persist($operador);
+					    $em->flush();
 
 					    $this->get('session')->getFlashBag()->add(
 					    'notice',
@@ -29,9 +32,15 @@ class ProcesarController extends Controller{
 
 					   	return $this->redirect($this->generateUrl('_operadores'));
 					}
+
+					$operadores = $this->getDoctrine()
+									->getRepository('TimsaControlFletesBundle:Operador')
+									->findAll();
 					
-					
-					return $this->redirect($this->generateUrl('_operadores'));
+					return $this->render("TimsaControlFletesBundle:Operador:operadores.html.twig",
+										array("operadores" => $operadores ,
+											  "form" => $form->createView() )
+										);
 
 					break;
 				

@@ -36,16 +36,16 @@ class Economico
     private $statusA;
 
     /**
-     * @var \DateTime
+     * @var \Date
      *
      * @ORM\Column(name="fecha_ingreso", type="date")
      */
     private $fechaIngreso;
 
     /**
-     * @var string
+     * @var \Date
      *
-     * @ORM\Column(name="fecha_salida", type="string", length=255)
+     * @ORM\Column(name="fecha_salida", type="date", nullable=true)
      */
     private $fechaSalida;
 
@@ -83,6 +83,17 @@ class Economico
      * @ORM\Column(name="tipo_vehiculo", type="string", length=255)
      */
     private $tipoVehiculo;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Relacion", mappedBy="economico")
+     */
+    private $relacion;
+
+    public function __construct()
+    {
+        $this->setStatusA("Activo");
+        $this->setFechaIngreso(new \DateTime(date('Y-m-d H:i:s')));
+    }
 
 
     /**
@@ -144,7 +155,7 @@ class Economico
     /**
      * Set fechaIngreso
      *
-     * @param \DateTime $fechaIngreso
+     * @param \Date $fechaIngreso
      * @return Economico
      */
     public function setFechaIngreso($fechaIngreso)
@@ -157,7 +168,7 @@ class Economico
     /**
      * Get fechaIngreso
      *
-     * @return \DateTime 
+     * @return \Date
      */
     public function getFechaIngreso()
     {
@@ -167,7 +178,7 @@ class Economico
     /**
      * Set fechaSalida
      *
-     * @param string $fechaSalida
+     * @param \Date $fechaSalida
      * @return Economico
      */
     public function setFechaSalida($fechaSalida)
@@ -180,7 +191,7 @@ class Economico
     /**
      * Get fechaSalida
      *
-     * @return string 
+     * @return \Date 
      */
     public function getFechaSalida()
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Timsa\ControlFletesBundle\Entity\Entity;
+namespace Timsa\ControlFletesBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 

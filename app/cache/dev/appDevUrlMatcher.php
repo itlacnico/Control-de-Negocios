@@ -138,17 +138,21 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\SecurityController::loginAction',  '_route' => 'login',);
         }
 
+        // login_check
+        if ($pathinfo === '/main/login_check') {
+            return array('_route' => 'login_check');
+        }
+
+        // _homepage
+        if (rtrim($pathinfo, '/') === '') {
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', '_homepage');
+            }
+
+            return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\PrincipalController::indexAction',  '_route' => '_homepage',);
+        }
+
         if (0 === strpos($pathinfo, '/main')) {
-            // login_check
-            if ($pathinfo === '/main/login_check') {
-                return array('_route' => 'login_check');
-            }
-
-            // _homepage
-            if ($pathinfo === '/main') {
-                return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\PrincipalController::indexAction',  '_route' => '_homepage',);
-            }
-
             if (0 === strpos($pathinfo, '/main/operador')) {
                 // _operadores
                 if ($pathinfo === '/main/operador') {

@@ -5,7 +5,7 @@ namespace Timsa\ControlFletesBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- *@ORM\Entity
+ *@ORM\Entity(repositoryClass="Timsa\ControlFletesBundle\Entity\OperadorRepository")
  *@ORM\HasLifecycleCallbacks
  *@ORM\Table(name="operador")
 */
@@ -56,6 +56,15 @@ class Operador{
      * @ORM\Column(type="string")
      */		
 	protected $imagen = "user.jpg";
+
+    /**
+     * @ORM\OneToMany(targetEntity="Relacion", mappedBy="operador")
+    */
+    protected $relacion;
+
+    public function __construct() {
+           $this->relacion = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Creamos un metodo que antes de persistir, inserte la fecha actual.

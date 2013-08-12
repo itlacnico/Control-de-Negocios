@@ -9,13 +9,13 @@ use Timsa\ControlFletesBundle\Form\OperadorType;
 class OperadorController extends Controller{
 
 	public function indexAction(){
-		/*$operador = new Operador();
-		$operador->setNombre("Chavuca");
-		
-		$em = $this->getDoctrine()->getManager();
-		$em->persist($operador);
-		$em->flush();
-		*/
+
+		$operador 	= new Operador();
+		$form 		= $this->createForm(
+										new OperadorType(),
+										$operador, 
+										array('action' => $this->generateUrl('_procesar', array('tipo'=>'Operador')))
+										);
 
 		$operadores = $this->getDoctrine()
 						->getRepository('TimsaControlFletesBundle:Operador')
@@ -27,24 +27,19 @@ class OperadorController extends Controller{
 				);
 			}
 
+		$operadores_libres = $this->getDoctrine()
+								 ->getRepository('TimsaControlFletesBundle:Operador')
+								 ->getOperadoresLibres();
+
+		$operadores_ocupados = $this->getDoctrine()
+								 ->getRepository('TimsaControlFletesBundle:Operador')
+								 ->getOperadoresOcupados();
+
 		return $this->render("TimsaControlFletesBundle:Operador:operadores.html.twig",
-							array("operadores" => $operadores ,)
+							array("operadores" => $operadores ,
+								"form" => $form->createView(),
+								"operadores_libres" => $operadores_libres,
+								"operadores_ocupados" => $operadores_ocupados )
 							);
-	}
-
-	public function createAction(){
-
-		$operador 	= new Operador();
-		$form 		= $this->createForm(
-										new OperadorType(),
-										$operador, 
-										array('action' => $this->generateUrl('_procesar', array('tipo'=>'Operador')))
-										);
-
-		return $this->render("TimsaControlFletesBundle:Operador:form_operador.html.twig",
-							array( 
-								"action" => "Crear Operador",
-								"form" => $form->createView() 
-								));
 	}
 }

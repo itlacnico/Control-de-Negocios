@@ -2,9 +2,6 @@ Timsa\ControlFletesBundle\Entity\Operador:
     properties:
         nombre:
            - NotBlank: ~
-        fecha_ingreso:
-           - NotBlank: ~
-           - Type: \DateTime
         telefono:
            - Length:
                min: 7

@@ -145,7 +145,7 @@ class __TwigTemplate_222c29287d5d781bf76ea5100c95248a extends Twig_Template
 
 \t\t\t  <ul class=\"nav navbar-nav pull-left\">
                 <li class=\"dropdown\">
-                  <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">Preferencias <b class=\"caret\"></b></a>
+                  <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">Acciones <b class=\"caret\"></b></a>
                   <ul class=\"dropdown-menu\">
                     <li><a href=\"#\">Operadores</a></li>
                     <li><a href=\"#\">Economicos</a></li>
