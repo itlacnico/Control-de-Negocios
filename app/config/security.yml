@@ -3,6 +3,7 @@ security:
     #Codificadores.
     encoders:
         Timsa\ControlFletesBundle\Entity\User: #Entidad
+           #id:  pass_encoder
            algorithm: sha1
            encode_as_base64: false
            iterations: 1    #NUmero de veces que se aplica el algoritmo. Default 5000

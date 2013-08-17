@@ -143,6 +143,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array('_route' => 'login_check');
         }
 
+        // logout
+        if ($pathinfo === '/login') {
+            return array('_route' => 'logout');
+        }
+
         // _homepage
         if (rtrim($pathinfo, '/') === '') {
             if (substr($pathinfo, -1) !== '/') {
@@ -197,6 +202,268 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             // _procesar
             if (0 === strpos($pathinfo, '/main/procesar') && preg_match('#^/main/procesar/(?P<tipo>[^/]++)$#s', $pathinfo, $matches)) {
                 return $this->mergeDefaults(array_replace($matches, array('_route' => '_procesar')), array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\ProcesarController::indexAction',));
+            }
+
+        }
+
+        if (0 === strpos($pathinfo, '/admin')) {
+            // sonata_admin_dashboard
+            if ($pathinfo === '/admin/dashboard') {
+                return array (  '_controller' => 'Sonata\\AdminBundle\\Controller\\CoreController::dashboardAction',  '_route' => 'sonata_admin_dashboard',);
+            }
+
+            if (0 === strpos($pathinfo, '/admin/core')) {
+                // sonata_admin_retrieve_form_element
+                if ($pathinfo === '/admin/core/get-form-field-element') {
+                    return array (  '_controller' => 'sonata.admin.controller.admin:retrieveFormFieldElementAction',  '_route' => 'sonata_admin_retrieve_form_element',);
+                }
+
+                // sonata_admin_append_form_element
+                if ($pathinfo === '/admin/core/append-form-field-element') {
+                    return array (  '_controller' => 'sonata.admin.controller.admin:appendFormFieldElementAction',  '_route' => 'sonata_admin_append_form_element',);
+                }
+
+                // sonata_admin_short_object_information
+                if ($pathinfo === '/admin/core/get-short-object-description') {
+                    return array (  '_controller' => 'sonata.admin.controller.admin:getShortObjectDescriptionAction',  '_route' => 'sonata_admin_short_object_information',);
+                }
+
+                // sonata_admin_set_object_field_value
+                if ($pathinfo === '/admin/core/set-object-field-value') {
+                    return array (  '_controller' => 'sonata.admin.controller.admin:setObjectFieldValueAction',  '_route' => 'sonata_admin_set_object_field_value',);
+                }
+
+            }
+
+            if (0 === strpos($pathinfo, '/admin/timsa/controlfletes')) {
+                if (0 === strpos($pathinfo, '/admin/timsa/controlfletes/socio')) {
+                    // admin_timsa_controlfletes_socio_list
+                    if ($pathinfo === '/admin/timsa/controlfletes/socio/list') {
+                        return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::listAction',  '_sonata_admin' => 'sonata.admin.socio',  '_sonata_name' => 'admin_timsa_controlfletes_socio_list',  '_route' => 'admin_timsa_controlfletes_socio_list',);
+                    }
+
+                    // admin_timsa_controlfletes_socio_create
+                    if ($pathinfo === '/admin/timsa/controlfletes/socio/create') {
+                        return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::createAction',  '_sonata_admin' => 'sonata.admin.socio',  '_sonata_name' => 'admin_timsa_controlfletes_socio_create',  '_route' => 'admin_timsa_controlfletes_socio_create',);
+                    }
+
+                    // admin_timsa_controlfletes_socio_batch
+                    if ($pathinfo === '/admin/timsa/controlfletes/socio/batch') {
+                        return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::batchAction',  '_sonata_admin' => 'sonata.admin.socio',  '_sonata_name' => 'admin_timsa_controlfletes_socio_batch',  '_route' => 'admin_timsa_controlfletes_socio_batch',);
+                    }
+
+                    // admin_timsa_controlfletes_socio_edit
+                    if (preg_match('#^/admin/timsa/controlfletes/socio/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_timsa_controlfletes_socio_edit')), array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::editAction',  '_sonata_admin' => 'sonata.admin.socio',  '_sonata_name' => 'admin_timsa_controlfletes_socio_edit',));
+                    }
+
+                    // admin_timsa_controlfletes_socio_delete
+                    if (preg_match('#^/admin/timsa/controlfletes/socio/(?P<id>[^/]++)/delete$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_timsa_controlfletes_socio_delete')), array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::deleteAction',  '_sonata_admin' => 'sonata.admin.socio',  '_sonata_name' => 'admin_timsa_controlfletes_socio_delete',));
+                    }
+
+                    // admin_timsa_controlfletes_socio_show
+                    if (preg_match('#^/admin/timsa/controlfletes/socio/(?P<id>[^/]++)/show$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_timsa_controlfletes_socio_show')), array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::showAction',  '_sonata_admin' => 'sonata.admin.socio',  '_sonata_name' => 'admin_timsa_controlfletes_socio_show',));
+                    }
+
+                    // admin_timsa_controlfletes_socio_export
+                    if ($pathinfo === '/admin/timsa/controlfletes/socio/export') {
+                        return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::exportAction',  '_sonata_admin' => 'sonata.admin.socio',  '_sonata_name' => 'admin_timsa_controlfletes_socio_export',  '_route' => 'admin_timsa_controlfletes_socio_export',);
+                    }
+
+                }
+
+                if (0 === strpos($pathinfo, '/admin/timsa/controlfletes/user')) {
+                    // admin_timsa_controlfletes_user_list
+                    if ($pathinfo === '/admin/timsa/controlfletes/user/list') {
+                        return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::listAction',  '_sonata_admin' => 'sonata.admin.user',  '_sonata_name' => 'admin_timsa_controlfletes_user_list',  '_route' => 'admin_timsa_controlfletes_user_list',);
+                    }
+
+                    // admin_timsa_controlfletes_user_create
+                    if ($pathinfo === '/admin/timsa/controlfletes/user/create') {
+                        return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::createAction',  '_sonata_admin' => 'sonata.admin.user',  '_sonata_name' => 'admin_timsa_controlfletes_user_create',  '_route' => 'admin_timsa_controlfletes_user_create',);
+                    }
+
+                    // admin_timsa_controlfletes_user_batch
+                    if ($pathinfo === '/admin/timsa/controlfletes/user/batch') {
+                        return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::batchAction',  '_sonata_admin' => 'sonata.admin.user',  '_sonata_name' => 'admin_timsa_controlfletes_user_batch',  '_route' => 'admin_timsa_controlfletes_user_batch',);
+                    }
+
+                    // admin_timsa_controlfletes_user_edit
+                    if (preg_match('#^/admin/timsa/controlfletes/user/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_timsa_controlfletes_user_edit')), array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::editAction',  '_sonata_admin' => 'sonata.admin.user',  '_sonata_name' => 'admin_timsa_controlfletes_user_edit',));
+                    }
+
+                    // admin_timsa_controlfletes_user_delete
+                    if (preg_match('#^/admin/timsa/controlfletes/user/(?P<id>[^/]++)/delete$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_timsa_controlfletes_user_delete')), array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::deleteAction',  '_sonata_admin' => 'sonata.admin.user',  '_sonata_name' => 'admin_timsa_controlfletes_user_delete',));
+                    }
+
+                    // admin_timsa_controlfletes_user_show
+                    if (preg_match('#^/admin/timsa/controlfletes/user/(?P<id>[^/]++)/show$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_timsa_controlfletes_user_show')), array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::showAction',  '_sonata_admin' => 'sonata.admin.user',  '_sonata_name' => 'admin_timsa_controlfletes_user_show',));
+                    }
+
+                    // admin_timsa_controlfletes_user_export
+                    if ($pathinfo === '/admin/timsa/controlfletes/user/export') {
+                        return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::exportAction',  '_sonata_admin' => 'sonata.admin.user',  '_sonata_name' => 'admin_timsa_controlfletes_user_export',  '_route' => 'admin_timsa_controlfletes_user_export',);
+                    }
+
+                }
+
+                if (0 === strpos($pathinfo, '/admin/timsa/controlfletes/operador')) {
+                    // admin_timsa_controlfletes_operador_list
+                    if ($pathinfo === '/admin/timsa/controlfletes/operador/list') {
+                        return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::listAction',  '_sonata_admin' => 'sonata.admin.operador',  '_sonata_name' => 'admin_timsa_controlfletes_operador_list',  '_route' => 'admin_timsa_controlfletes_operador_list',);
+                    }
+
+                    // admin_timsa_controlfletes_operador_create
+                    if ($pathinfo === '/admin/timsa/controlfletes/operador/create') {
+                        return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::createAction',  '_sonata_admin' => 'sonata.admin.operador',  '_sonata_name' => 'admin_timsa_controlfletes_operador_create',  '_route' => 'admin_timsa_controlfletes_operador_create',);
+                    }
+
+                    // admin_timsa_controlfletes_operador_batch
+                    if ($pathinfo === '/admin/timsa/controlfletes/operador/batch') {
+                        return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::batchAction',  '_sonata_admin' => 'sonata.admin.operador',  '_sonata_name' => 'admin_timsa_controlfletes_operador_batch',  '_route' => 'admin_timsa_controlfletes_operador_batch',);
+                    }
+
+                    // admin_timsa_controlfletes_operador_edit
+                    if (preg_match('#^/admin/timsa/controlfletes/operador/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_timsa_controlfletes_operador_edit')), array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::editAction',  '_sonata_admin' => 'sonata.admin.operador',  '_sonata_name' => 'admin_timsa_controlfletes_operador_edit',));
+                    }
+
+                    // admin_timsa_controlfletes_operador_delete
+                    if (preg_match('#^/admin/timsa/controlfletes/operador/(?P<id>[^/]++)/delete$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_timsa_controlfletes_operador_delete')), array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::deleteAction',  '_sonata_admin' => 'sonata.admin.operador',  '_sonata_name' => 'admin_timsa_controlfletes_operador_delete',));
+                    }
+
+                    // admin_timsa_controlfletes_operador_show
+                    if (preg_match('#^/admin/timsa/controlfletes/operador/(?P<id>[^/]++)/show$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_timsa_controlfletes_operador_show')), array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::showAction',  '_sonata_admin' => 'sonata.admin.operador',  '_sonata_name' => 'admin_timsa_controlfletes_operador_show',));
+                    }
+
+                    // admin_timsa_controlfletes_operador_export
+                    if ($pathinfo === '/admin/timsa/controlfletes/operador/export') {
+                        return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::exportAction',  '_sonata_admin' => 'sonata.admin.operador',  '_sonata_name' => 'admin_timsa_controlfletes_operador_export',  '_route' => 'admin_timsa_controlfletes_operador_export',);
+                    }
+
+                }
+
+                if (0 === strpos($pathinfo, '/admin/timsa/controlfletes/role')) {
+                    // admin_timsa_controlfletes_role_list
+                    if ($pathinfo === '/admin/timsa/controlfletes/role/list') {
+                        return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::listAction',  '_sonata_admin' => 'sonata.admin.role',  '_sonata_name' => 'admin_timsa_controlfletes_role_list',  '_route' => 'admin_timsa_controlfletes_role_list',);
+                    }
+
+                    // admin_timsa_controlfletes_role_create
+                    if ($pathinfo === '/admin/timsa/controlfletes/role/create') {
+                        return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::createAction',  '_sonata_admin' => 'sonata.admin.role',  '_sonata_name' => 'admin_timsa_controlfletes_role_create',  '_route' => 'admin_timsa_controlfletes_role_create',);
+                    }
+
+                    // admin_timsa_controlfletes_role_batch
+                    if ($pathinfo === '/admin/timsa/controlfletes/role/batch') {
+                        return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::batchAction',  '_sonata_admin' => 'sonata.admin.role',  '_sonata_name' => 'admin_timsa_controlfletes_role_batch',  '_route' => 'admin_timsa_controlfletes_role_batch',);
+                    }
+
+                    // admin_timsa_controlfletes_role_edit
+                    if (preg_match('#^/admin/timsa/controlfletes/role/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_timsa_controlfletes_role_edit')), array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::editAction',  '_sonata_admin' => 'sonata.admin.role',  '_sonata_name' => 'admin_timsa_controlfletes_role_edit',));
+                    }
+
+                    // admin_timsa_controlfletes_role_delete
+                    if (preg_match('#^/admin/timsa/controlfletes/role/(?P<id>[^/]++)/delete$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_timsa_controlfletes_role_delete')), array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::deleteAction',  '_sonata_admin' => 'sonata.admin.role',  '_sonata_name' => 'admin_timsa_controlfletes_role_delete',));
+                    }
+
+                    // admin_timsa_controlfletes_role_show
+                    if (preg_match('#^/admin/timsa/controlfletes/role/(?P<id>[^/]++)/show$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_timsa_controlfletes_role_show')), array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::showAction',  '_sonata_admin' => 'sonata.admin.role',  '_sonata_name' => 'admin_timsa_controlfletes_role_show',));
+                    }
+
+                    // admin_timsa_controlfletes_role_export
+                    if ($pathinfo === '/admin/timsa/controlfletes/role/export') {
+                        return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::exportAction',  '_sonata_admin' => 'sonata.admin.role',  '_sonata_name' => 'admin_timsa_controlfletes_role_export',  '_route' => 'admin_timsa_controlfletes_role_export',);
+                    }
+
+                }
+
+                if (0 === strpos($pathinfo, '/admin/timsa/controlfletes/economico')) {
+                    // admin_timsa_controlfletes_economico_list
+                    if ($pathinfo === '/admin/timsa/controlfletes/economico/list') {
+                        return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::listAction',  '_sonata_admin' => 'sonata.admin.economico',  '_sonata_name' => 'admin_timsa_controlfletes_economico_list',  '_route' => 'admin_timsa_controlfletes_economico_list',);
+                    }
+
+                    // admin_timsa_controlfletes_economico_create
+                    if ($pathinfo === '/admin/timsa/controlfletes/economico/create') {
+                        return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::createAction',  '_sonata_admin' => 'sonata.admin.economico',  '_sonata_name' => 'admin_timsa_controlfletes_economico_create',  '_route' => 'admin_timsa_controlfletes_economico_create',);
+                    }
+
+                    // admin_timsa_controlfletes_economico_batch
+                    if ($pathinfo === '/admin/timsa/controlfletes/economico/batch') {
+                        return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::batchAction',  '_sonata_admin' => 'sonata.admin.economico',  '_sonata_name' => 'admin_timsa_controlfletes_economico_batch',  '_route' => 'admin_timsa_controlfletes_economico_batch',);
+                    }
+
+                    // admin_timsa_controlfletes_economico_edit
+                    if (preg_match('#^/admin/timsa/controlfletes/economico/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_timsa_controlfletes_economico_edit')), array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::editAction',  '_sonata_admin' => 'sonata.admin.economico',  '_sonata_name' => 'admin_timsa_controlfletes_economico_edit',));
+                    }
+
+                    // admin_timsa_controlfletes_economico_delete
+                    if (preg_match('#^/admin/timsa/controlfletes/economico/(?P<id>[^/]++)/delete$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_timsa_controlfletes_economico_delete')), array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::deleteAction',  '_sonata_admin' => 'sonata.admin.economico',  '_sonata_name' => 'admin_timsa_controlfletes_economico_delete',));
+                    }
+
+                    // admin_timsa_controlfletes_economico_show
+                    if (preg_match('#^/admin/timsa/controlfletes/economico/(?P<id>[^/]++)/show$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_timsa_controlfletes_economico_show')), array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::showAction',  '_sonata_admin' => 'sonata.admin.economico',  '_sonata_name' => 'admin_timsa_controlfletes_economico_show',));
+                    }
+
+                    // admin_timsa_controlfletes_economico_export
+                    if ($pathinfo === '/admin/timsa/controlfletes/economico/export') {
+                        return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::exportAction',  '_sonata_admin' => 'sonata.admin.economico',  '_sonata_name' => 'admin_timsa_controlfletes_economico_export',  '_route' => 'admin_timsa_controlfletes_economico_export',);
+                    }
+
+                }
+
+                if (0 === strpos($pathinfo, '/admin/timsa/controlfletes/relacion')) {
+                    // admin_timsa_controlfletes_relacion_list
+                    if ($pathinfo === '/admin/timsa/controlfletes/relacion/list') {
+                        return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::listAction',  '_sonata_admin' => 'sonata.admin.relacion',  '_sonata_name' => 'admin_timsa_controlfletes_relacion_list',  '_route' => 'admin_timsa_controlfletes_relacion_list',);
+                    }
+
+                    // admin_timsa_controlfletes_relacion_create
+                    if ($pathinfo === '/admin/timsa/controlfletes/relacion/create') {
+                        return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::createAction',  '_sonata_admin' => 'sonata.admin.relacion',  '_sonata_name' => 'admin_timsa_controlfletes_relacion_create',  '_route' => 'admin_timsa_controlfletes_relacion_create',);
+                    }
+
+                    // admin_timsa_controlfletes_relacion_batch
+                    if ($pathinfo === '/admin/timsa/controlfletes/relacion/batch') {
+                        return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::batchAction',  '_sonata_admin' => 'sonata.admin.relacion',  '_sonata_name' => 'admin_timsa_controlfletes_relacion_batch',  '_route' => 'admin_timsa_controlfletes_relacion_batch',);
+                    }
+
+                    // admin_timsa_controlfletes_relacion_edit
+                    if (preg_match('#^/admin/timsa/controlfletes/relacion/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_timsa_controlfletes_relacion_edit')), array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::editAction',  '_sonata_admin' => 'sonata.admin.relacion',  '_sonata_name' => 'admin_timsa_controlfletes_relacion_edit',));
+                    }
+
+                    // admin_timsa_controlfletes_relacion_delete
+                    if (preg_match('#^/admin/timsa/controlfletes/relacion/(?P<id>[^/]++)/delete$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_timsa_controlfletes_relacion_delete')), array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::deleteAction',  '_sonata_admin' => 'sonata.admin.relacion',  '_sonata_name' => 'admin_timsa_controlfletes_relacion_delete',));
+                    }
+
+                    // admin_timsa_controlfletes_relacion_show
+                    if (preg_match('#^/admin/timsa/controlfletes/relacion/(?P<id>[^/]++)/show$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_timsa_controlfletes_relacion_show')), array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::showAction',  '_sonata_admin' => 'sonata.admin.relacion',  '_sonata_name' => 'admin_timsa_controlfletes_relacion_show',));
+                    }
+
+                    // admin_timsa_controlfletes_relacion_export
+                    if ($pathinfo === '/admin/timsa/controlfletes/relacion/export') {
+                        return array (  '_controller' => 'Timsa\\ControlFletesBundle\\Controller\\AdminController::exportAction',  '_sonata_admin' => 'sonata.admin.relacion',  '_sonata_name' => 'admin_timsa_controlfletes_relacion_export',  '_route' => 'admin_timsa_controlfletes_relacion_export',);
+                    }
+
+                }
+
             }
 
         }

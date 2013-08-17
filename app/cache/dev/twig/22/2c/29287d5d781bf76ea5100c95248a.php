@@ -151,7 +151,10 @@ class __TwigTemplate_222c29287d5d781bf76ea5100c95248a extends Twig_Template
                     <li><a href=\"#\">Economicos</a></li>
                     <li><a href=\"#\">Socios</a></li>
                     <li class=\"divider\"></li>
-                    <li><a href=\"#\" class=\"glyphicon glyphicon-off\"> Log out</a></li>
+                    <li><a href=\"";
+        // line 57
+        echo $this->env->getExtension('routing')->getPath("logout");
+        echo "\" class=\"glyphicon glyphicon-off\"> Log out</a></li>
                   </ul>
                 </li>
               </ul>
@@ -231,6 +234,6 @@ class __TwigTemplate_222c29287d5d781bf76ea5100c95248a extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  211 => 88,  206 => 87,  203 => 86,  196 => 79,  193 => 78,  189 => 76,  186 => 75,  171 => 68,  168 => 67,  165 => 66,  137 => 41,  133 => 40,  129 => 39,  125 => 38,  121 => 37,  117 => 36,  108 => 32,  96 => 22,  93 => 21,  88 => 83,  86 => 78,  83 => 77,  81 => 75,  78 => 74,  76 => 66,  73 => 65,  70 => 21,  67 => 20,  51 => 7,  47 => 6,  43 => 5,  38 => 4,  35 => 3,);
+        return array (  214 => 88,  209 => 87,  206 => 86,  199 => 79,  196 => 78,  192 => 76,  189 => 75,  174 => 68,  171 => 67,  168 => 66,  156 => 57,  137 => 41,  133 => 40,  129 => 39,  125 => 38,  121 => 37,  117 => 36,  108 => 32,  96 => 22,  93 => 21,  88 => 83,  86 => 78,  83 => 77,  81 => 75,  78 => 74,  76 => 66,  73 => 65,  70 => 21,  67 => 20,  51 => 7,  47 => 6,  43 => 5,  38 => 4,  35 => 3,);
     }
 }

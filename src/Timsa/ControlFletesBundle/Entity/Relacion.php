@@ -21,9 +21,9 @@ class Relacion{
 	private $id;
 
 	/**
-	 * @var string
+	 * @var boolean
 	 *
-	 * @ORM\Column(name="statusA", type="string", length=45)
+	 * @ORM\Column(name="statusA", type="boolean", length=45)
 	 */
 	private $statusA;
 
@@ -45,8 +45,8 @@ class Relacion{
 	*/
 	private $socio;
 
-	private function __construct(){
-		$this->setStatusA("Activo");
+	public function __construct(){
+		$this->setStatusA(true);
 	}
 
 
@@ -63,7 +63,7 @@ class Relacion{
     /**
      * Set statusA
      *
-     * @param string $statusA
+     * @param boolean $statusA
      * @return Relacion
      */
     public function setStatusA($statusA)
@@ -76,7 +76,7 @@ class Relacion{
     /**
      * Get statusA
      *
-     * @return string 
+     * @return boolean 
      */
     public function getStatusA()
     {
@@ -150,5 +150,9 @@ class Relacion{
     public function getSocio()
     {
         return $this->socio;
+    }
+
+    public function __toString(){
+        return (string)$this->id;
     }
 }

@@ -52,8 +52,9 @@ class __TwigTemplate_4b8d92a58a2152928c9f40fe9768f62e extends Twig_Template
 \t\t  <li class=\"active\"><a href=\"#mostrar_operadores\" data-toggle=\"tab\">Operadores</a></li>
 \t\t  <li><a href=\"#operadores_libres\" data-toggle=\"tab\">Operadores Libres</a></li>
 \t\t  <li><a href=\"#operadores_ocupados\" data-toggle=\"tab\">Operadores Ocupados</a></li>
-\t\t  <li><a href=\"#crear\" data-toggle=\"tab\">Crear Operador</a></li>
-\t\t</ul>
+\t\t  ";
+        // line 18
+        echo "\t\t</ul>
 
 \t</div>
 
@@ -73,10 +74,10 @@ class __TwigTemplate_4b8d92a58a2152928c9f40fe9768f62e extends Twig_Template
             // line 28
             echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl(("images/" . $this->getAttribute((isset($context["operador"]) ? $context["operador"] : $this->getContext($context, "operador")), "imagen"))), "html", null, true);
             echo "\">
-\t\t\t\t\t\t\t<h5>";
+\t\t\t\t\t\t\t<h5><span class=\"label label-info\">";
             // line 29
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["operador"]) ? $context["operador"] : $this->getContext($context, "operador")), "nombre"), "html", null, true);
-            echo "</h5>
+            echo "</span></h5>
 \t\t\t\t\t\t</div>
 \t\t\t\t\t</li>
 \t\t\t\t</ul>
@@ -110,10 +111,10 @@ class __TwigTemplate_4b8d92a58a2152928c9f40fe9768f62e extends Twig_Template
             // line 44
             echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl(("images/" . $this->getAttribute((isset($context["operador"]) ? $context["operador"] : $this->getContext($context, "operador")), "imagen"))), "html", null, true);
             echo "\">
-\t\t\t\t\t\t<h5>";
+\t\t\t\t\t\t<h5><span class=\"label label-info\">";
             // line 45
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["operador"]) ? $context["operador"] : $this->getContext($context, "operador")), "nombre"), "html", null, true);
-            echo "</h5>
+            echo "</span></h5>
 \t\t\t\t\t</div>
 \t\t\t\t</li>
 \t\t\t</ul>
@@ -147,10 +148,10 @@ class __TwigTemplate_4b8d92a58a2152928c9f40fe9768f62e extends Twig_Template
             // line 60
             echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl(("images/" . $this->getAttribute((isset($context["operador"]) ? $context["operador"] : $this->getContext($context, "operador")), "imagen"))), "html", null, true);
             echo "\">
-\t\t\t\t\t\t<h5>";
+\t\t\t\t\t\t<h5><span class=\"label label-warning\">";
             // line 61
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["operador"]) ? $context["operador"] : $this->getContext($context, "operador")), "nombre"), "html", null, true);
-            echo "</h5>
+            echo "</span></h5>
 \t\t\t\t\t</div>
 \t\t\t\t</li>
 \t\t\t</ul>
@@ -160,7 +161,7 @@ class __TwigTemplate_4b8d92a58a2152928c9f40fe9768f62e extends Twig_Template
         }
         if (!$context['_iterated']) {
             // line 67
-            echo "\t\t\t\t<h1>No existen Operadores Libres</h1>
+            echo "\t\t\t\t<h1>No existen Operadores Ocupados</h1>
 \t\t\t";
         }
         $_parent = $context['_parent'];
@@ -168,100 +169,18 @@ class __TwigTemplate_4b8d92a58a2152928c9f40fe9768f62e extends Twig_Template
         $context = array_intersect_key($context, $_parent) + $_parent;
         // line 69
         echo "\t\t</div>
-
-\t\t<div class=\"tab-pane col-lg-8\" id=\"crear\">
-\t\t\t";
-        // line 72
-        echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'form_start', array("attr" => array("class" => "well col-lg-5")));
-        echo "
-
-\t\t\t\t<div class=\"form-group\">
-\t\t\t\t\t";
-        // line 75
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "nombre"), 'label', array("label" => "Nombre"));
-        echo "
-\t\t\t\t\t";
-        // line 76
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "nombre"), 'widget', array("attr" => array("class" => "form-control")));
-        echo "
-\t\t\t\t\t";
-        // line 77
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "nombre"), 'errors');
-        echo "
-\t\t\t\t</div>
-
-\t\t\t\t<div class=\"form-group\">
-\t\t\t\t\t";
-        // line 81
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "telefono"), 'label', array("label" => "Telefono"));
-        echo "
-\t\t\t\t\t";
-        // line 82
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "telefono"), 'widget', array("attr" => array("class" => "form-control")));
-        echo "
-\t\t\t\t\t";
-        // line 83
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "telefono"), 'errors');
-        echo "
-\t\t\t\t</div>
-
-\t\t\t\t<div class=\"form-group\">
-\t\t\t\t\t";
-        // line 87
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "CURP"), 'label', array("label" => "CURP"));
-        echo "
-\t\t\t\t\t";
-        // line 88
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "CURP"), 'widget', array("attr" => array("class" => "form-control")));
-        echo "
-\t\t\t\t\t";
-        // line 89
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "CURP"), 'errors');
-        echo "
-\t\t\t\t</div>
-
-
-\t\t\t\t<div class=\"form-group\">
-\t\t\t\t\t";
-        // line 94
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "RC"), 'label', array("label" => "R.C."));
-        echo "
-\t\t\t\t\t";
-        // line 95
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "RC"), 'widget', array("attr" => array("class" => "form-control")));
-        echo "
-\t\t\t\t\t";
-        // line 96
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "RC"), 'errors');
-        echo "
-\t\t\t\t</div>
-
-
-
-\t\t\t\t ";
-        // line 101
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'rest');
-        echo "
-\t\t\t\t <button type=\"submit\" class=\"btn btn-default\">Submit</button>
-\t\t\t\t <a href=\"";
-        // line 103
-        echo $this->env->getExtension('routing')->getPath("_operadores");
-        echo "\"><button type=\"reset\" class=\"btn btn-danger\"> Volver</button></a>
-\t\t\t";
-        // line 104
-        echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'form_end');
-        echo "
-\t\t</div>
-\t</div>
+";
+        // line 107
+        echo "\t</div>
 
 \t\t
 ";
     }
 
-    // line 111
+    // line 112
     public function block_javascripts($context, array $blocks = array())
     {
-        // line 112
+        // line 113
         echo "\t";
         $this->displayParentBlock("javascripts", $context, $blocks);
         echo "
@@ -287,6 +206,6 @@ class __TwigTemplate_4b8d92a58a2152928c9f40fe9768f62e extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  265 => 112,  262 => 111,  252 => 104,  248 => 103,  243 => 101,  235 => 96,  231 => 95,  227 => 94,  219 => 89,  215 => 88,  211 => 87,  204 => 83,  200 => 82,  196 => 81,  189 => 77,  185 => 76,  181 => 75,  175 => 72,  170 => 69,  163 => 67,  152 => 61,  148 => 60,  143 => 57,  138 => 56,  133 => 53,  126 => 51,  115 => 45,  111 => 44,  106 => 41,  101 => 40,  96 => 37,  89 => 35,  78 => 29,  74 => 28,  69 => 25,  64 => 24,  50 => 12,  47 => 11,  42 => 8,  39 => 7,  34 => 4,  31 => 3,);
+        return array (  184 => 113,  181 => 112,  174 => 107,  171 => 69,  164 => 67,  153 => 61,  149 => 60,  144 => 57,  139 => 56,  134 => 53,  127 => 51,  116 => 45,  112 => 44,  107 => 41,  102 => 40,  97 => 37,  90 => 35,  79 => 29,  75 => 28,  70 => 25,  65 => 24,  57 => 18,  50 => 12,  47 => 11,  42 => 8,  39 => 7,  34 => 4,  31 => 3,);
     }
 }

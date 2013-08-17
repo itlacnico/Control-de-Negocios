@@ -31,9 +31,14 @@ class Economico
     /**
      * @var string
      *
-     * @ORM\Column(name="statusA", type="string", length=45)
+     * @ORM\Column(name="actividad", type="string", length=45)
      */
-    private $statusA;
+    private $actividad;
+
+    /**
+     * @ORM\Column(name="statusA", type="boolean")
+     */
+    protected $statusA = true;
 
     /**
      * @var \Date
@@ -52,35 +57,35 @@ class Economico
     /**
      * @var string
      *
-     * @ORM\Column(name="numero_serie", type="string", length=45)
+     * @ORM\Column(name="numero_serie", type="string", length=45, nullable=true)
      */
     private $numeroSerie;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="modelo", type="string", length=45)
+     * @ORM\Column(name="modelo", type="string", length=45, nullable=true)
      */
     private $modelo;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="transponder", type="string", length=45)
+     * @ORM\Column(name="transponder", type="string", length=45, nullable=true)
      */
     private $transponder;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="marca", type="string", length=255)
+     * @ORM\Column(name="marca", type="string", length=255, nullable=true)
      */
     private $marca;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="tipo_vehiculo", type="string", length=255)
+     * @ORM\Column(name="tipo_vehiculo", type="string", length=255, nullable=true)
      */
     private $tipoVehiculo;
 
@@ -91,7 +96,7 @@ class Economico
 
     public function __construct()
     {
-        $this->setStatusA("Activo");
+        $this->setActividad("Activo");
         $this->setFechaIngreso(new \DateTime(date('Y-m-d H:i:s')));
     }
 
@@ -130,26 +135,26 @@ class Economico
     }
 
     /**
-     * Set statusA
+     * Set actividad
      *
-     * @param string $statusA
+     * @param string $actividad
      * @return Economico
      */
-    public function setStatusA($statusA)
+    public function setActividad($actividad)
     {
-        $this->statusA = $statusA;
+        $this->actividad = $actividad;
     
         return $this;
     }
 
     /**
-     * Get statusA
+     * Get actividad
      *
      * @return string 
      */
-    public function getStatusA()
+    public function getActividad()
     {
-        return $this->statusA;
+        return $this->actividad;
     }
 
     /**
@@ -311,5 +316,65 @@ class Economico
     public function getTipoVehiculo()
     {
         return $this->tipoVehiculo;
+    }
+
+    public function __toString(){
+        return (string)$this->id;
+    }
+
+    /**
+     * Set statusA
+     *
+     * @param boolean $statusA
+     * @return Economico
+     */
+    public function setStatusA($statusA)
+    {
+        $this->statusA = $statusA;
+    
+        return $this;
+    }
+
+    /**
+     * Get statusA
+     *
+     * @return boolean 
+     */
+    public function getStatusA()
+    {
+        return $this->statusA;
+    }
+
+    /**
+     * Add relacion
+     *
+     * @param \Timsa\ControlFletesBundle\Entity\Relacion $relacion
+     * @return Economico
+     */
+    public function addRelacion(\Timsa\ControlFletesBundle\Entity\Relacion $relacion)
+    {
+        $this->relacion[] = $relacion;
+    
+        return $this;
+    }
+
+    /**
+     * Remove relacion
+     *
+     * @param \Timsa\ControlFletesBundle\Entity\Relacion $relacion
+     */
+    public function removeRelacion(\Timsa\ControlFletesBundle\Entity\Relacion $relacion)
+    {
+        $this->relacion->removeElement($relacion);
+    }
+
+    /**
+     * Get relacion
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRelacion()
+    {
+        return $this->relacion;
     }
 }

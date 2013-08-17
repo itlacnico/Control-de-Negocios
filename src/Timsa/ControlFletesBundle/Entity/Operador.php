@@ -34,21 +34,26 @@ class Operador{
      */
 	protected $CURP;
 	/**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column( type="date")
      */
 	protected $fecha_ingreso;
 
 	/**
+     * @ORM\Column(type="boolean")
+     */
+	protected $statusA = true;
+
+    /**
      * @ORM\Column(type="string")
      */
-	protected $statusA = "Activo";
+    protected $actividad = "Libre";
 	/**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="date", nullable=true)
      */
 	protected $fecha_deprecated;
 
 	/**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column( type="string", nullable=true)
      */
 	protected $telefono;
 
@@ -64,21 +69,7 @@ class Operador{
 
     public function __construct() {
            $this->relacion = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Creamos un metodo que antes de persistir, inserte la fecha actual.
-     *
-     * @ORM\PrePersist
-     */
-    public function updatedTimestamps()
-    {
-        $this->setFechaIngreso(new \DateTime(date('Y-m-d H:i:s')));
-
-        if($this->getFechaIngreso() == null)
-        {
-            $this->setFechaIngreso(new \DateTime(date('Y-m-d H:i:s')));
-        }
+           $this->setFechaIngreso(new \DateTime(date('Y-m-d H:i:s')));
     }
 
     /**
@@ -163,7 +154,7 @@ class Operador{
     /**
      * Set fecha_ingreso
      *
-     * @param \DateTime $fechaIngreso
+     * @param \Date $fechaIngreso
      * @return Operador
      */
     public function setFechaIngreso($fechaIngreso)
@@ -176,7 +167,7 @@ class Operador{
     /**
      * Get fecha_ingreso
      *
-     * @return \DateTime 
+     * @return \Date
      */
     public function getFechaIngreso()
     {
@@ -209,7 +200,7 @@ class Operador{
     /**
      * Set fecha_deprecated
      *
-     * @param \DateTime $fechaDeprecated
+     * @param \Date $fechaDeprecated
      * @return Operador
      */
     public function setFechaDeprecated($fechaDeprecated)
@@ -222,7 +213,7 @@ class Operador{
     /**
      * Get fecha_deprecated
      *
-     * @return \DateTime 
+     * @return \Date 
      */
     public function getFechaDeprecated()
     {
@@ -273,5 +264,65 @@ class Operador{
     public function getImagen()
     {
         return $this->imagen;
+    }
+
+    public function __toString(){
+        return $this->nombre;
+    }
+
+    /**
+     * Set actividad
+     *
+     * @param string $actividad
+     * @return Operador
+     */
+    public function setActividad($actividad)
+    {
+        $this->actividad = $actividad;
+    
+        return $this;
+    }
+
+    /**
+     * Get actividad
+     *
+     * @return string 
+     */
+    public function getActividad()
+    {
+        return $this->actividad;
+    }
+
+    /**
+     * Add relacion
+     *
+     * @param \Timsa\ControlFletesBundle\Entity\Relacion $relacion
+     * @return Operador
+     */
+    public function addRelacion(\Timsa\ControlFletesBundle\Entity\Relacion $relacion)
+    {
+        $this->relacion[] = $relacion;
+    
+        return $this;
+    }
+
+    /**
+     * Remove relacion
+     *
+     * @param \Timsa\ControlFletesBundle\Entity\Relacion $relacion
+     */
+    public function removeRelacion(\Timsa\ControlFletesBundle\Entity\Relacion $relacion)
+    {
+        $this->relacion->removeElement($relacion);
+    }
+
+    /**
+     * Get relacion
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRelacion()
+    {
+        return $this->relacion;
     }
 }

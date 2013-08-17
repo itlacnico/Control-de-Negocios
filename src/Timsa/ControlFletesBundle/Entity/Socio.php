@@ -221,4 +221,41 @@ class Socio
     {
         return $this->imagen;
     }
+
+    public function __toString(){
+        return $this->nombre;
+    }
+
+    /**
+     * Add relacion
+     *
+     * @param \Timsa\ControlFletesBundle\Entity\Relacion $relacion
+     * @return Socio
+     */
+    public function addRelacion(\Timsa\ControlFletesBundle\Entity\Relacion $relacion)
+    {
+        $this->relacion[] = $relacion;
+    
+        return $this;
+    }
+
+    /**
+     * Remove relacion
+     *
+     * @param \Timsa\ControlFletesBundle\Entity\Relacion $relacion
+     */
+    public function removeRelacion(\Timsa\ControlFletesBundle\Entity\Relacion $relacion)
+    {
+        $this->relacion->removeElement($relacion);
+    }
+
+    /**
+     * Get relacion
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRelacion()
+    {
+        return $this->relacion;
+    }
 }

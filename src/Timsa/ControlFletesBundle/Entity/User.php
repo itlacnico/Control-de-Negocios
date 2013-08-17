@@ -5,12 +5,14 @@ namespace Timsa\ControlFletesBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Security\Core\Encoder\EncoderFactory;
 
 /**
  * Timsa\ControlFletesBundle\Entity\User
  *
  * @ORM\Table(name="timsa_users")
  * @ORM\Entity(repositoryClass="Timsa\ControlFletesBundle\Entity\UserRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class User implements AdvancedUserInterface, \Serializable
 {
@@ -180,6 +182,7 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function setPassword($password)
     {
+
         $this->password = $password;
     
         return $this;
@@ -253,4 +256,5 @@ class User implements AdvancedUserInterface, \Serializable
     {
         $this->roles->removeElement($roles);
     }
+
 }

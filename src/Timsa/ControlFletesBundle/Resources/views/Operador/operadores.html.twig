@@ -14,7 +14,7 @@ Operadores
 		  <li class="active"><a href="#mostrar_operadores" data-toggle="tab">Operadores</a></li>
 		  <li><a href="#operadores_libres" data-toggle="tab">Operadores Libres</a></li>
 		  <li><a href="#operadores_ocupados" data-toggle="tab">Operadores Ocupados</a></li>
-		  <li><a href="#crear" data-toggle="tab">Crear Operador</a></li>
+		  {#<li><a href="#crear" data-toggle="tab">Crear Operador</a></li>#}
 		</ul>
 
 	</div>
@@ -26,7 +26,7 @@ Operadores
 					<li class="col-lg-3">
 						<div class="col-lg-8">
 							<img width="100" height="100" src="{{ asset('images/' ~ operador.imagen ) }}">
-							<h5>{{operador.nombre}}</h5>
+							<h5><span class="label label-info">{{operador.nombre}}</span></h5>
 						</div>
 					</li>
 				</ul>
@@ -42,7 +42,7 @@ Operadores
 				<li class="col-lg-3">
 					<div class="col-lg-8">
 						<img width="100" height="100" src="{{ asset('images/' ~ operador.imagen ) }}">
-						<h5>{{operador.nombre}}</h5>
+						<h5><span class="label label-info">{{operador.nombre}}</span></h5>
 					</div>
 				</li>
 			</ul>
@@ -58,16 +58,16 @@ Operadores
 				<li class="col-lg-3">
 					<div class="col-lg-8">
 						<img width="100" height="100" src="{{ asset('images/' ~ operador.imagen ) }}">
-						<h5>{{operador.nombre}}</h5>
+						<h5><span class="label label-warning">{{operador.nombre}}</span></h5>
 					</div>
 				</li>
 			</ul>
 
 			{% else %}
-				<h1>No existen Operadores Libres</h1>
+				<h1>No existen Operadores Ocupados</h1>
 			{% endfor %}
 		</div>
-
+{#
 		<div class="tab-pane col-lg-8" id="crear">
 			{{form_start(form, {'attr': {'class': 'well col-lg-5'  }} ) }}
 
@@ -103,6 +103,7 @@ Operadores
 				 <a href="{{path('_operadores')}}"><button type="reset" class="btn btn-danger"> Volver</button></a>
 			{{form_end(form)}}
 		</div>
+		#}
 	</div>
 
 		

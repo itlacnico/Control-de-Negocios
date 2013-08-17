@@ -5,3 +5,6 @@ services:
 #    timsa_control_fletes.example:
 #        class: %timsa_control_fletes.example.class%
 #        arguments: [@service_id, "plain_value", %parameter%]
+
+    pass_encoder:
+        class: Timsa\ControlFletesBundle\Entity\UserEncoder
