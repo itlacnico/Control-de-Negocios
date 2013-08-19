@@ -3095,7 +3095,6 @@
     <service id="sensio_framework_extra.cache.listener" class="Sensio\Bundle\FrameworkExtraBundle\EventListener\CacheListener">
       <tag name="kernel.event_subscriber"/>
     </service>
-    <service id="pass_encoder" class="Timsa\ControlFletesBundle\Entity\UserEncoder"/>
     <service id="sonata.block.service.empty" class="Sonata\BlockBundle\Block\Service\EmptyBlockService">
       <tag name="sonata.block"/>
       <argument>sonata.block.empty</argument>
