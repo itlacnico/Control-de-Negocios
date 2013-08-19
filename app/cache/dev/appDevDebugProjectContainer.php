@@ -134,7 +134,6 @@ class appDevDebugProjectContainer extends Container
             'monolog.logger.router' => 'getMonolog_Logger_RouterService',
             'monolog.logger.security' => 'getMonolog_Logger_SecurityService',
             'monolog.logger.templating' => 'getMonolog_Logger_TemplatingService',
-            'pass_encoder' => 'getPassEncoderService',
             'profiler' => 'getProfilerService',
             'profiler_listener' => 'getProfilerListenerService',
             'property_accessor' => 'getPropertyAccessorService',
@@ -1760,19 +1759,6 @@ class appDevDebugProjectContainer extends Container
         $instance->pushHandler($this->get('monolog.handler.debug'));
 
         return $instance;
-    }
-
-    /**
-     * Gets the 'pass_encoder' service.
-     *
-     * This service is shared.
-     * This method always returns the same instance of the service.
-     *
-     * @return Timsa\ControlFletesBundle\Entity\UserEncoder A Timsa\ControlFletesBundle\Entity\UserEncoder instance.
-     */
-    protected function getPassEncoderService()
-    {
-        return $this->services['pass_encoder'] = new \Timsa\ControlFletesBundle\Entity\UserEncoder();
     }
 
     /**

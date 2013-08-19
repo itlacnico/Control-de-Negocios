@@ -6,5 +6,9 @@ services:
 #        class: %timsa_control_fletes.example.class%
 #        arguments: [@service_id, "plain_value", %parameter%]
 
-    pass_encoder:
-        class: Timsa\ControlFletesBundle\Entity\UserEncoder
+    #pass_encoder:
+       # class: Timsa\ControlFletesBundle\Entity\UserEncoder
+#    encrypt.listener:
+  #    class: TImsa\ControlFletesBundle\EventListener\EncryptListener
+  #    tags:
+ #         - { name: kernel.event_listener, event: user.encrypt, method: onUserRegister }

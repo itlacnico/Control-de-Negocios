@@ -18,6 +18,8 @@ services:
             - ~
             - Timsa\ControlFletesBundle\Entity\User
             - 'TimsaControlFletesBundle:Admin'
+ #       calls:
+ #           - [encryptPassword, ["@my_mailer"]]
 
 
     sonata.admin.operador:
