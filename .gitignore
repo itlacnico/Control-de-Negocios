@@ -214,9 +214,12 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 
-/web/bundles/
-/app/bootstrap*
-/app/cache/*
-/app/logs/*
-/vendor/
-/app/config/parameters.yml
+app/bootstrap.php.cache
+app/bootstrap_cache.php.cache
+app/config/parameters.ini
+app/config/parameters.yml
+app/cache/*
+app/logs/*
+vendor/*
+
+

@@ -16,6 +16,7 @@ class OperadorAdmin extends Admin{
 			->add('fecha_ingreso')
 			->add('statusA')
 			->add('imagen')
+			->add('actividad')
 			// add custom action links
           ->add('_action', 'actions', array(
               'actions' => array(
