@@ -6,8 +6,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Timsa\ControlFletesBundle\Entity\Operador;
 use Timsa\ControlFletesBundle\Form\OperadorType;
 
-use Timsa\ControlFletesBundle\Entity\User;
-
 class OperadorController extends Controller{
 
 	public function indexAction(){

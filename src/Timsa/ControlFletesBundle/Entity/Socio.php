@@ -38,7 +38,14 @@ class Socio
     /**
      * @var string
      *
-     * @ORM\Column(name="statusA", type="string", length=255)
+     * @ORM\Column(name="actividad", type="string", length=255)
+     */
+    private $actividad;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="statusA", type="boolean")
      */
     private $statusA;
 
@@ -61,7 +68,7 @@ class Socio
      *
      * @ORM\Column(name="imagen", type="string", length=255)
      */
-    private $imagen;
+    private $imagen = "user.jpg";
 
     /**
      * @ORM\OneToMany(targetEntity="Relacion", mappedBy="socio")
@@ -70,8 +77,9 @@ class Socio
 
     public function __construct()
     {
-        $this->setStatusA("Activo");
+        $this->setActividad("Activo");
         $this->setFechaIngreso(new \DateTime(date('Y-m-d H:i:s')));
+        $this->setStatusA(true);
     }
 
     /**
@@ -131,26 +139,26 @@ class Socio
     }
 
     /**
-     * Set statusA
+     * Set actividad
      *
-     * @param string $statusA
+     * @param string $actividad
      * @return Socio
      */
-    public function setStatusA($statusA)
+    public function setActividad($actividad)
     {
-        $this->statusA = $statusA;
+        $this->actividad = $actividad;
     
         return $this;
     }
 
     /**
-     * Get statusA
+     * Get actividad
      *
      * @return string 
      */
-    public function getStatusA()
+    public function getActividad()
     {
-        return $this->statusA;
+        return $this->actividad;
     }
 
     /**
@@ -257,5 +265,28 @@ class Socio
     public function getRelacion()
     {
         return $this->relacion;
+    }
+
+    /**
+     * Set statusA
+     *
+     * @param boolean $statusA
+     * @return Socio
+     */
+    public function setStatusA($statusA)
+    {
+        $this->statusA = $statusA;
+    
+        return $this;
+    }
+
+    /**
+     * Get statusA
+     *
+     * @return boolean 
+     */
+    public function getStatusA()
+    {
+        return $this->statusA;
     }
 }

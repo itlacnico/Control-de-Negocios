@@ -8,8 +8,15 @@ login_check:
 logout:
     pattern: /login
 
+_entrada:
+    pattern: /
+    defaults: 
+        _controller: FrameworkBundle:Redirect:urlRedirect
+        path: /main
+        permanent: true
+
 _homepage:
-    pattern:  /
+    pattern:  /main
     defaults: { _controller: TimsaControlFletesBundle:Principal:index }
 
 _operadores:

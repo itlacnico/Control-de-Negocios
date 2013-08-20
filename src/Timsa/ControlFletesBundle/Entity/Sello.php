@@ -23,3 +23,4 @@ class Sello{
 	protected $sello;
 	protected $numero_sello;
 	protected $fecha_sellado;
+}

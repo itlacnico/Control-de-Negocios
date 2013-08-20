@@ -1,19 +1,35 @@
+{% extends 'TimsaControlFletesBundle::layout.html.twig' %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block cabecera %}
+Login
+{% endblock %}
+
+{% block content %}
+
 {% if error %}
     <div>{{ error.message }}</div>
 {% endif %}
- 
-<form action="{{ path('login_check') }}" method="post">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="_username" value="{{ last_username }}" />
- 
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="_password" />
- 
-    {#
-        añade lo siguiente si quieres redirigir al usuario a una
-        URL concreta después del login (explicado más adelante)
-        <input type="hidden" name="_target_path" value="/account" />
-    #}
- 
-    <button type="submit">login</button>
-</form>
+ <div class="container">
+        <form class="well col-lg-6 col-lg-offset-3" action="{{ path('login_check') }}" method="post">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input placeholder="Nombre de usuario" class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" />
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input placeholder="Contraseña" class="form-control" type="password" id="password" name="_password" />
+            </div>
+
+        {#
+            añade lo siguiente si quieres redirigir al usuario a una
+            URL concreta después del login (explicado más adelante)
+            <input type="hidden" name="_target_path" value="/account" />
+        #}
+        <input type="submit" class="btn btn-primary form-control" value="login" />
+        </form>
+</div>
+{% endblock %}

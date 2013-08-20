@@ -11,10 +11,7 @@ Socios
 	<div class="col-lg-4">
 		<ul class="nav nav-pills nav-stacked" style="max-width: 300px;">
 		  <li class="active"><a href="">Socios</a></li>
-		  <li><a href="">Crear Socio</a></li>
 		</ul>
-
-		<a href="{{ path('_crearOperador') }}"><button class="btn">Crear Operador</button></a>
 	</div>
 
 	<div>
@@ -22,4 +19,14 @@ Socios
 	</div>
 
 		
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	<script>
+		$('#myTab').click(function(event) {
+			$('#myTab a').tab('show');
+		});
+
+	</script>
+
 {% endblock %}

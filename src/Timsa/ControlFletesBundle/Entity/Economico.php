@@ -83,6 +83,12 @@ class Economico
     private $marca;
 
     /**
+    * @var string
+    * @ORM\Column(name="imagen", type="string", length=100)
+    */
+    protected $imagen = "user.jpg";
+
+    /**
      * @var string
      *
      * @ORM\Column(name="tipo_vehiculo", type="string", length=255, nullable=true)
@@ -98,6 +104,7 @@ class Economico
     {
         $this->setActividad("Activo");
         $this->setFechaIngreso(new \DateTime(date('Y-m-d H:i:s')));
+        $this->relacion = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 
@@ -376,5 +383,28 @@ class Economico
     public function getRelacion()
     {
         return $this->relacion;
+    }
+
+    /**
+     * Set imagen
+     *
+     * @param string $imagen
+     * @return Economico
+     */
+    public function setImagen($imagen)
+    {
+        $this->imagen = $imagen;
+    
+        return $this;
+    }
+
+    /**
+     * Get imagen
+     *
+     * @return string 
+     */
+    public function getImagen()
+    {
+        return $this->imagen;
     }
 }

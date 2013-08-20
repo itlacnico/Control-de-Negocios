@@ -25,3 +25,4 @@ class Contenedor{
 	protected $workorder;
 	protected $booking;
 	protected $sellos;
+}

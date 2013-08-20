@@ -40,3 +40,4 @@ class Flete{
 
 	protected $Sucursal;
 	protected $CuotaViaje;
+}

@@ -19,3 +19,31 @@ class Tarifa{
 	*/
 
 	protected $id;
+
+	/**
+	 * @ORM\Column(name="nombre", type="string", length="100")
+	 */
+
+	protected $nombre;
+
+	/**
+	 * @ORM\Column(type="boolean")
+	 */
+	protected $statusA;
+
+	/**
+	 * @ORM\OneToMany(targetEntity="TarifaAgencia", mappedBy="tarifa")
+	 */
+	private $tarifas;
+
+	/**
+	 * @ManyToMany(targetEntity="Sucursal", mappedBy="tarifas")
+	 */
+	protected $sucursales;
+
+	public function __construct() {
+	    $this->tarifas 		= new \Doctrine\Common\Collections\ArrayCollection();
+	    $this->sucursales 	= new \Doctrine\Common\Collections\ArrayCollection();
+	}
+
+}

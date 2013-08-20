@@ -12,4 +12,11 @@ use Doctrine\ORM\EntityRepository;
  */
 class SocioRepository extends EntityRepository
 {
+
+	public function findAllActive(){
+		return $this->getEntityManager()
+					->createQuery("SELECT p FROM TimsaControlFletesBundle:Socio p 
+											WHERE p.statusA = true ")
+					->getResult();
+	}
 }
