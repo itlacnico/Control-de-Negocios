@@ -22,6 +22,12 @@ class Economico
     private $id;
 
     /**
+     * @ORM\Column(name="numero", type="integer")
+     */
+
+    private $numero;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="placas", type="string", length=45)
@@ -326,7 +332,7 @@ class Economico
     }
 
     public function __toString(){
-        return (string)$this->id;
+        return (string) $this->numero;
     }
 
     /**
@@ -406,5 +412,28 @@ class Economico
     public function getImagen()
     {
         return $this->imagen;
+    }
+
+    /**
+     * Set numero
+     *
+     * @param integer $numero
+     * @return Economico
+     */
+    public function setNumero($numero)
+    {
+        $this->numero = $numero;
+    
+        return $this;
+    }
+
+    /**
+     * Get numero
+     *
+     * @return integer 
+     */
+    public function getNumero()
+    {
+        return $this->numero;
     }
 }

@@ -33,7 +33,7 @@ class OperadorAdmin extends Admin{
 	            ->add('RC')
 				->add('CURP')
 				->add('fecha_ingreso')
-				->add('fecha_deprecated')
+				#->add('fecha_deprecated')
 				->add('imagen')
 	        ;
 	    }

@@ -17,6 +17,7 @@ class EconomicoAdmin extends Admin{
 		    {
 		    	
 		        $listMapper
+		        	->add('numero')
 		            ->add('placas')
 		            ->add('statusA')
 		            ->add('fechaIngreso')
@@ -40,10 +41,11 @@ class EconomicoAdmin extends Admin{
 	        {
 	        	
 	            $formMapper
+	            		->add('numero')
 			            ->add('placas')
-			            ->add('statusA')
+			            #->add('statusA')
 			            ->add('fechaIngreso')
-			            ->add('fechaSalida')
+			            #->add('fechaSalida')
 			            ->add('numeroSerie')
 			            ->add('modelo')
 			            ->add('transponder')

@@ -20,6 +20,7 @@ class RelacionAdmin extends Admin{
 		            ->add('economico')
 		            ->add('socio')
 		            ->add('statusA')
+		            ->add('prioridad')
 		            ->add('_action', 'actions', array(
 		                'actions' => array(
 		                    'edit' => array(),
@@ -42,6 +43,7 @@ class RelacionAdmin extends Admin{
 		            ->add('economico')
 		            ->add('socio')
 		            ->add('statusA')
+		            ->add('prioridad')
 	            ->end()
 	            ;
 	        }

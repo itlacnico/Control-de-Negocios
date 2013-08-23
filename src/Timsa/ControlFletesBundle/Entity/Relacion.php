@@ -45,6 +45,13 @@ class Relacion{
 	*/
 	private $socio;
 
+    /**
+     * @ORM\Column(name="prioridad", type="integer")
+     *
+     */
+
+    private $prioridad;
+
 	public function __construct(){
 		$this->setStatusA(true);
 	}
@@ -154,5 +161,28 @@ class Relacion{
 
     public function __toString(){
         return (string)$this->id;
+    }
+
+    /**
+     * Set prioridad
+     *
+     * @param integer $prioridad
+     * @return Relacion
+     */
+    public function setPrioridad($prioridad)
+    {
+        $this->prioridad = $prioridad;
+    
+        return $this;
+    }
+
+    /**
+     * Get prioridad
+     *
+     * @return integer 
+     */
+    public function getPrioridad()
+    {
+        return $this->prioridad;
     }
 }

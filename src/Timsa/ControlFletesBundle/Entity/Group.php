@@ -21,4 +21,14 @@ class Group extends BaseGroup
      public function __toString(){
      	return $this->name;
      }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 }
