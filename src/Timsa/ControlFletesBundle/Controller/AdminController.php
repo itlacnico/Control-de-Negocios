@@ -6,6 +6,7 @@ use Timsa\ControlFletesBundle\Entity\User;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 
 class AdminController extends Controller{
+	
 
 	public function createAction()
 	{
@@ -21,6 +22,7 @@ class AdminController extends Controller{
 	    $this->admin->setSubject($object);
 
 	    /** @var $form \Symfony\Component\Form\Form */
+	    
 	    $form = $this->admin->getForm();
 	    $form->setData($object);
 
@@ -99,6 +101,7 @@ class AdminController extends Controller{
 	    $this->admin->setSubject($object);
 
 	    /** @var $form \Symfony\Component\Form\Form */
+	    
 	    $form = $this->admin->getForm();
 	    $form->setData($object);
 

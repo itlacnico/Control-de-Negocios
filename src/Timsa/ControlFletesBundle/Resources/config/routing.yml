@@ -1,12 +1,12 @@
-login:
-    pattern:  /login
-    defaults: {_controller: TimsaControlFletesBundle:Security:login}
+#login:
+#    pattern:  /login
+#    defaults: {_controller: TimsaControlFletesBundle:Security:login}
 
-login_check:
-    pattern:  /main/login_check
+#login_check:
+#    pattern:  /main/login_check
 
-logout:
-    pattern: /login
+#logout:
+#    pattern: /login
 
 _entrada:
     pattern: /

@@ -10,16 +10,16 @@ services:
         calls:
             - [ setTranslationDomain, [YourNSAdminBundle]]
 
-#    sonata.admin.user:
-  #      class: Timsa\ControlFletesBundle\Admin\UserAdmin
-#        tags:
-#             - {name: sonata.admin, manager_type: orm, group: Usuarios, label: "Usuarios" }
- #       arguments:
- #           - ~
- #           - Timsa\ControlFletesBundle\Entity\User
- #           - 'TimsaControlFletesBundle:Admin'
- #       calls:
- #           - [encryptPassword, ["@my_mailer"]]
+    sonata.admin.user:
+        class: Timsa\ControlFletesBundle\Admin\UserAdmin
+        tags:
+             - {name: sonata.admin, manager_type: orm, group: Usuarios, label: "Usuarios" }
+        arguments:
+            - ~
+            - Timsa\ControlFletesBundle\Entity\User
+            - 'TimsaControlFletesBundle:Admin'
+        calls:
+            #- [encryptPassword, ["@my_mailer"]]
 
 
     sonata.admin.operador:

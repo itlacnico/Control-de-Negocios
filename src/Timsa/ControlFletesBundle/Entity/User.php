@@ -14,8 +14,8 @@ use FOS\UserBundle\Model\User as BaseUser;
  * Timsa\ControlFletesBundle\Entity\User
  *
  * @ORM\Table(name="timsa_users")
- * @ORM\Entity(repositoryClass="Timsa\ControlFletesBundle\Entity\UserRepository")
- * @ORM\HasLifecycleCallbacks()
+ * @ORM\Entity
+ * 
  */
 
 class User extends BaseUser 
@@ -31,9 +31,9 @@ class User extends BaseUser
 
     public function __construct()
     {
-        $this->isActive = true;
+        parent::__construct();
+        #$this->isActive = true;
         $this->salt = md5(uniqid(null, true));
-        $this->roles = new ArrayCollection();
     }
 
  

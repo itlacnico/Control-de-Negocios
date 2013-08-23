@@ -19,6 +19,8 @@ class UserAdmin extends Admin{
 	            ->add('username')
 	            ->add('password')
 	            ->add('email')
+	            ->add('enabled')
+	            ->add('roles')
 	            ->add('_action', 'actions', array(
 	                'actions' => array(
 	                    'edit' => array(),
@@ -39,7 +41,10 @@ class UserAdmin extends Admin{
             ->with('General')
             	->add('username')
             	->add('password')
-            	->add('email');
+            	->add('email')
+            	->add('enabled')
+            	->add('roles')
+            ->end();
             }
 
 }
