@@ -26,13 +26,16 @@ class User extends BaseUser
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
+
     protected $id;
 
-       public function __construct()
+    public function __construct()
     {
-        parent::construct();
- #       $this->isActive = true;
- #       $this->salt = md5(uniqid(null, true));
- #       $this->roles = new ArrayCollection();
+        $this->isActive = true;
+        $this->salt = md5(uniqid(null, true));
+        $this->roles = new ArrayCollection();
     }
+
+ 
+
 }
