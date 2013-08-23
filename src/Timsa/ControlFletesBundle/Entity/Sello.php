@@ -23,4 +23,14 @@ class Sello{
 	protected $sello;
 	protected $numero_sello;
 	protected $fecha_sellado;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 }

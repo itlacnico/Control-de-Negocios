@@ -40,4 +40,14 @@ class Flete{
 
 	protected $Sucursal;
 	protected $CuotaViaje;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 }

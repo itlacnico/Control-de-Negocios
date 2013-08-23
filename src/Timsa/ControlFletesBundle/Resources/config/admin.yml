@@ -10,14 +10,14 @@ services:
         calls:
             - [ setTranslationDomain, [YourNSAdminBundle]]
 
-    sonata.admin.user:
-        class: Timsa\ControlFletesBundle\Admin\UserAdmin
-        tags:
-             - {name: sonata.admin, manager_type: orm, group: Usuarios, label: "Usuarios" }
-        arguments:
-            - ~
-            - Timsa\ControlFletesBundle\Entity\User
-            - 'TimsaControlFletesBundle:Admin'
+#    sonata.admin.user:
+  #      class: Timsa\ControlFletesBundle\Admin\UserAdmin
+#        tags:
+#             - {name: sonata.admin, manager_type: orm, group: Usuarios, label: "Usuarios" }
+ #       arguments:
+ #           - ~
+ #           - Timsa\ControlFletesBundle\Entity\User
+ #           - 'TimsaControlFletesBundle:Admin'
  #       calls:
  #           - [encryptPassword, ["@my_mailer"]]
 
@@ -31,14 +31,14 @@ services:
               - Timsa\ControlFletesBundle\Entity\Operador
               - 'TimsaControlFletesBundle:Admin'
 
-    sonata.admin.role:
-        class: Timsa\ControlFletesBundle\Admin\RoleAdmin
-        tags:
-            - {name: sonata.admin, manager_type: orm, group: Usuarios, label: "Roles"}
-        arguments:
-              - ~
-              - Timsa\ControlFletesBundle\Entity\Role
-              - 'TimsaControlFletesBundle:Admin'
+ #   sonata.admin.role:
+ #       class: Timsa\ControlFletesBundle\Admin\RoleAdmin
+  #      tags:
+  #          - {name: sonata.admin, manager_type: orm, group: Usuarios, label: "Roles"}
+  #      arguments:
+  #            - ~
+   #           - Timsa\ControlFletesBundle\Entity\Role
+  #            - 'TimsaControlFletesBundle:Admin'
 
     sonata.admin.economico:
         class: Timsa\ControlFletesBundle\Admin\EconomicoAdmin
@@ -56,4 +56,58 @@ services:
         arguments:
               - ~
               - Timsa\ControlFletesBundle\Entity\Relacion
+              - 'TimsaControlFletesBundle:Admin'
+
+    sonata.admin.cliente:
+        class: Timsa\ControlFletesBundle\Admin\ClienteAdmin
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Operacionales, label: "Clientes"}
+        arguments:
+              - ~
+              - Timsa\ControlFletesBundle\Entity\Cliente
+              - 'TimsaControlFletesBundle:Admin'
+
+    sonata.admin.sucursal:
+        class: Timsa\ControlFletesBundle\Admin\SucursalAdmin
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Operacionales, label: "Sucursales"}
+        arguments:
+              - ~
+              - Timsa\ControlFletesBundle\Entity\Sucursal
+              - 'TimsaControlFletesBundle:Admin'
+
+    sonata.admin.agencia:
+        class: Timsa\ControlFletesBundle\Admin\AgenciaAdmin
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Operacionales, label: "Agencias"}
+        arguments:
+              - ~
+              - Timsa\ControlFletesBundle\Entity\Agencia
+              - 'TimsaControlFletesBundle:Admin'
+
+    sonata.admin.tarifa:
+        class: Timsa\ControlFletesBundle\Admin\TarifaAdmin
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Operacionales, label: "Tarifas"}
+        arguments:
+              - ~
+              - Timsa\ControlFletesBundle\Entity\Tarifa
+              - 'TimsaControlFletesBundle:Admin'
+
+    sonata.admin.tarifa_agencia:
+        class: Timsa\ControlFletesBundle\Admin\TarifaAgenciaAdmin
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Operacionales, label: "TarifaAgencias"}
+        arguments:
+              - ~
+              - Timsa\ControlFletesBundle\Entity\TarifaAgencia
+              - 'TimsaControlFletesBundle:Admin'
+
+    sonata.admin.cuota:
+        class: Timsa\ControlFletesBundle\Admin\CuotaAdmin
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Operacionales, label: "Cuota"}
+        arguments:
+              - ~
+              - Timsa\ControlFletesBundle\Entity\Cuota
               - 'TimsaControlFletesBundle:Admin'

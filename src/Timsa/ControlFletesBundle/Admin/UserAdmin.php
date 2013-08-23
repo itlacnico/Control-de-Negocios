@@ -19,7 +19,6 @@ class UserAdmin extends Admin{
 	            ->add('username')
 	            ->add('password')
 	            ->add('email')
-	            ->add('isActive')
 	            ->add('_action', 'actions', array(
 	                'actions' => array(
 	                    'edit' => array(),
@@ -41,12 +40,20 @@ class UserAdmin extends Admin{
             	->add('username')
             	->add('password')
             	->add('email')
-            	->add('isActive')
-            ->end()
-            ->with('Roles')
-            	->add('roles', 'sonata_type_model',array('expanded' => true, 'compound' => true, 'multiple' => true))
-            ->end()
-            ;
+            ->end();
+           # ->with('Roles')
+            #	->add('roles', 'sonata_type_model', array('expanded' => true,  'multiple' => true,  ) )
+            #->end();
         }
+/*
+'roles', 'sonata_type_model',array('expanded' => true, , 'multiple' => true)
 
+        'roles', 'collection', array(
+                'type'      => new Role(),
+                'prototype' => true,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'options' => array('data_class' => 'Timsa\ControlFletesBundle\Entity\Role'),
+
+*/
 }
