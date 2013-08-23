@@ -7,7 +7,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
-class UserAdmin extends Admin{
+class GroupAdmin extends Admin{
 	/**
 	 * @param \Sonata\AdminBundle\Datagrid\ListMapper $listMapper
 	 *
@@ -16,16 +16,12 @@ class UserAdmin extends Admin{
 	protected function configureListFields(ListMapper $listMapper)
 	    {
 	        $listMapper
-	            ->add('username')
-	            #->add('password')
-	            ->add('email')
-	            ->add('enabled')
-	            #->add('roles')
-	            ->add('groups')
-	            ->add('_action', 'actions', array(
-	                'actions' => array(
-	                    'edit' => array(),
-	                )))
+	            ->add('name')
+	            ->add('roles')
+	            #->add('_action', 'actions', array(
+	            #    'actions' => array(
+	             #       'edit' => array(),
+	             #   )))
 	        ;
 	    }
 
@@ -40,12 +36,8 @@ class UserAdmin extends Admin{
 
             $formMapper
             ->with('General')
-            	->add('username')
-            	->add('password')
-            	->add('email')
-            	->add('enabled')
-            	->add('groups')
-            	#->add('roles')
+            	->add('name')
+            	->add('roles')
             ->end();
             }
 

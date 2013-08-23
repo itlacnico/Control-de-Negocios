@@ -77,6 +77,8 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: aplicacion
     user_class: Timsa\ControlFletesBundle\Entity\User
+    group:
+           group_class: Timsa\ControlFletesBundle\Entity\Group
 
 sonata_block:
    default_contexts: [cms]

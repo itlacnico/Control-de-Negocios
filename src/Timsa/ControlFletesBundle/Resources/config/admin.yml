@@ -111,3 +111,12 @@ services:
               - ~
               - Timsa\ControlFletesBundle\Entity\Cuota
               - 'TimsaControlFletesBundle:Admin'
+
+    sonata.admin.groups:
+        class: Timsa\ControlFletesBundle\Admin\GroupAdmin
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Usuarios, label: "Grupos"}
+        arguments:
+              - ~
+              - Timsa\ControlFletesBundle\Entity\Group
+              - 'TimsaControlFletesBundle:Admin'
