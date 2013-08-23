@@ -44,10 +44,10 @@ class User implements AdvancedUserInterface, \Serializable
     private $email;
 
     /**
-     * @ORM\Column(name="is_active", type="boolean")
+     * @ORM\Column(name="is_active", type="boolean", nullable=true)
      */
     private $isActive;
-
+#, cascade={"all"}, orphanRemoval=true
     /**
     * @ORM\ManyToMany(targetEntity="Role", inversedBy="users")
     *
@@ -61,9 +61,16 @@ class User implements AdvancedUserInterface, \Serializable
         $this->roles = new ArrayCollection();
     }
 
+    public function getRealRoles()
+    {
+        return $this->roles;
+         #return $this->roles ?: $this->roles = new ArrayCollection();
+    }
+
     public function getRoles()
     {
         return $this->roles->toArray();
+         #return $this->roles ?: $this->roles = new ArrayCollection();
     }
 
     /**
@@ -251,6 +258,7 @@ class User implements AdvancedUserInterface, \Serializable
      * Remove roles
      *
      * @param \Timsa\ControlFletesBundle\Entity\Role $roles
+     * @return User
      */
     public function removeRole(\Timsa\ControlFletesBundle\Entity\Role $roles)
     {

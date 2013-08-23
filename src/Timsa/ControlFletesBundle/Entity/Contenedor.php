@@ -25,4 +25,14 @@ class Contenedor{
 	protected $workorder;
 	protected $booking;
 	protected $sellos;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 }
