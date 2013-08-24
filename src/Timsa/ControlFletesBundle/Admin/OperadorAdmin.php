@@ -11,11 +11,12 @@ class OperadorAdmin extends Admin{
 	protected function configureListFields(ListMapper $listMapper){
 		$listMapper
 			->add('nombre')
+			->add('telefono')
 			->add('RC')
 			->add('CURP')
 			->add('fecha_ingreso')
 			->add('statusA')
-			->add('imagen')
+			#->add('imagen')
 			->add('actividad')
 			// add custom action links
           ->add('_action', 'actions', array(
@@ -29,12 +30,13 @@ class OperadorAdmin extends Admin{
 	    {
 	        $formMapper
 	            ->add('nombre')
-	            ->add('statusA', null, array('required' => false))
+	            ->add('telefono')
+	            #->add('statusA', null, array('required' => false))
 	            ->add('RC')
 				->add('CURP')
 				->add('fecha_ingreso')
 				#->add('fecha_deprecated')
-				->add('imagen')
+				#->add('imagen')
 	        ;
 	    }
 

@@ -11,8 +11,8 @@ Operadores
 {% block content %}
 	<div class="col-lg-4">
 		<ul class="nav nav-tabs nav-pills nav-stacked" style="max-width: 300px;" id="myTab">
-		  <li class="active"><a href="#mostrar_operadores" data-toggle="tab">Operadores</a></li>
-		  <li><a href="#operadores_libres" data-toggle="tab">Operadores Libres</a></li>
+		  {#<li class="active"><a href="#mostrar_operadores" data-toggle="tab">Operadores</a></li>#}
+		  <li class="active"><a href="#operadores_libres" data-toggle="tab">Operadores Libres</a></li>
 		  <li><a href="#operadores_ocupados" data-toggle="tab">Operadores Ocupados</a></li>
 		  {#<li><a href="#crear" data-toggle="tab">Crear Operador</a></li>#}
 		</ul>
@@ -20,52 +20,89 @@ Operadores
 	</div>
 
 	<div class="tab-content">
+		{#
 		<div class="tab-pane active col-lg-8" id="mostrar_operadores">
+			
+			<table class="table">
+				<tr>
+					<th colspan="2">Nombre</th>
+				</tr>
 				{% for operador in operadores %}
-				<ul class="list-inline">
-					<li class="col-lg-3">
-						<div class="col-lg-8">
-							<img width="100" height="100" src="{{ asset('images/' ~ operador.imagen ) }}">
-							<h5><span class="label label-info">{{operador.nombre}}</span></h5>
-						</div>
-					</li>
-				</ul>
-
+					<tr>
+						<td>
+						<h5><span class="label label-info">{{operador.nombre}}</span></h5></td>
+					</tr>
 				{% else %}
 					<h1>No existen Operadores</h1>
 				{% endfor %}
-		</div>
-
-		<div class="tab-pane col-lg-8" id="operadores_libres">
-			{% for operador in operadores_libres %}
+			</table>
+			#}
+			{#
 			<ul class="list-inline">
+				{% for operador in operadores %}
+					<li class="col-lg-3">
+						<div class="col-lg-8">
+							<img width="60" height="60" src="{{ asset('images/' ~ operador.imagen ) }}">
+							<h5><span class="label label-info">{{operador.nombre}}</span></h5>
+						</div>
+					</li>
+				{% else %}
+					<h1>No existen Operadores</h1>
+				{% endfor %}
+			</ul>
+			
+		</div>
+#}
+		<div class="tab-pane active col-lg-8" id="operadores_libres">
+			<nav class="navbar navbar-default" role="navigation">
+				<div class="navbar-responsive-collapse">
+				    <ul class="nav navbar-nav pagination">
+				        <li class="disabled"><a href="#">&laquo;</a></li>
+				        <li class="active"><a href="#">1 <span class="sr-only"></span></a></li>
+				    </ul>
+				</div>
+
+				<form class="navbar-form pull-right">
+					<input type="text" class="form-control" placeholder="Buscar.." id="search" style="width: 200px;">
+					<button type="submit" class="btn btn-primary">Buscar</button>
+				</form>
+			</nav>
+
+			<ul class="list-inline">
+			{% for operador in operadores_libres %}
+			
 				<li class="col-lg-3">
 					<div class="col-lg-8">
 						<img width="100" height="100" src="{{ asset('images/' ~ operador.imagen ) }}">
 						<h5><span class="label label-info">{{operador.nombre}}</span></h5>
 					</div>
 				</li>
-			</ul>
+			
 
 			{% else %}
 				<h1>No existen Operadores Libres</h1>
 			{% endfor %}
+			</ul>
+
+			<div class="navigation">
+			    {{ knp_pagination_render(operadores_libres) }}
+			</div>
 		</div>
 
 		<div class="tab-pane col-lg-8" id="operadores_ocupados">
-			{% for operador in operadores_ocupados %}
 			<ul class="list-inline">
+			{% for operador in operadores_ocupados %}
+			
 				<li class="col-lg-3">
 					<div class="col-lg-8">
 						<img width="100" height="100" src="{{ asset('images/' ~ operador.imagen ) }}">
 						<h5><span class="label label-warning">{{operador.nombre}}</span></h5>
 					</div>
 				</li>
-			</ul>
-
 			{% else %}
 				<h1>No existen Operadores Ocupados</h1>
 			{% endfor %}
+			</ul>
 		</div>
 {#
 		<div class="tab-pane col-lg-8" id="crear">

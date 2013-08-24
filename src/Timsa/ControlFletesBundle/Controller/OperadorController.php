@@ -8,7 +8,7 @@ use Timsa\ControlFletesBundle\Form\OperadorType;
 
 class OperadorController extends Controller{
 
-	public function indexAction(){
+	public function indexAction($libre, $ocupado){
 /*
 		$operador 	= new Operador();
 		$form 		= $this->createForm(
@@ -32,10 +32,18 @@ class OperadorController extends Controller{
 										 ->getRepository('TimsaControlFletesBundle:Operador')
 										 ->getOperadoresOcupados();
 
+
+				$paginator = $this->container->get('knp_paginator');
+				       $pagination = $paginator->paginate(
+				           $operadores_libres,
+				           $this->container->get('request')->query->get('libre', 1)/*page number*/,
+				           10/*limit per page*/
+				       );
+
 				return $this->render("TimsaControlFletesBundle:Operador:operadores.html.twig",
-									array("operadores" => $operadores ,
+									array(#"operadores" => $operadores ,
 										#"form" => $form->createView(),
-										"operadores_libres" => $operadores_libres,
+										"operadores_libres" => $paginator,
 										"operadores_ocupados" => $operadores_ocupados )
 									);
 		}
@@ -43,7 +51,7 @@ class OperadorController extends Controller{
 			$operadores_libres   = "";
 			$operadores_ocupados = "";
 			return $this->render("TimsaControlFletesBundle:Operador:operadores.html.twig",
-								array("operadores" => $operadores ,
+								array(#"operadores" => $operadores ,
 									#"form" => $form->createView(),
 									"operadores_libres" => $operadores_libres,
 									"operadores_ocupados" => $operadores_ocupados )

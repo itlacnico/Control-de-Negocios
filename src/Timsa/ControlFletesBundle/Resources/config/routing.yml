@@ -20,8 +20,11 @@ _homepage:
     defaults: { _controller: TimsaControlFletesBundle:Principal:index }
 
 _operadores:
-    pattern: /main/operador
-    defaults: { _controller: TimsaControlFletesBundle:Operador:index }
+    pattern: /main/operador/{libre}/{ocupado}
+    defaults: { _controller: TimsaControlFletesBundle:Operador:index, ocupado: 1, libre: 1 }
+    requirements:
+        ocupado: \d+
+        libre: \d+
 
 _crearOperador:
     pattern: /main/operador/crear

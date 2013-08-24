@@ -15,14 +15,16 @@ class OperadorRepository extends EntityRepository
 	public function getOperadoresLibres(){
 		return $this->getEntityManager()
 					->createQuery("SELECT p FROM TimsaControlFletesBundle:Operador p 
-											WHERE p.actividad = 'Libre' ")
+											WHERE p.actividad = 'Libre' 
+											ORDER BY p.nombre")
 					->getResult();
 	}
 
 	public function getOperadoresOcupados(){
 		return $this->getEntityManager()
 					->createQuery("SELECT p FROM TimsaControlFletesBundle:Operador p 
-											WHERE p.actividad = 'Ocupado' ")
+											WHERE p.actividad = 'Ocupado' 
+											ORDER BY p.nombre")
 					->getResult();
 	}
 }

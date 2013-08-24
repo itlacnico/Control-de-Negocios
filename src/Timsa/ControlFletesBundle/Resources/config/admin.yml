@@ -1,4 +1,22 @@
 services:
+    sonata.admin.operador:
+          class: Timsa\ControlFletesBundle\Admin\OperadorAdmin
+          tags:
+                - {name: sonata.admin, manager_type: orm, group: Principales, label: "Operadores"}
+          arguments:
+                - ~
+                - Timsa\ControlFletesBundle\Entity\Operador
+                - 'TimsaControlFletesBundle:Admin'
+
+    sonata.admin.economico:
+        class: Timsa\ControlFletesBundle\Admin\EconomicoAdmin
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Principales, label: "Economico"}
+        arguments:
+              - ~
+              - Timsa\ControlFletesBundle\Entity\Economico
+              - 'TimsaControlFletesBundle:Admin'
+
     sonata.admin.socio:
         class: Timsa\ControlFletesBundle\Admin\SocioAdmin
         tags:
@@ -10,44 +28,6 @@ services:
         calls:
             - [ setTranslationDomain, [YourNSAdminBundle]]
 
-    sonata.admin.user:
-        class: Timsa\ControlFletesBundle\Admin\UserAdmin
-        tags:
-             - {name: sonata.admin, manager_type: orm, group: Usuarios, label: "Usuarios" }
-        arguments:
-            - ~
-            - Timsa\ControlFletesBundle\Entity\User
-            - 'TimsaControlFletesBundle:Admin'
-        calls:
-            #- [encryptPassword, ["@my_mailer"]]
-
-
-    sonata.admin.operador:
-        class: Timsa\ControlFletesBundle\Admin\OperadorAdmin
-        tags:
-              - {name: sonata.admin, manager_type: orm, group: Principales, label: "Operadores"}
-        arguments:
-              - ~
-              - Timsa\ControlFletesBundle\Entity\Operador
-              - 'TimsaControlFletesBundle:Admin'
-
- #   sonata.admin.role:
- #       class: Timsa\ControlFletesBundle\Admin\RoleAdmin
-  #      tags:
-  #          - {name: sonata.admin, manager_type: orm, group: Usuarios, label: "Roles"}
-  #      arguments:
-  #            - ~
-   #           - Timsa\ControlFletesBundle\Entity\Role
-  #            - 'TimsaControlFletesBundle:Admin'
-
-    sonata.admin.economico:
-        class: Timsa\ControlFletesBundle\Admin\EconomicoAdmin
-        tags:
-            - {name: sonata.admin, manager_type: orm, group: Principales, label: "Economico"}
-        arguments:
-              - ~
-              - Timsa\ControlFletesBundle\Entity\Economico
-              - 'TimsaControlFletesBundle:Admin'
 
     sonata.admin.relacion:
         class: Timsa\ControlFletesBundle\Admin\RelacionAdmin
@@ -111,6 +91,26 @@ services:
               - ~
               - Timsa\ControlFletesBundle\Entity\Cuota
               - 'TimsaControlFletesBundle:Admin'
+
+    sonata.admin.flete:
+        class: Timsa\ControlFletesBundle\Admin\FleteAdmin
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Administrativos, label: "Fletes"}
+        arguments:
+              - ~
+              - Timsa\ControlFletesBundle\Entity\Flete
+              - 'TimsaControlFletesBundle:Admin'
+
+    sonata.admin.user:
+        class: Timsa\ControlFletesBundle\Admin\UserAdmin
+        tags:
+             - {name: sonata.admin, manager_type: orm, group: Usuarios, label: "Usuarios" }
+        arguments:
+            - ~
+            - Timsa\ControlFletesBundle\Entity\User
+            - 'TimsaControlFletesBundle:Admin'
+        calls:
+            #- [encryptPassword, ["@my_mailer"]]
 
     sonata.admin.groups:
         class: Timsa\ControlFletesBundle\Admin\GroupAdmin
