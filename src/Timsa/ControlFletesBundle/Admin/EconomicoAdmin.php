@@ -27,6 +27,10 @@ class EconomicoAdmin extends Admin{
 		            ->add('transponder')
 		            ->add('marca')
 		            ->add('tipoVehiculo')
+		            ->add('_action', 'actions', array(
+		                'actions' => array(
+		                    'edit' => array(),
+		                )))
 		        ;
 
 		    }

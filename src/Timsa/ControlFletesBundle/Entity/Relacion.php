@@ -50,7 +50,7 @@ class Relacion{
      *
      */
 
-    private $prioridad;
+    private $prioridad = 1;
 
 	public function __construct(){
 		$this->setStatusA(true);

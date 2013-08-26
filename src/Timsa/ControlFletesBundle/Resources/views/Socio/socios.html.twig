@@ -1,32 +1,20 @@
-{% extends 'TimsaControlFletesBundle::layout.html.twig' %}
+<div class="socio">
 
-{% block cabecera %}
-Socios
-<div>
+	<ul class="nav nav-tabs nav-justified" id="tabla">
+	  <li ><a href="#eco" data-toggle="tab">Economicos</a>  </li>
+	  <li class="active">	<a href="#soc" data-toggle="tab">Socios </a>	 </li>
+	</ul>
+
+	<div class="tab-content">
+		<div class="tab-pane  col-lg-8" id="eco">
+			<ul>
+			{% for economico in economicos %}
+				<li><h1>{{ economico.placas }}</h1></li>
+			{% endfor %}
+			</ul>
+		</div>
+		<div class="tab-pane active col-lg-8" id="soc">
+			<h1>Hello</h1>
+		</div>
+	</div>
 </div>
-
-{% endblock %}
-
-{% block content %}
-	<div class="col-lg-4">
-		<ul class="nav nav-pills nav-stacked" style="max-width: 300px;">
-		  <li class="active"><a href="">Socios</a></li>
-		</ul>
-	</div>
-
-	<div>
-		
-	</div>
-
-		
-{% endblock %}
-{% block javascripts %}
-	{{ parent() }}
-	<script>
-		$('#myTab').click(function(event) {
-			$('#myTab a').tab('show');
-		});
-
-	</script>
-
-{% endblock %}

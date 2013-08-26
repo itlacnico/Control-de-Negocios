@@ -1,12 +1,11 @@
 #login:
-#    pattern:  /login
-#    defaults: {_controller: TimsaControlFletesBundle:Security:login}
+    #pattern:  /login
 
 #login_check:
 #    pattern:  /main/login_check
 
 #logout:
-#    pattern: /login
+    #pattern: /logout
 
 _entrada:
     pattern: /
@@ -20,23 +19,23 @@ _homepage:
     defaults: { _controller: TimsaControlFletesBundle:Principal:index }
 
 _operadores:
-    pattern: /main/operador/{libre}/{ocupado}
-    defaults: { _controller: TimsaControlFletesBundle:Operador:index, ocupado: 1, libre: 1 }
-    requirements:
-        ocupado: \d+
-        libre: \d+
+    pattern: /main/operador/
+    defaults: { _controller: TimsaControlFletesBundle:Operador:index, busqueda: ""}
+    #requirements:
+        #ocupado: \d+
+        #libre: \d+
 
-_crearOperador:
-    pattern: /main/operador/crear
-    defaults: {_controller: TimsaControlFletesBundle:Operador:create}
-
-_socios:
-    pattern: /main/socio
-    defaults: { _controller: TimsaControlFletesBundle:Socio:index }
+#_crearOperador:
+    #pattern: /main/operador/crear
+    #defaults: {_controller: TimsaControlFletesBundle:Operador:create}
 
 _economicos:
     pattern: /main/economico
     defaults: {_controller: TimsaControlFletesBundle:Economico:index }
+
+_socio:
+    pattern: /main/socio/{idSocio}
+    defaults: { _controller: TimsaControlFletesBundle:Economico:ajaxSocio }
 
 _clientes:
     pattern: /main/cliente

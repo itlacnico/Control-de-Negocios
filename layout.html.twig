@@ -1,0 +1,45 @@
+{# Este es el template de login del FosUserBundle #}
+
+{% extends 'TimsaControlFletesBundle::layout.html.twig' %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block cabecera %}
+Login
+{% endblock %}
+
+{% block navigationBar %}
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+			{#{% block fos_user_content %} #}
+				{% if error %}
+				    <div>{{ error|trans }}</div>
+				{% endif %}
+
+				<form action="{{ path("fos_user_security_check") }}" method="post" class="well col-lg-6 col-lg-offset-3">
+
+				    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+				    <div class="form-group">
+					    <label for="username">Usuario</label>
+					    <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+				    </div>
+				    <div class="form-group">
+					    <label for="password">Contraseña</label>
+					    <input class="form-control" type="password" id="password" name="_password" required="required" />
+					</div>
+					<div class="form-group">
+						
+					    <input  type="checkbox" id="remember_me" name="_remember_me" value="on" />
+					    <label for="remember_me">Recordarme</label>
+					</div>
+
+				    <input class="btn btn-primary" type="submit" id="_submit" name="_submit" value="Entrar al sitio" />
+				</form>
+			{#{% endblock %}#}
+    </div>
+{% endblock %}

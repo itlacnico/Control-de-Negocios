@@ -12,4 +12,13 @@ use Doctrine\ORM\EntityRepository;
  */
 class EconomicoRepository extends EntityRepository
 {
+	public function getEconomicosPorSocio($socio){
+
+		return $this->getEntityManager()
+					->createQuery("SELECT p FROM TimsaControlFletesBundle:Economico p 
+											JOIN p.relacion r
+											where r.socio = $socio
+											ORDER BY r.prioridad")
+					->getResult();
+	}
 }

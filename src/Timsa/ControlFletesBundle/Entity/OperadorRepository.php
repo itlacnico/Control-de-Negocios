@@ -27,4 +27,24 @@ class OperadorRepository extends EntityRepository
 											ORDER BY p.nombre")
 					->getResult();
 	}
+
+	public function getLikeOperadoresLibres($nombre){
+		return $this->getEntityManager()
+					->createQuery("SELECT p FROM TimsaControlFletesBundle:Operador p 
+											WHERE p.actividad = 'Libre'
+											and
+											p.nombre LIKE '%$nombre%' 
+											ORDER BY p.nombre")
+					->getResult();
+	}
+
+	public function getLikeOperadoresOcupados($nombre){
+		return $this->getEntityManager()
+					->createQuery("SELECT p FROM TimsaControlFletesBundle:Operador p 
+											WHERE p.actividad = 'Ocupado'
+											and
+											p.nombre LIKE '%$nombre%' 
+											ORDER BY p.nombre")
+					->getResult();
+	}
 }

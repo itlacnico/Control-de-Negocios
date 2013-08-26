@@ -31,7 +31,7 @@ class Socio
     /**
      * @var string
      *
-     * @ORM\Column(name="telefono", type="string", length=255)
+     * @ORM\Column(name="telefono", type="string", length=255, nullable=true)
      */
     private $telefono;
 
@@ -68,7 +68,7 @@ class Socio
      *
      * @ORM\Column(name="imagen", type="string", length=255)
      */
-    private $imagen = "user.jpg";
+    private $imagen = "user2.jpg";
 
     /**
      * @ORM\OneToMany(targetEntity="Relacion", mappedBy="socio")

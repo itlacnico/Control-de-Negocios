@@ -11,59 +11,20 @@ Operadores
 {% block content %}
 	<div class="col-lg-4">
 		<ul class="nav nav-tabs nav-pills nav-stacked" style="max-width: 300px;" id="myTab">
-		  {#<li class="active"><a href="#mostrar_operadores" data-toggle="tab">Operadores</a></li>#}
-		  <li class="active"><a href="#operadores_libres" data-toggle="tab">Operadores Libres</a></li>
-		  <li><a href="#operadores_ocupados" data-toggle="tab">Operadores Ocupados</a></li>
-		  {#<li><a href="#crear" data-toggle="tab">Crear Operador</a></li>#}
+		  <li class="{{libre}}"><a href="#operadores_libres" data-toggle="tab">Operadores Libres</a></li>
+		  <li class="{{ocupado}}"><a href="#operadores_ocupados" data-toggle="tab">Operadores Ocupados</a></li>
 		</ul>
-
 	</div>
 
 	<div class="tab-content">
-		{#
-		<div class="tab-pane active col-lg-8" id="mostrar_operadores">
-			
-			<table class="table">
-				<tr>
-					<th colspan="2">Nombre</th>
-				</tr>
-				{% for operador in operadores %}
-					<tr>
-						<td>
-						<h5><span class="label label-info">{{operador.nombre}}</span></h5></td>
-					</tr>
-				{% else %}
-					<h1>No existen Operadores</h1>
-				{% endfor %}
-			</table>
-			#}
-			{#
-			<ul class="list-inline">
-				{% for operador in operadores %}
-					<li class="col-lg-3">
-						<div class="col-lg-8">
-							<img width="60" height="60" src="{{ asset('images/' ~ operador.imagen ) }}">
-							<h5><span class="label label-info">{{operador.nombre}}</span></h5>
-						</div>
-					</li>
-				{% else %}
-					<h1>No existen Operadores</h1>
-				{% endfor %}
-			</ul>
-			
-		</div>
-#}
-		<div class="tab-pane active col-lg-8" id="operadores_libres">
+		<div class="tab-pane col-lg-8 {{libre}}" id="operadores_libres">
 			<nav class="navbar navbar-default" role="navigation">
 				<div class="navbar-responsive-collapse">
-				    <ul class="nav navbar-nav pagination">
-				        <li class="disabled"><a href="#">&laquo;</a></li>
-				        <li class="active"><a href="#">1 <span class="sr-only"></span></a></li>
-				    </ul>
+					{{ knp_pagination_render(operadores_libres) }}
 				</div>
 
-				<form class="navbar-form pull-right">
-					<input type="text" class="form-control" placeholder="Buscar.." id="search" style="width: 200px;">
+				<form class="navbar-form pull-right" action="{{path('_operadores')}}">
+					<input type="text" class="form-control" placeholder="Buscar.." id="search" style="width: 200px;" name="busquedaLibre">
 					<button type="submit" class="btn btn-primary">Buscar</button>
 				</form>
 			</nav>
@@ -84,12 +45,21 @@ Operadores
 			{% endfor %}
 			</ul>
 
-			<div class="navigation">
-			    {{ knp_pagination_render(operadores_libres) }}
-			</div>
 		</div>
 
-		<div class="tab-pane col-lg-8" id="operadores_ocupados">
+		<div class="tab-pane col-lg-8 {{ocupado}}" id="operadores_ocupados">
+
+			<nav class="navbar navbar-default" role="navigation">
+				<div class="navbar-responsive-collapse">
+					{{ knp_pagination_render(operadores_ocupados) }}
+				</div>
+
+				<form class="navbar-form pull-right" action="{{path('_operadores')}}">
+					<input  type="text" class="form-control" placeholder="Buscar.." id="search" style="width: 200px;" name="busquedaOcupado">
+					<button type="submit" class="btn btn-primary">Buscar</button>
+				</form>
+			</nav>
+
 			<ul class="list-inline">
 			{% for operador in operadores_ocupados %}
 			
@@ -104,43 +74,6 @@ Operadores
 			{% endfor %}
 			</ul>
 		</div>
-{#
-		<div class="tab-pane col-lg-8" id="crear">
-			{{form_start(form, {'attr': {'class': 'well col-lg-5'  }} ) }}
-
-				<div class="form-group">
-					{{form_label(form.nombre,  'Nombre'  )}}
-					{{form_widget(form.nombre, {'attr':{'class' : 'form-control'}}) }}
-					{{form_errors(form.nombre)}}
-				</div>
-
-				<div class="form-group">
-					{{form_label(form.telefono,  'Telefono'  )}}
-					{{form_widget(form.telefono, {'attr':{'class' : 'form-control'}}) }}
-					{{form_errors(form.telefono)}}
-				</div>
-
-				<div class="form-group">
-					{{form_label(form.CURP,  'CURP'  )}}
-					{{form_widget(form.CURP, {'attr':{'class' : 'form-control'}}) }}
-					{{form_errors(form.CURP)}}
-				</div>
-
-
-				<div class="form-group">
-					{{form_label(form.RC,  'R.C.'  )}}
-					{{form_widget(form.RC, {'attr':{'class' : 'form-control'}}) }}
-					{{form_errors(form.RC)}}
-				</div>
-
-
-
-				 {{ form_rest(form) }}
-				 <button type="submit" class="btn btn-default">Submit</button>
-				 <a href="{{path('_operadores')}}"><button type="reset" class="btn btn-danger"> Volver</button></a>
-			{{form_end(form)}}
-		</div>
-		#}
 	</div>
 
 		
