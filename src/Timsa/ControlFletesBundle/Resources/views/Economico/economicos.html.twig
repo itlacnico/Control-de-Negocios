@@ -38,8 +38,12 @@ Economicos
 			<ul class="list-inline">
 				<li class="col-lg-3">
 					<div class="col-lg-8">
-						<img width="100" height="100" src="{{ asset('images/' ~ economico.imagen ) }}">
-						<h5><span class="label label-info">{{economico.placas}}</span></h5>
+						<img  src="{{ asset('images/camion.jpg') }}">
+						{% if economico.actividad == 'Libre' %}
+						<h5><span class="label label-info">{{economico.numero}}</span></h5>
+						{% else %}
+						<h5><span class="label label-warning">{{economico.numero}}</span></h5>
+						{% endif %}
 					</div>
 				</li>
 			</ul>
@@ -80,14 +84,9 @@ Economicos
 			});
 
 			$('body').on('click', '#tabla', function(event) {
-				//event.preventDefault();
 				$('#tabla a').tab('show');
 			});
 
-			//$('body').on('click', '#tab', function(event) {
-				//alert("asd");
-			//	$('#tab a').tab('show');
-			//});
 		});
 	</script>
 

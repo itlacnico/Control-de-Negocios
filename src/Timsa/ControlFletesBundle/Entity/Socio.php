@@ -68,7 +68,7 @@ class Socio
      *
      * @ORM\Column(name="imagen", type="string", length=255)
      */
-    private $imagen = "user2.jpg";
+    private $imagen = "user2.png";
 
     /**
      * @ORM\OneToMany(targetEntity="Relacion", mappedBy="socio")

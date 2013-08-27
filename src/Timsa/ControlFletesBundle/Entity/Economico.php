@@ -108,7 +108,7 @@ class Economico
 
     public function __construct()
     {
-        $this->setActividad("Activo");
+        $this->setActividad("Libre");
         $this->setFechaIngreso(new \DateTime(date('Y-m-d H:i:s')));
         $this->relacion = new \Doctrine\Common\Collections\ArrayCollection();
     }

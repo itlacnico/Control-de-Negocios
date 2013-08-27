@@ -11,8 +11,8 @@ Operadores
 {% block content %}
 	<div class="col-lg-4">
 		<ul class="nav nav-tabs nav-pills nav-stacked" style="max-width: 300px;" id="myTab">
-		  <li class="{{libre}}"><a href="#operadores_libres" data-toggle="tab">Operadores Libres</a></li>
-		  <li class="{{ocupado}}"><a href="#operadores_ocupados" data-toggle="tab">Operadores Ocupados</a></li>
+		  <li class="{{libre}}"><a href="#operadores_libres" data-toggle="tab">Operadores Libres <span class="badge">{{operadores_libres|length}}</span></a></li>
+		  <li class="{{ocupado}}"><a href="#operadores_ocupados" data-toggle="tab">Operadores Ocupados <span class="badge">{{operadores_ocupados|length}}</span></a></li>
 		</ul>
 	</div>
 

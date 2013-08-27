@@ -1,20 +1,22 @@
 <div class="socio">
 
 	<ul class="nav nav-tabs nav-justified" id="tabla">
-	  <li ><a href="#eco" data-toggle="tab">Economicos</a>  </li>
-	  <li class="active">	<a href="#soc" data-toggle="tab">Socios </a>	 </li>
+	  <li class="active"><a href="#eco" data-toggle="tab">Economicos   <span class="badge">{{economicos|length}}</span></a>  </li>
+	  <li>	<a href="#soc" data-toggle="tab">Socios </a>	 </li>
 	</ul>
 
 	<div class="tab-content">
-		<div class="tab-pane  col-lg-8" id="eco">
+		<div class="tab-pane col-lg-8 active" id="eco">
 			<ul>
 			{% for economico in economicos %}
-				<li><h1>{{ economico.placas }}</h1></li>
+				<li><img src="{{asset('images/camion.jpg')}}"> <span class="label label-default"> {{ economico.numero }} </span></li>
+			{% else %}
+			<h1>El socio no posee economicos asignados</h1>
 			{% endfor %}
 			</ul>
 		</div>
-		<div class="tab-pane active col-lg-8" id="soc">
-			<h1>Hello</h1>
+		<div class="tab-pane col-lg-8" id="soc">
+			<img src="{{asset('images/'~ socio.imagen)}}" >
 		</div>
 	</div>
 </div>
