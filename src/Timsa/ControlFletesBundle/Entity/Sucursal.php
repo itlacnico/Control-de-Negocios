@@ -501,4 +501,8 @@ class Sucursal{
     {
         return $this->tarifas;
     }
+
+    public function __toString(){
+        return $this->nombre;
+    }
 }

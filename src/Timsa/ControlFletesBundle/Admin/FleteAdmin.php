@@ -17,16 +17,20 @@ class FleteAdmin extends Admin{
 		    {
 		    	
 		        $listMapper
-		        	->add('numero')
-		            ->add('placas')
+		        	->add('fecha')
+		            ->add('actividad')
 		            ->add('statusA')
-		            ->add('fechaIngreso')
-		            ->add('fechaSalida')
-		            ->add('numeroSerie')
-		            ->add('modelo')
-		            ->add('transponder')
-		            ->add('marca')
-		            ->add('tipoVehiculo')
+		            ->add('comentarios')
+		            ->add('fecha')
+		            ->add('fecha_facturacion')
+		            ->add('agencia')
+		            ->add('operador')
+		            ->add('economico')
+		            ->add('socio')
+		            ->add('fletePadre')
+		            ->add('fleteHijo')
+		            ->add('sucursal')
+		            ->add('cuota')
 		        ;
 
 		    }
@@ -41,16 +45,20 @@ class FleteAdmin extends Admin{
 	        {
 	        	
 	            $formMapper
-	            		->add('numero')
-			            ->add('placas')
-			            #->add('statusA')
-			            ->add('fechaIngreso')
-			            #->add('fechaSalida')
-			            ->add('numeroSerie')
-			            ->add('modelo')
-			            ->add('transponder')
-			            ->add('marca')
-			            ->add('tipoVehiculo')
+	            	->add('fecha')
+	                ->add('actividad')
+	                ->add('statusA')
+	                ->add('comentarios')
+	                ->add('fecha')
+	                ->add('fecha_facturacion')
+	                ->add('agencia')
+	                ->add('operador')
+	                ->add('economico')
+	                ->add('socio')
+	                ->add('fletePadre')
+	                ->add('fleteHijo')
+	                ->add('sucursal')
+	                ->add('cuota')
 	            ;
 	            
 	        }
