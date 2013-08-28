@@ -21,6 +21,8 @@ class TarifaAgenciaAdmin extends Admin{
 		            ->add('tarifa')
 		            ->add('agencia')
 		            ->add('cuota')
+		            ->add('fecha_ingreso')
+		            ->add('fecha_salida')
 		            ->add('_action', 'actions', array(
 		                'actions' => array(
 		                    'edit' => array(),

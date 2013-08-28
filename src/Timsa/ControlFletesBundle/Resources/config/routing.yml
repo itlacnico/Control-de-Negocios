@@ -49,6 +49,10 @@ _fletes:
     pattern: /main/flete
     defaults: {_controller: TimsaControlFletesBundle:Flete:index }
 
-_procesar:
-    pattern: /main/procesar/{tipo}
-    defaults: {_controller: TimsaControlFletesBundle:Procesar:index}
+_tarifa:
+    pattern: /main/tarifa/{idAgencia}
+    defaults: {_controller: TimsaControlFletesBundle:Tarifa:index}
+
+#_procesar:
+    #pattern: /main/procesar/{tipo}
+    #defaults: {_controller: TimsaControlFletesBundle:Procesar:index}

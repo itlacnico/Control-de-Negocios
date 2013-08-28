@@ -50,7 +50,7 @@ services:
     sonata.admin.sucursal:
         class: Timsa\ControlFletesBundle\Admin\SucursalAdmin
         tags:
-            - {name: sonata.admin, manager_type: orm, group: Operacionales, label: "Sucursales"}
+            - {name: sonata.admin, manager_type: orm, group: Operacionales, label: "Destinos"}
         arguments:
               - ~
               - Timsa\ControlFletesBundle\Entity\Sucursal

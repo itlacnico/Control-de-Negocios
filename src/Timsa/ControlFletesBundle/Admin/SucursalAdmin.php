@@ -29,6 +29,7 @@ class SucursalAdmin extends Admin{
 		            ->add('fechaIngreso')
 		            ->add('fechaDeprecated')
 		            ->add('cliente')
+		            ->add('tarifas')
 		            ->add('_action', 'actions', array(
 		                'actions' => array(
 		                    'edit' => array(),
@@ -59,6 +60,7 @@ class SucursalAdmin extends Admin{
 		            ->add('telefono')
 		            ->add('statusA')
 		            ->add('fechaIngreso')
+		            ->add('tarifas')
 	            ->end()
 	            #->with('Roles')
 	            #	->add('roles', 'sonata_type_model',array('expanded' => true, 'compound' => true, 'multiple' => true))

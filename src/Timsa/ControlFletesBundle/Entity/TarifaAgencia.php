@@ -5,7 +5,7 @@ namespace Timsa\ControlFletesBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- *@ORM\Entity(repositoryClass="Timsa\ControlFletesBundle\Entity\OperadorRepository")
+ *@ORM\Entity(repositoryClass="Timsa\ControlFletesBundle\Entity\TarifaAgenciaRepository")
  *@ORM\HasLifecycleCallbacks
  *@ORM\Table(name="tarifa_agencia")
 */
@@ -48,6 +48,16 @@ class TarifaAgencia{
 	 */
 
 	private $cuota;
+
+    /**
+     * @ORM\Column( type="date")
+     */
+    protected $fecha_ingreso;
+
+    /**
+     * @ORM\Column( type="date", nullable=true)
+     */
+    protected $fecha_salida;
 
     /**
      * Get id
@@ -156,4 +166,54 @@ class TarifaAgencia{
     	return (string) $this->tarifa . $this->agencia;
     }
 
+
+    /**
+     * Set fecha_ingreso
+     *
+     * @param \DateTime $fechaIngreso
+     * @return TarifaAgencia
+     */
+    public function setFechaIngreso($fechaIngreso)
+    {
+        $this->fecha_ingreso = $fechaIngreso;
+    
+        return $this;
+    }
+
+    /**
+     * Get fecha_ingreso
+     *
+     * @return \DateTime 
+     */
+    public function getFechaIngreso()
+    {
+        return $this->fecha_ingreso;
+    }
+
+    /**
+     * Set fecha_salida
+     *
+     * @param \DateTime $fechaSalida
+     * @return TarifaAgencia
+     */
+    public function setFechaSalida($fechaSalida)
+    {
+        $this->fecha_salida = $fechaSalida;
+    
+        return $this;
+    }
+
+    /**
+     * Get fecha_salida
+     *
+     * @return \DateTime 
+     */
+    public function getFechaSalida()
+    {
+        return $this->fecha_salida;
+    }
+
+    public function __construct(){
+        $this->setFechaIngreso(new \DateTime(date('Y-m-d H:i:s')));
+    }
 }

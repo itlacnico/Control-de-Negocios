@@ -44,15 +44,4 @@ class User extends BaseUser
         #$this->isActive = true;
         $this->salt = md5(uniqid(null, true));
     }
-
- 
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 }
