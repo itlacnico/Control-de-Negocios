@@ -21,16 +21,14 @@ class FleteAdmin extends Admin{
 		            ->add('actividad')
 		            ->add('statusA')
 		            ->add('comentarios')
-		            ->add('fecha')
+		            ->add('relacion')
 		            ->add('fecha_facturacion')
 		            ->add('agencia')
-		            ->add('operador')
-		            ->add('economico')
-		            ->add('socio')
 		            ->add('fletePadre')
 		            ->add('fleteHijo')
 		            ->add('sucursal')
 		            ->add('cuota')
+		            ->add('tipo_viaje')
 		        ;
 
 		    }
@@ -43,22 +41,27 @@ class FleteAdmin extends Admin{
 
 	    protected function configureFormFields(FormMapper $formMapper)
 	        {
-	        	
 	            $formMapper
-	            	->add('fecha')
+	            ->with('General')
 	                ->add('actividad')
 	                ->add('statusA')
 	                ->add('comentarios')
 	                ->add('fecha')
 	                ->add('fecha_facturacion')
-	                ->add('agencia')
-	                ->add('operador')
-	                ->add('economico')
-	                ->add('socio')
-	                ->add('fletePadre')
-	                ->add('fleteHijo')
-	                ->add('sucursal')
-	                ->add('cuota')
+	            ->end()
+	            ->with('Relacion')
+	            	->add('relacion','sonata_type_model' , array('expanded' => true, 'compound' => true))
+	            ->end()
+	            ->with('Viajes')
+	            	->add('agencia')
+	            	->add('sucursal')
+	            	->add('cuota')
+	            	->add('tipo_viaje')
+	            ->end()
+	            ->with('Relaciones con fletes')
+	            	->add('fletePadre')
+	            	->add('fleteHijo')
+	            ->end()
 	            ;
 	            
 	        }

@@ -15,7 +15,7 @@ class OperadorRepository extends EntityRepository
 	public function getOperadoresLibres(){
 		return $this->getEntityManager()
 					->createQuery("SELECT p FROM TimsaControlFletesBundle:Operador p 
-											WHERE p.actividad = 'Libre' 
+											WHERE p.actividad = 1 
 											ORDER BY p.nombre")
 					->getResult();
 	}
@@ -23,7 +23,7 @@ class OperadorRepository extends EntityRepository
 	public function getOperadoresOcupados(){
 		return $this->getEntityManager()
 					->createQuery("SELECT p FROM TimsaControlFletesBundle:Operador p 
-											WHERE p.actividad = 'Ocupado' 
+											WHERE p.actividad = 2 
 											ORDER BY p.nombre")
 					->getResult();
 	}
@@ -31,7 +31,7 @@ class OperadorRepository extends EntityRepository
 	public function getLikeOperadoresLibres($nombre){
 		return $this->getEntityManager()
 					->createQuery("SELECT p FROM TimsaControlFletesBundle:Operador p 
-											WHERE p.actividad = 'Libre'
+											WHERE p.actividad = 1
 											and
 											p.nombre LIKE '%$nombre%' 
 											ORDER BY p.nombre")
@@ -41,7 +41,7 @@ class OperadorRepository extends EntityRepository
 	public function getLikeOperadoresOcupados($nombre){
 		return $this->getEntityManager()
 					->createQuery("SELECT p FROM TimsaControlFletesBundle:Operador p 
-											WHERE p.actividad = 'Ocupado'
+											WHERE p.actividad = 2
 											and
 											p.nombre LIKE '%$nombre%' 
 											ORDER BY p.nombre")

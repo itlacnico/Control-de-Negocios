@@ -27,10 +27,12 @@ class Flete{
 	 * @ORM\Column(type="boolean")
 	 */
 	protected $statusA;
-	/**
-	 * @ORM\Column(type="string")
-	 */
-	protected $actividad;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="ActividadesFlete")
+     * @ORM\JoinColumn(name="actividad",  referencedColumnName="id")
+     */
+	protected $actividad = 5;
 	/**
 	 * @ORM\Column(type="string", length=700, nullable=true)
 	 */
@@ -45,52 +47,50 @@ class Flete{
 	 */
 	protected $fecha_facturacion;
 
+	/**
+	 * @ORM\ManyToOne(targetEntity="Relacion")
+	 * @ORM\JoinColumn(name="relacion_id", referencedColumnName="id")
+	 */
+	protected $relacion;
 	#Objetos Foraneos;
 
 	/**
-     * @ORM\OneToOne(targetEntity="Agencia")
+     * @ORM\ManyToOne(targetEntity="Agencia")
      * @ORM\JoinColumn(name="agencia_id", referencedColumnName="id")
      */
 	protected $agencia;
+
 	/**
-     * @ORM\OneToOne(targetEntity="Operador")
-     * @ORM\JoinColumn(name="operador_id", referencedColumnName="id")
-     */
-	protected $operador;
-	/**
-     * @ORM\OneToOne(targetEntity="Economico")
-     * @ORM\JoinColumn(name="economico_id", referencedColumnName="id")
-     */
-	protected $economico;
-	/**
-     * @ORM\OneToOne(targetEntity="Socio")
-     * @ORM\JoinColumn(name="socio_id", referencedColumnName="id")
-     */
-	protected $socio;
-	/**
-     * @ORM\OneToOne(targetEntity="Flete")
-     * @ORM\JoinColumn(name="flete_padre_id", referencedColumnName="id")
-     */
+	 * @ORM\ManyToOne(targetEntity="Flete")
+	 * @ORM\JoinColumn(name="flete_padre_id", referencedColumnName="id")
+	 */
 	protected $fletePadre;
 	/**
-     * @ORM\OneToOne(targetEntity="Flete")
+     * @ORM\ManyToOne(targetEntity="Flete")
      * @ORM\JoinColumn(name="flete_hijo_id", referencedColumnName="id")
      */
 	protected $fleteHijo;
 
 	#Cuota para el Flete
 	/**
-     * @ORM\OneToOne(targetEntity="Sucursal")
+     * @ORM\ManyToOne(targetEntity="Sucursal")
      * @ORM\JoinColumn(name="flete_hijo_id", referencedColumnName="id")
      */
 	protected $sucursal;
 
 	/**
-     * @ORM\OneToOne(targetEntity="Cuota")
+     * @ORM\ManyToOne(targetEntity="Cuota")
      * @ORM\JoinColumn(name="cuota", referencedColumnName="id")
      */
 
 	protected $cuota;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="TipoViaje")
+     * @ORM\JoinColumn(name="tipo_viaje",  referencedColumnName="id")
+     */
+
+    protected $tipo_viaje;
 
 	public function __construct(){
 
@@ -155,7 +155,6 @@ class Flete{
     /**
      * Set actividad
      *
-     * @param string $actividad
      * @return Flete
      */
     public function setActividad($actividad)
@@ -168,7 +167,6 @@ class Flete{
     /**
      * Get actividad
      *
-     * @return string 
      */
     public function getActividad()
     {
@@ -268,75 +266,6 @@ class Flete{
     }
 
     /**
-     * Set operador
-     *
-     * @param \Timsa\ControlFletesBundle\Entity\Operador $operador
-     * @return Flete
-     */
-    public function setOperador(\Timsa\ControlFletesBundle\Entity\Operador $operador = null)
-    {
-        $this->operador = $operador;
-    
-        return $this;
-    }
-
-    /**
-     * Get operador
-     *
-     * @return \Timsa\ControlFletesBundle\Entity\Operador 
-     */
-    public function getOperador()
-    {
-        return $this->operador;
-    }
-
-    /**
-     * Set economico
-     *
-     * @param \Timsa\ControlFletesBundle\Entity\Economico $economico
-     * @return Flete
-     */
-    public function setEconomico(\Timsa\ControlFletesBundle\Entity\Economico $economico = null)
-    {
-        $this->economico = $economico;
-    
-        return $this;
-    }
-
-    /**
-     * Get economico
-     *
-     * @return \Timsa\ControlFletesBundle\Entity\Economico 
-     */
-    public function getEconomico()
-    {
-        return $this->economico;
-    }
-
-    /**
-     * Set socio
-     *
-     * @param \Timsa\ControlFletesBundle\Entity\Socio $socio
-     * @return Flete
-     */
-    public function setSocio(\Timsa\ControlFletesBundle\Entity\Socio $socio = null)
-    {
-        $this->socio = $socio;
-    
-        return $this;
-    }
-
-    /**
-     * Get socio
-     *
-     * @return \Timsa\ControlFletesBundle\Entity\Socio 
-     */
-    public function getSocio()
-    {
-        return $this->socio;
-    }
-
-    /**
      * Set fletePadre
      *
      * @param \Timsa\ControlFletesBundle\Entity\Flete $fletePadre
@@ -426,5 +355,51 @@ class Flete{
     public function getCuota()
     {
         return $this->cuota;
+    }
+
+    /**
+     * Set relacion
+     *
+     * @param \Timsa\ControlFletesBundle\Entity\Relacion $relacion
+     * @return Flete
+     */
+    public function setRelacion(\Timsa\ControlFletesBundle\Entity\Relacion $relacion = null)
+    {
+        $this->relacion = $relacion;
+    
+        return $this;
+    }
+
+    /**
+     * Get relacion
+     *
+     * @return \Timsa\ControlFletesBundle\Entity\Relacion 
+     */
+    public function getRelacion()
+    {
+        return $this->relacion;
+    }
+
+    /**
+     * Set tipo_viaje
+     *
+     * @param \Timsa\ControlFletesBundle\Entity\TipoViaje $tipoViaje
+     * @return Flete
+     */
+    public function setTipoViaje(\Timsa\ControlFletesBundle\Entity\TipoViaje $tipoViaje = null)
+    {
+        $this->tipo_viaje = $tipoViaje;
+    
+        return $this;
+    }
+
+    /**
+     * Get tipo_viaje
+     *
+     * @return \Timsa\ControlFletesBundle\Entity\TipoViaje 
+     */
+    public function getTipoViaje()
+    {
+        return $this->tipo_viaje;
     }
 }

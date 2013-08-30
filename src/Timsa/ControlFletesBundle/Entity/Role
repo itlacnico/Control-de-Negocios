@@ -133,3 +133,19 @@ class Role implements RoleInterface
         return $this->name;
     }
 }
+
+/**
+     * @ORM\OneToOne(targetEntity="Operador")
+     * @ORM\JoinColumn(name="operador_id", referencedColumnName="id")
+     */
+    protected $operador;
+    /**
+     * @ORM\OneToOne(targetEntity="Economico")
+     * @ORM\JoinColumn(name="economico_id", referencedColumnName="id")
+     */
+    protected $economico;
+    /**
+     * @ORM\OneToOne(targetEntity="Socio")
+     * @ORM\JoinColumn(name="socio_id", referencedColumnName="id")
+     */
+    protected $socio;

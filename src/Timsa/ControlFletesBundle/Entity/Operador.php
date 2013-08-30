@@ -44,9 +44,10 @@ class Operador{
 	protected $statusA = true;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\ManyToOne(targetEntity="Actividades")
+     * @ORM\JoinColumn(name="actividad",  referencedColumnName="id")
      */
-    protected $actividad = "Libre";
+    protected $actividad = 1;
 	/**
      * @ORM\Column(type="date", nullable=true)
      */

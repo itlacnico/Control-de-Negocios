@@ -1,0 +1,9 @@
+Crear una clase TipoViaje, con solo constantes de viaje
+	- Ligarla al flete
+	- Una vez ligada, mapearla a la cuota para identificar la cantidad a cobrar.
+
+Encontrar la manera de crear formularios mas dinamicos para muchos registros en Sonata.
+
+Configurar la creacion de fletes de sonata, con alguna clase de FleteAdmin, para que de esta manera se modifiquen los estados de los economicos y los operadores cada vez que se altere el estado de este
+
+Crear clase de "Actividades", la cual sostenga los estados de los operadores o fletes.
