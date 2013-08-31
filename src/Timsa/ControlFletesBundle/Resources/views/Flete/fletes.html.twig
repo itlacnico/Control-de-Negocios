@@ -14,29 +14,47 @@
  {% endblock %}
 
 {% block content %}
-     <div class="span12">        
+
+	<nav class="navbar navbar-default" role="navigation">
+		<div class="navbar-responsive-collapse">
+			{{ knp_pagination_render(operadores_ocupados) }}
+		</div>
+
+		<form class="navbar-form pull-right" action="{{path('_operadores')}}">
+			<input  type="text" class="form-control" placeholder="Buscar.." id="search" style="width: 200px;" name="busquedaOcupado">
+			<button type="submit" class="btn btn-primary">Buscar</button>
+		</form>
+	</nav>
+     <!-- 
         <div class="well" style="overflow: auto">
+        	<form class="form-inline pull-right" role="form">
+        		<label>Filtros</label>
+        		<div class="form-group">
+        			<label class="sr-only" for="operador ">Operador</label>
+        			<input type="text" class="form-control input-sm" id="operador" placeholder="Operador">
+        		</div>
+        		<div class="form-group">
+        			<label class="sr-only" for="economico ">Operador</label>
+        			<input type="text" class="form-control input-sm" id="economico" placeholder="Economico">
+        		</div>
+        		<div class="form-group">
+        			<label class="sr-only" for="socio ">Operador</label>
+        			<input type="text" class="form-control input-sm" id="socio" placeholder="Socio">
+        		</div>
+        		<button type="submit" class="btn btn-info">Filtrar</button>
+        	</form>
         	{#
         	<div>
         		<button class="btn btn-primary pull-left">Nuevo Flete</button>
         	</div>
 			#}
 
-           <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+           <div id="reportrange" class="pull-left" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
               <i class="icon-calendar icon-large"></i>
               <span></span> <b class="caret"></b>
            </div>
         </div>
-
-        <div>
-        	<form class="form-inline" role="form">
-        		<div class="form-group">
-        			<label  for="operador">Operador</label>
-        			<input type="text" class="form-control input-sm" id="operador" placeholder="Ricardo">
-        		</div>
-        		<button type="submit" class="btn btn-default">Filtrar</button>
-        	</form>
-        </div>
+-->
 
         <div>
         	{% if fletes %}
