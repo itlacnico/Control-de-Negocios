@@ -51,4 +51,14 @@ class TarifaAgenciaAdmin extends Admin{
 	            #->end()
 	            ;
 	        }
+
+	    protected function configureDatagridFilters(DatagridMapper $datagrid)
+	        {
+	            $datagrid
+	                ->add('agencia.nombre', 'doctrine_orm_string')
+	                ->add('tarifa.nombre', 'doctrine_orm_string')
+	                ->add('cuota.nombre', 'doctrine_orm_string')
+	                #->add('numero', null, array(), null, array('expanded' => true, 'multiple' => true))
+	            ;
+	        }
 }

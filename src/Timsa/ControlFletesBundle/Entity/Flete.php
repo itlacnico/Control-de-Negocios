@@ -26,13 +26,13 @@ class Flete{
 	/**
 	 * @ORM\Column(type="boolean")
 	 */
-	protected $statusA;
+	protected $statusA = true;
 
     /**
      * @ORM\ManyToOne(targetEntity="ActividadesFlete")
      * @ORM\JoinColumn(name="actividad",  referencedColumnName="id")
      */
-	protected $actividad = 5;
+	protected $actividad;
 	/**
 	 * @ORM\Column(type="string", length=700, nullable=true)
 	 */
@@ -92,8 +92,15 @@ class Flete{
 
     protected $tipo_viaje;
 
-	public function __construct(){
+    /**
+     * @ORM\ManyToMany(targetEntity="Contenedor", inversedBy="fletes")
+     * @ORM\JoinTable(name="contenedores_flete")
+     */
 
+    protected $contenedores;
+
+	public function __construct(){
+        $this->contenedores = new \Doctrine\Common\Collections\ArrayCollection();
 	}
 
     /**
@@ -401,5 +408,42 @@ class Flete{
     public function getTipoViaje()
     {
         return $this->tipo_viaje;
+    }
+
+    public function __toString(){
+        return (String)$this->id;
+    }
+
+    /**
+     * Add contenedores
+     *
+     * @param \Timsa\ControlFletesBundle\Entity\Contenedor $contenedores
+     * @return Flete
+     */
+    public function addContenedore(\Timsa\ControlFletesBundle\Entity\Contenedor $contenedores)
+    {
+        $this->contenedores[] = $contenedores;
+    
+        return $this;
+    }
+
+    /**
+     * Remove contenedores
+     *
+     * @param \Timsa\ControlFletesBundle\Entity\Contenedor $contenedores
+     */
+    public function removeContenedore(\Timsa\ControlFletesBundle\Entity\Contenedor $contenedores)
+    {
+        $this->contenedores->removeElement($contenedores);
+    }
+
+    /**
+     * Get contenedores
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getContenedores()
+    {
+        return $this->contenedores;
     }
 }

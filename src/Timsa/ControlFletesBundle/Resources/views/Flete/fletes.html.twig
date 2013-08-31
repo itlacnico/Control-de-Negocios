@@ -16,10 +16,65 @@
 {% block content %}
      <div class="span12">        
         <div class="well" style="overflow: auto">
+        	{#
+        	<div>
+        		<button class="btn btn-primary pull-left">Nuevo Flete</button>
+        	</div>
+			#}
+
            <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
               <i class="icon-calendar icon-large"></i>
               <span></span> <b class="caret"></b>
            </div>
+        </div>
+
+        <div>
+        	<form class="form-inline" role="form">
+        		<div class="form-group">
+        			<label  for="operador">Operador</label>
+        			<input type="text" class="form-control input-sm" id="operador" placeholder="Ricardo">
+        		</div>
+        		<button type="submit" class="btn btn-default">Filtrar</button>
+        	</form>
+        </div>
+
+        <div>
+        	{% if fletes %}
+        	{#<div class="table-responsive">#}
+        	<table class="table table-condensed">
+        		<tr>
+        			<th>#</th>
+        			<th>Eco</th>
+        			<th>Licencia</th>
+        			<th>Operador</th>
+        			<th>Socio</th>
+        			<th>Booking</th>
+        			<th>WorkOrder</th>
+        			<th>Trafico</th>
+        			<th>Cliente</th>
+        			<th>Contenedor(s)</th>
+        			<th>Size</th>
+        			<th>Type</th>
+        		</tr>
+        		{% set items = { 'Activo': '', 'Pendiente Facturacion': 'active', 'Completo': 'success', 'Cancelado' : 'danger', 'Preparado': 'warning', "" : 'warning' } %}
+
+        		{% for flete in fletes %}
+
+        		<tr class="{{ items[( flete.actividad ~ "")] }}"  >
+        			<td>{{flete.id}}</td>
+        			<td>{{flete.relacion.economico}}</td>
+        			<td>{{flete.relacion.operador}}</td>
+        			<td>{{flete.relacion.socio}}</td>
+        			<td></td>
+        			{#<td>{{flete.licencia}}</td>#}
+        		</tr>
+        		{% endfor %}
+        	</table>
+        	{#</div>#}
+        	{% else %}
+        	<h3>No existen Fletes</h3>
+        	{% endif %}
+
         </div>
 
      </div>

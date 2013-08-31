@@ -56,3 +56,7 @@ _tarifa:
 #_procesar:
     #pattern: /main/procesar/{tipo}
     #defaults: {_controller: TimsaControlFletesBundle:Procesar:index}
+
+_contenedores:
+    pattern: /main/contenedores
+    defaults: {_controller: TimsaControlFletesBundle:Contenedor:index}

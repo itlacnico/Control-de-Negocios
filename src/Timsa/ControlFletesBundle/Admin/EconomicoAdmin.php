@@ -59,4 +59,13 @@ class EconomicoAdmin extends Admin{
 	            ;
 	            
 	        }
+
+        protected function configureDatagridFilters(DatagridMapper $datagrid)
+            {
+                $datagrid
+                    ->add('numero', 'doctrine_orm_number')
+                    ->add('placas', 'doctrine_orm_string')
+                    #->add('numero', null, array(), null, array('expanded' => true, 'multiple' => true))
+                ;
+            }
 }

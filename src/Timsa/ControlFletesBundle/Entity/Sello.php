@@ -20,9 +20,26 @@ class Sello{
 
 	protected $id;
 
+	/**
+	 * @ORM\Column(type="string")
+	 */
 	protected $sello;
+
+	/**
+	 * @ORM\Column(type="integer")
+	 */
 	protected $numero_sello;
+
+	/**
+	 * @ORM\Column(type="date")
+	 */
 	protected $fecha_sellado;
+
+	/**
+	 * @ORM\ManyToOne(targetEntity="Contenedor", inversedBy="sellos")
+	 */
+
+	protected $contenedor;
 
     /**
      * Get id
@@ -32,5 +49,97 @@ class Sello{
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set sello
+     *
+     * @param string $sello
+     * @return Sello
+     */
+    public function setSello($sello)
+    {
+        $this->sello = $sello;
+    
+        return $this;
+    }
+
+    /**
+     * Get sello
+     *
+     * @return string 
+     */
+    public function getSello()
+    {
+        return $this->sello;
+    }
+
+    /**
+     * Set numero_sello
+     *
+     * @param integer $numeroSello
+     * @return Sello
+     */
+    public function setNumeroSello($numeroSello)
+    {
+        $this->numero_sello = $numeroSello;
+    
+        return $this;
+    }
+
+    /**
+     * Get numero_sello
+     *
+     * @return integer 
+     */
+    public function getNumeroSello()
+    {
+        return $this->numero_sello;
+    }
+
+    /**
+     * Set fecha_sellado
+     *
+     * @param \DateTime $fechaSellado
+     * @return Sello
+     */
+    public function setFechaSellado($fechaSellado)
+    {
+        $this->fecha_sellado = $fechaSellado;
+    
+        return $this;
+    }
+
+    /**
+     * Get fecha_sellado
+     *
+     * @return \DateTime 
+     */
+    public function getFechaSellado()
+    {
+        return $this->fecha_sellado;
+    }
+
+    /**
+     * Set contenedor
+     *
+     * @param \Timsa\ControlFletesBundle\Entity\Contenedor $contenedor
+     * @return Sello
+     */
+    public function setContenedor(\Timsa\ControlFletesBundle\Entity\Contenedor $contenedor = null)
+    {
+        $this->contenedor = $contenedor;
+    
+        return $this;
+    }
+
+    /**
+     * Get contenedor
+     *
+     * @return \Timsa\ControlFletesBundle\Entity\Contenedor 
+     */
+    public function getContenedor()
+    {
+        return $this->contenedor;
     }
 }

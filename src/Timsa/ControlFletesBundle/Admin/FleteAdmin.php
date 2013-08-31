@@ -17,11 +17,12 @@ class FleteAdmin extends Admin{
 		    {
 		    	
 		        $listMapper
-		        	->add('fecha')
+		        	->add('id')
 		            ->add('actividad')
 		            ->add('statusA')
 		            ->add('comentarios')
 		            ->add('relacion')
+		            ->add('fecha')
 		            ->add('fecha_facturacion')
 		            ->add('agencia')
 		            ->add('fletePadre')
@@ -29,6 +30,10 @@ class FleteAdmin extends Admin{
 		            ->add('sucursal')
 		            ->add('cuota')
 		            ->add('tipo_viaje')
+		            ->add('_action', 'actions', array(
+		                'actions' => array(
+		                    'edit' => array(),
+		                )))
 		        ;
 
 		    }
@@ -49,7 +54,7 @@ class FleteAdmin extends Admin{
 	                ->add('fecha')
 	                ->add('fecha_facturacion')
 	            ->end()
-	            ->with('Relacion')
+	            ->with('Relacion', array('collapsed' => true))
 	            	->add('relacion','sonata_type_model' , array('expanded' => true, 'compound' => true))
 	            ->end()
 	            ->with('Viajes')
@@ -65,4 +70,14 @@ class FleteAdmin extends Admin{
 	            ;
 	            
 	        }
+
+    protected function configureDatagridFilters(DatagridMapper $datagrid)
+        {
+            $datagrid
+                ->add('id', 'doctrine_orm_number')
+                ->add('relacion.economico.numero', 'doctrine_orm_number')
+                ->add('relacion.operador.nombre', 'doctrine_orm_string')
+                #->add('numero', null, array(), null, array('expanded' => true, 'multiple' => true))
+            ;
+        }
 }

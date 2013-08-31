@@ -12,7 +12,31 @@ use Doctrine\ORM\EntityRepository;
  */
 class FleteRepository extends EntityRepository
 {
-	public function getEconomicosPorSocio($socio){
+	public function getFletesPorSocio($socio){
+		return $this->getEntityManager()
+					->createQuery("SELECT p FROM TimsaControlFletesBundle:Economico p
+											JOIN p.relacion r 
+											WHERE r.socio = $socio ")
+					->getResult();
+	}
+
+	public function getFletesPorOperador($socio){
+		return $this->getEntityManager()
+					->createQuery("SELECT p FROM TimsaControlFletesBundle:Economico p
+											JOIN p.relacion r 
+											WHERE r.socio = $socio ")
+					->getResult();
+	}
+
+	public function getFletesPorEconomico($socio){
+		return $this->getEntityManager()
+					->createQuery("SELECT p FROM TimsaControlFletesBundle:Economico p
+											JOIN p.relacion r 
+											WHERE r.socio = $socio ")
+					->getResult();
+	}
+
+	public function getFletesPorFecha($socio){
 		return $this->getEntityManager()
 					->createQuery("SELECT p FROM TimsaControlFletesBundle:Economico p
 											JOIN p.relacion r 

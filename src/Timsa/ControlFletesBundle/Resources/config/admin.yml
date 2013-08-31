@@ -92,6 +92,24 @@ services:
               - Timsa\ControlFletesBundle\Entity\Cuota
               - 'TimsaControlFletesBundle:Admin'
 
+    sonata.admin.contenedor:
+        class: Timsa\ControlFletesBundle\Admin\ContenedorAdmin
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Administrativos, label: "Contenedores"}
+        arguments:
+              - ~
+              - Timsa\ControlFletesBundle\Entity\Contenedor
+              - 'TimsaControlFletesBundle:Admin'
+
+    sonata.admin.sello:
+        class: Timsa\ControlFletesBundle\Admin\SelloAdmin
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Administrativos, label: "Sellos"}
+        arguments:
+              - ~
+              - Timsa\ControlFletesBundle\Entity\Sello
+              - 'TimsaControlFletesBundle:Admin'
+
     sonata.admin.flete:
         class: Timsa\ControlFletesBundle\Admin\FleteAdmin
         tags:
@@ -99,7 +117,7 @@ services:
         arguments:
               - ~
               - Timsa\ControlFletesBundle\Entity\Flete
-              - 'TimsaControlFletesBundle:Admin'
+              - 'TimsaControlFletesBundle:FleteAdmin'
 
     sonata.admin.user:
         class: Timsa\ControlFletesBundle\Admin\UserAdmin
