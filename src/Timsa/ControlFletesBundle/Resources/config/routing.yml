@@ -60,3 +60,11 @@ _tarifa:
 _contenedores:
     pattern: /main/contenedores
     defaults: {_controller: TimsaControlFletesBundle:Contenedor:index}
+
+flete_detalle:
+    pattern: /main/fleteDetalle/{flete}
+    defaults: {_controller: TimsaControlFletesBundle:Flete:detalle, flete: 0 }
+
+create_flete:
+   pattern: /main/CreateFlete
+   defaults: {_controller: TimsaControlFletesBundle:Flete:create}

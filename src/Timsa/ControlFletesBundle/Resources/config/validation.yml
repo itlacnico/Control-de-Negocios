@@ -11,3 +11,12 @@ Timsa\ControlFletesBundle\Entity\Operador:
            - Regex:
                pattern: "/\d+/"
                message: Your name cannot contain a number
+
+Timsa\ControlFletesBundle\Entity\Flete:
+    properties:
+        relacion:
+           - NotBlank: ~
+        agencia:
+           - NotBlank: ~
+        sucursal:
+           - NotBlank: ~

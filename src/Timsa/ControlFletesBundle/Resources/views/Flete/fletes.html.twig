@@ -3,7 +3,8 @@
 {% block header %}
 
 <div class="page-header">
-  <h1>Fletes</h1>
+  <h1>Fletes <a href="{{path('create_flete')}}"><button class="btn">Crear Flete</button></a></h1>
+  
 </div>
  {% endblock %}
  {% block stylesheets %}
@@ -14,78 +15,130 @@
  {% endblock %}
 
 {% block content %}
-
+<!--
 	<nav class="navbar navbar-default" role="navigation">
-		<div class="navbar-responsive-collapse">
-			{{ knp_pagination_render(operadores_ocupados) }}
-		</div>
 
-		<form class="navbar-form pull-right" action="{{path('_operadores')}}">
-			<input  type="text" class="form-control" placeholder="Buscar.." id="search" style="width: 200px;" name="busquedaOcupado">
-			<button type="submit" class="btn btn-primary">Buscar</button>
-		</form>
+       <div class="navbar-form navbar-left" action="">
+            <a href="flete/crear"><button type="submit" class="btn btn-default">Crear Flete</button></a>
+        </div>
 	</nav>
-     <!-- 
-        <div class="well" style="overflow: auto">
-        	<form class="form-inline pull-right" role="form">
-        		<label>Filtros</label>
-        		<div class="form-group">
-        			<label class="sr-only" for="operador ">Operador</label>
-        			<input type="text" class="form-control input-sm" id="operador" placeholder="Operador">
-        		</div>
-        		<div class="form-group">
-        			<label class="sr-only" for="economico ">Operador</label>
-        			<input type="text" class="form-control input-sm" id="economico" placeholder="Economico">
-        		</div>
-        		<div class="form-group">
-        			<label class="sr-only" for="socio ">Operador</label>
-        			<input type="text" class="form-control input-sm" id="socio" placeholder="Socio">
-        		</div>
-        		<button type="submit" class="btn btn-info">Filtrar</button>
-        	</form>
-        	{#
-        	<div>
-        		<button class="btn btn-primary pull-left">Nuevo Flete</button>
-        	</div>
-			#}
+-->
+    <div class="panel">
+        <div class="panel-group" id="accordion">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                       Filtros
+                    </a>
+                  </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse">
+                 <div class="panel-body">
 
-           <div id="reportrange" class="pull-left" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
-              <i class="icon-calendar icon-large"></i>
-              <span></span> <b class="caret"></b>
+            <form class="form-inline" action="{{path('_operadores')}}">
+                    <div id="reportrange" class="navbar navbar-right">
+                        <span></span> <b class="caret"></b>
+                    </div>
+                     <div class="form-group">
+                        <label for="searchOperador">Operador</label>
+                        <input  type="text" class="form-control" placeholder="Buscar.." id="searchOperador" style="width: 200px;" name="operador">
+                    </div>
+                      <div class="form-group">                  
+                        <label for="searchEconomico">Economico</label>
+                        <input  type="text" class="form-control" placeholder="Buscar.." id="searchEconomico" style="width: 200px;" name="economico">
+                    </div>
+                     <div class="form-group">                    
+                        <label for="searchSocio">Socio</label>
+                        <input  type="text" class="form-control" placeholder="Buscar.." id="searchSocio" style="width: 200px;" name="operador">
+                    </div>
+                    <br>
+                    <br>
+                     <div class="form-group">                    
+                        <label>Viaje</label>
+                        <input  type="checkbox" ckecked> Sencillo
+                        <input type="checkbox" ckecked> Full 
+                        <input type="checkbox" ckecked> Importacion 
+                        <input type="checkbox" ckecked> Exportacion 
+                        <input type="checkbox" ckecked> Reutilizado
+                    </div>
+                    <br>
+                    <br>
+                    <div class="form-group"> 
+                        <label>WorkOrder</label>
+                        <input  type="text" class="form-control" placeholder="Buscar.." id="search" style="width: 200px;" name="operador">
+                     </div>                   
+                     <div class="form-group">                    
+                        <label>Booking</label>
+                        <input  type="text" class="form-control" placeholder="Buscar.." id="search" style="width: 200px;" name="operador">
+                    </div>
+                    <br><br>
+                <button type="submit" class="btn btn-info">Buscar</button>
+            </form>
            </div>
         </div>
--->
-
+    </div>
+     
         <div>
         	{% if fletes %}
         	{#<div class="table-responsive">#}
-        	<table class="table table-condensed">
+        	<table class="table table-bordered">
         		<tr>
         			<th>#</th>
         			<th>Eco</th>
+                    <th>Operador</th>
         			<th>Licencia</th>
-        			<th>Operador</th>
         			<th>Socio</th>
-        			<th>Booking</th>
+        			<th scope="rowgroup">Booking</th>
         			<th>WorkOrder</th>
         			<th>Trafico</th>
         			<th>Cliente</th>
         			<th>Contenedor(s)</th>
         			<th>Size</th>
         			<th>Type</th>
+                    <th>Acciones</th>
         		</tr>
         		{% set items = { 'Activo': '', 'Pendiente Facturacion': 'active', 'Completo': 'success', 'Cancelado' : 'danger', 'Preparado': 'warning', "" : 'warning' } %}
 
         		{% for flete in fletes %}
 
-        		<tr class="{{ items[( flete.actividad ~ "")] }}"  >
-        			<td>{{flete.id}}</td>
-        			<td>{{flete.relacion.economico}}</td>
-        			<td>{{flete.relacion.operador}}</td>
-        			<td>{{flete.relacion.socio}}</td>
-        			<td></td>
+        		<tr class="{{ items[( flete.actividad ~ "")] }}">
+        			<td rowspan="2" >{{flete.id}}</td>
+        			<td rowspan="2">{{flete.relacion.economico}}</td>
+        			<td rowspan="2">{{flete.relacion.operador}}</td>
+                    <td rowspan="2"></td>
+        			<td rowspan="2">{{flete.relacion.socio}}</td>
+
+                    {% if flete.tipoviaje.trafico == 'Sencillo'%}
+                        {% set x = "rowspan=2" %}
+                        {% else %} 
+                        {% set x = "rowspan=1" %}
+                    {% endif %}
+                    <td {{x}}> book</td>
+                    <td {{x}}></td>
+                    <td rowspan="2">
+                        <span class="label label-info">{{flete.tipoviaje.viaje}}</span>
+                    </td>
+                    <td rowspan="2"></td>
+                    <td {{x}}></td>
+                    <td {{x}}></td>
+                    <td {{x}}></td>
+                    <td rowspan="2"><a href="{{path('flete_detalle',{'flete': flete.id})}}"><button class="btn btn-success">Detalles</button></a></td>
         			{#<td>{{flete.licencia}}</td>#}
         		</tr>
+
+                {% if flete.tipoviaje.trafico == 'Full'%}
+                    <tr class="{{ items[( flete.actividad ~ "")] }}">
+                        <td>book</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                {% else %}
+                    <tr></tr>
+                {% endif %}
+
         		{% endfor %}
         	</table>
         	{#</div>#}
@@ -93,6 +146,9 @@
         	<h3>No existen Fletes</h3>
         	{% endif %}
 
+        </div>
+        <div class="navbar-responsive-collapse">
+            {{ knp_pagination_render(fletes) }}
         </div>
 
      </div>
@@ -115,7 +171,7 @@
 		      {
 		         startDate: moment().subtract('days', 29),
 		         endDate: moment(),
-		         minDate: '01/01/2012',
+		         minDate: '01/01/2013',
 		         maxDate: '12/31/2014',
 		         dateLimit: { days: 60 },
 		         showDropdowns: true,
@@ -124,12 +180,12 @@
 		         timePickerIncrement: 1,
 		         timePicker12Hour: true,
 		         ranges: {
-		            'Today': [moment(), moment()],
-		            'Yesterday': [moment().subtract('days', 1), moment().subtract('days', 1)],
-		            'Last 7 Days': [moment().subtract('days', 6), moment()],
-		            'Last 30 Days': [moment().subtract('days', 29), moment()],
-		            'This Month': [moment().startOf('month'), moment().endOf('month')],
-		            'Last Month': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')]
+		            'Hoy': [moment(), moment()],
+		            'Ayer': [moment().subtract('days', 1), moment().subtract('days', 1)],
+		            'Ultimos 7 dias': [moment().subtract('days', 6), moment()],
+		            'Ultimos 30 dias': [moment().subtract('days', 29), moment()],
+		            'Este mes': [moment().startOf('month'), moment().endOf('month')],
+		            'Mes pasado': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')],
 		         },
 		         opens: 'left',
 		         buttonClasses: ['btn btn-default'],
@@ -138,12 +194,12 @@
 		         format: 'MM/DD/YYYY',
 		         separator: ' to ',
 		         locale: {
-		             applyLabel: 'Submit',
-		             fromLabel: 'From',
-		             toLabel: 'To',
-		             customRangeLabel: 'Custom Range',
-		             daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr','Sa'],
-		             monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+		             applyLabel: 'Filtro',
+		             fromLabel: 'Desde',
+		             toLabel: 'Hasta',
+		             customRangeLabel: 'Especificar Rango',
+		             daysOfWeek: ['Do', 'Lu', 'Mar', 'Mie', 'Jue', 'Vie','Sa'],
+		             monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Marzo'],
 		             firstDay: 1
 		         }
 		      },

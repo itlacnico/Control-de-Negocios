@@ -30,16 +30,16 @@ class Sello{
 	 */
 	protected $numero_sello;
 
+    /**
+     * @ORM\OneToOne(targetEntity="WorkOrder", mappedBy="sellos")
+     */
+    protected $workorder;
+
 	/**
 	 * @ORM\Column(type="date")
 	 */
 	protected $fecha_sellado;
 
-	/**
-	 * @ORM\ManyToOne(targetEntity="Contenedor", inversedBy="sellos")
-	 */
-
-	protected $contenedor;
 
     /**
      * Get id

@@ -12,35 +12,24 @@ use Doctrine\ORM\EntityRepository;
  */
 class FleteRepository extends EntityRepository
 {
-	public function getFletesPorSocio($socio){
-		return $this->getEntityManager()
-					->createQuery("SELECT p FROM TimsaControlFletesBundle:Economico p
-											JOIN p.relacion r 
-											WHERE r.socio = $socio ")
-					->getResult();
-	}
 
-	public function getFletesPorOperador($socio){
+	public function getFiltroFlete($flete){
 		return $this->getEntityManager()
-					->createQuery("SELECT p FROM TimsaControlFletesBundle:Economico p
-											JOIN p.relacion r 
-											WHERE r.socio = $socio ")
-					->getResult();
-	}
+					->createQuery("SELECT f.fecha, f.actividad, f.comentarios, f.fecha_llegada,
+										  f.fecha_facturacion, op.nombre 
+								   FROM TimsaControlFletesBundle:Flete f
+									JOIN f.relacion   r
+									JOIN r.operador   op
+									JOIN r.economico  ec
+									JOIN r.socio 	  so
+									JOIN f.agencia    ag
+									JOIN f.fletePadre fp
+									JOIN f.fleteHijo  fh
+									JOIN f.sucursal   su
+									JOIN f.cuota  	  cu
+									JOIN f.tipo_viaje tv
 
-	public function getFletesPorEconomico($socio){
-		return $this->getEntityManager()
-					->createQuery("SELECT p FROM TimsaControlFletesBundle:Economico p
-											JOIN p.relacion r 
-											WHERE r.socio = $socio ")
-					->getResult();
-	}
-
-	public function getFletesPorFecha($socio){
-		return $this->getEntityManager()
-					->createQuery("SELECT p FROM TimsaControlFletesBundle:Economico p
-											JOIN p.relacion r 
-											WHERE r.socio = $socio ")
+									WHERE p.id = $flete ")
 					->getResult();
 	}
 }

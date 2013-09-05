@@ -24,11 +24,11 @@ class Contenedor{
 	 */
 	protected $tipo;
 	/**
-	 * @ORM\Column(type="string")
+	 * @ORM\ManyToOne(targetEntity="WorkOrder", inversedBy="contenedor")
 	 */
 	protected $workorder;
 	/**
-	 * @ORM\Column(type="string")
+	 * @ORM\ManyToOne(targetEntity="Booking", inversedBy="contenedores")
 	 */
 	protected $booking;
 
@@ -37,11 +37,6 @@ class Contenedor{
 	 *
 	 */
 	protected $fletes;
-
-	/**
-	 * @ORM\OneToMany(targetEntity="Sello", mappedBy="contenedor")
-	 */
-	protected $sellos;
 
     /**
      * Get id
@@ -81,51 +76,6 @@ class Contenedor{
         return $this->tipo;
     }
 
-    /**
-     * Set workorder
-     *
-     * @param string $workorder
-     * @return Contenedor
-     */
-    public function setWorkorder($workorder)
-    {
-        $this->workorder = $workorder;
-    
-        return $this;
-    }
-
-    /**
-     * Get workorder
-     *
-     * @return string 
-     */
-    public function getWorkorder()
-    {
-        return $this->workorder;
-    }
-
-    /**
-     * Set booking
-     *
-     * @param string $booking
-     * @return Contenedor
-     */
-    public function setBooking($booking)
-    {
-        $this->booking = $booking;
-    
-        return $this;
-    }
-
-    /**
-     * Get booking
-     *
-     * @return string 
-     */
-    public function getBooking()
-    {
-        return $this->booking;
-    }
 
     /**
      * Add fletes
@@ -191,5 +141,51 @@ class Contenedor{
     public function getSellos()
     {
         return $this->sellos;
+    }
+
+    /**
+     * Set workorder
+     *
+     * @param \Timsa\ControlFletesBundle\Entity\WorkOrder $workorder
+     * @return Contenedor
+     */
+    public function setWorkorder(\Timsa\ControlFletesBundle\Entity\WorkOrder $workorder = null)
+    {
+        $this->workorder = $workorder;
+    
+        return $this;
+    }
+
+    /**
+     * Get workorder
+     *
+     * @return \Timsa\ControlFletesBundle\Entity\WorkOrder 
+     */
+    public function getWorkorder()
+    {
+        return $this->workorder;
+    }
+
+    /**
+     * Set booking
+     *
+     * @param \Timsa\ControlFletesBundle\Entity\Booking $booking
+     * @return Contenedor
+     */
+    public function setBooking(\Timsa\ControlFletesBundle\Entity\Booking $booking = null)
+    {
+        $this->booking = $booking;
+    
+        return $this;
+    }
+
+    /**
+     * Get booking
+     *
+     * @return \Timsa\ControlFletesBundle\Entity\Booking 
+     */
+    public function getBooking()
+    {
+        return $this->booking;
     }
 }
