@@ -110,6 +110,24 @@ services:
               - Timsa\ControlFletesBundle\Entity\Sello
               - 'TimsaControlFletesBundle:Admin'
 
+    sonata.admin.workorder:
+        class: Timsa\ControlFletesBundle\Admin\WorkOrderAdmin
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Administrativos, label: "WorkOrder"}
+        arguments:
+              - ~
+              - Timsa\ControlFletesBundle\Entity\WorkOrder
+              - 'TimsaControlFletesBundle:Admin'
+
+    sonata.admin.booking:
+        class: Timsa\ControlFletesBundle\Admin\BookingAdmin
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Administrativos, label: "Booking"}
+        arguments:
+              - ~
+              - Timsa\ControlFletesBundle\Entity\Booking
+              - 'TimsaControlFletesBundle:Admin'
+
     sonata.admin.flete:
         class: Timsa\ControlFletesBundle\Admin\FleteAdmin
         tags:

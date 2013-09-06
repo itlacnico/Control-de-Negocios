@@ -20,16 +20,15 @@ class FleteAdmin extends Admin{
 		        	->add('id')
 		            ->add('actividad')
 		            ->add('statusA')
-		            ->add('comentarios')
 		            ->add('relacion')
 		            ->add('fecha')
 		            ->add('fecha_facturacion')
 		            ->add('agencia')
-		            ->add('fletePadre')
-		            ->add('fleteHijo')
 		            ->add('sucursal')
 		            ->add('cuota')
+		            ->add('workorders')
 		            ->add('tipo_viaje')
+		            ->add('comentarios')
 		            ->add('_action', 'actions', array(
 		                'actions' => array(
 		                    'edit' => array(),
@@ -66,6 +65,9 @@ class FleteAdmin extends Admin{
 	            ->with('Relaciones con fletes')
 	            	->add('fletePadre')
 	            	->add('fleteHijo')
+	            ->end()
+	            ->with('Contenedores')
+	            	->add('workorders')
 	            ->end()
 	            ;
 	            

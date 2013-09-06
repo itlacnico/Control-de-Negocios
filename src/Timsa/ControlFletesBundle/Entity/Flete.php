@@ -93,14 +93,14 @@ class Flete{
     protected $tipo_viaje;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Contenedor", inversedBy="fletes")
+     * @ORM\ManyToOne(targetEntity="WorkOrder", inversedBy="flete")
      * @ORM\JoinTable(name="contenedores_flete")
      */
 
-    protected $contenedores;
+    protected $workorders;
 
 	public function __construct(){
-        $this->contenedores = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->workorders = new \Doctrine\Common\Collections\ArrayCollection();
 	}
 
     /**
@@ -414,36 +414,27 @@ class Flete{
         return (String)$this->id;
     }
 
+
     /**
-     * Add contenedores
+     * Set workorders
      *
-     * @param \Timsa\ControlFletesBundle\Entity\Contenedor $contenedores
+     * @param \Timsa\ControlFletesBundle\Entity\WorkOrder $workorders
      * @return Flete
      */
-    public function addContenedore(\Timsa\ControlFletesBundle\Entity\Contenedor $contenedores)
+    public function setWorkorders(\Timsa\ControlFletesBundle\Entity\WorkOrder $workorders = null)
     {
-        $this->contenedores[] = $contenedores;
+        $this->workorders = $workorders;
     
         return $this;
     }
 
     /**
-     * Remove contenedores
+     * Get workorders
      *
-     * @param \Timsa\ControlFletesBundle\Entity\Contenedor $contenedores
+     * @return \Timsa\ControlFletesBundle\Entity\WorkOrder 
      */
-    public function removeContenedore(\Timsa\ControlFletesBundle\Entity\Contenedor $contenedores)
+    public function getWorkorders()
     {
-        $this->contenedores->removeElement($contenedores);
-    }
-
-    /**
-     * Get contenedores
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getContenedores()
-    {
-        return $this->contenedores;
+        return $this->workorders;
     }
 }

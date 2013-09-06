@@ -19,24 +19,20 @@ class Contenedor{
 	*/
 
 	protected $id;
-	/**
-	 * @ORM\Column(type="string")
-	 */
+
+    /**
+     *  @ORM\Column(type="string")
+     */
+
+    protected $codigo;
+    /**
+     * @ORM\Column(type="string")
+     */
 	protected $tipo;
 	/**
 	 * @ORM\ManyToOne(targetEntity="WorkOrder", inversedBy="contenedor")
 	 */
 	protected $workorder;
-	/**
-	 * @ORM\ManyToOne(targetEntity="Booking", inversedBy="contenedores")
-	 */
-	protected $booking;
-
-	/**
-	 * @ORM\ManyToMany(targetEntity="Flete", mappedBy="contenedores")
-	 *
-	 */
-	protected $fletes;
 
     /**
      * Get id
@@ -187,5 +183,32 @@ class Contenedor{
     public function getBooking()
     {
         return $this->booking;
+    }
+
+    /**
+     * Set codigo
+     *
+     * @param string $codigo
+     * @return Contenedor
+     */
+    public function setCodigo($codigo)
+    {
+        $this->codigo = $codigo;
+    
+        return $this;
+    }
+
+    /**
+     * Get codigo
+     *
+     * @return string 
+     */
+    public function getCodigo()
+    {
+        return $this->codigo;
+    }
+
+    public function __toString(){
+        return (String)$this->codigo;
     }
 }

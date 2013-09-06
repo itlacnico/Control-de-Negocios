@@ -11,7 +11,7 @@ class ContenedorAdmin extends Admin{
 	protected function configureListFields(ListMapper $listMapper){
 		$listMapper
 			// add custom action links
-		 ->add("id")
+		 ->add("codigo")
 		 ->add("tipo")
 		 ->add("")
           ->add('_action', 'actions', array(
@@ -23,9 +23,10 @@ class ContenedorAdmin extends Admin{
 
 	protected function configureFormFields(FormMapper $formMapper)
 	    {
-	       # $formMapper
-				#->add('imagen')
-	        #;
+	        $formMapper
+	        	->add("codigo")
+	        	->add("tipo")
+	        ;
 	    }
 
     protected function configureDatagridFilters(DatagridMapper $datagrid)

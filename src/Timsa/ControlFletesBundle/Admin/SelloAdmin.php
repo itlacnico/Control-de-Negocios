@@ -10,14 +10,10 @@ use Sonata\AdminBundle\Form\FormMapper;
 class SelloAdmin extends Admin{
 	protected function configureListFields(ListMapper $listMapper){
 		$listMapper
-			->add('nombre')
-			->add('telefono')
-			->add('RC')
-			->add('CURP')
-			->add('fecha_ingreso')
-			->add('statusA')
-			#->add('imagen')
-			->add('actividad')
+			    ->add('sello')
+	        	->add('numero_sello')
+	        	->add('workorder')
+	        	->add('fecha_sellado')
 			// add custom action links
           ->add('_action', 'actions', array(
               'actions' => array(
@@ -29,23 +25,11 @@ class SelloAdmin extends Admin{
 	protected function configureFormFields(FormMapper $formMapper)
 	    {
 	        $formMapper
-	            ->add('nombre')
-	            ->add('statusA')
-	            ->add('telefono')
-	            #->add('statusA', null, array('required' => false))
-	            ->add('RC')
-				->add('CURP')
-				->add('fecha_ingreso')
-				->add('fecha_deprecated')
+	        	->add('sello')
+	        	->add('numero_sello')
+	        	->add('workorder')
+	        	->add('fecha_sellado')
 				#->add('imagen')
 	        ;
 	    }
-
-    protected function configureDatagridFilters(DatagridMapper $datagrid)
-        {
-            $datagrid
-                ->add('nombre', 'doctrine_orm_string')
-                #->add('numero', null, array(), null, array('expanded' => true, 'multiple' => true))
-            ;
-        }
 }

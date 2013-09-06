@@ -21,13 +21,13 @@ class Booking{
 	protected $booking;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="Contenedor", mappedBy="booking")
+	 * @ORM\OneToMany(targetEntity="WorkOrder", mappedBy="booking")
 	 */
 
-	protected $contenedores;
+	protected $workorders;
 
 	public function __construct(){
-		$this->contenedores = new  \Doctrine\Common\Collections\ArrayCollection();
+		$this->workorders = new  \Doctrine\Common\Collections\ArrayCollection();
 	}
 
     /**
@@ -94,5 +94,38 @@ class Booking{
     public function getContenedores()
     {
         return $this->contenedores;
+    }
+
+    /**
+     * Add workorders
+     *
+     * @param \Timsa\ControlFletesBundle\Entity\WorkOrder $workorders
+     * @return Booking
+     */
+    public function addWorkorder(\Timsa\ControlFletesBundle\Entity\WorkOrder $workorders)
+    {
+        $this->workorders[] = $workorders;
+    
+        return $this;
+    }
+
+    /**
+     * Remove workorders
+     *
+     * @param \Timsa\ControlFletesBundle\Entity\WorkOrder $workorders
+     */
+    public function removeWorkorder(\Timsa\ControlFletesBundle\Entity\WorkOrder $workorders)
+    {
+        $this->workorders->removeElement($workorders);
+    }
+
+    /**
+     * Get workorders
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getWorkorders()
+    {
+        return $this->workorders;
     }
 }

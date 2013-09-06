@@ -142,4 +142,27 @@ class Sello{
     {
         return $this->contenedor;
     }
+
+    /**
+     * Set workorder
+     *
+     * @param \Timsa\ControlFletesBundle\Entity\WorkOrder $workorder
+     * @return Sello
+     */
+    public function setWorkorder(\Timsa\ControlFletesBundle\Entity\WorkOrder $workorder = null)
+    {
+        $this->workorder = $workorder;
+    
+        return $this;
+    }
+
+    /**
+     * Get workorder
+     *
+     * @return \Timsa\ControlFletesBundle\Entity\WorkOrder 
+     */
+    public function getWorkorder()
+    {
+        return $this->workorder;
+    }
 }
