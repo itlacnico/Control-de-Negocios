@@ -8,4 +8,156 @@
 
  {% endblock %}
 
+ {% block content %}
+
+ <form>
+
+
+ 	<ul class="nav nav-tabs nav-justified" id="tabla">
+ 	  <li class="active"><a href="#eco" data-toggle="tab">Viaje<span class="badge"></span></a>  </li>
+ 	  <li>	<a href="#soc" data-toggle="tab">WorkOrder </a>	 </li>
+ 	</ul>
+
+ 	<div class="tab-content">
+
+ 		<div class="tab-pane col-lg-12 active" id="eco">
+ 			<div class="col-lg-8 active">
+	 			<br><br>
+	 			<div class="form-group">
+	 			 	<label class="col-lg-2 control-label" for="economico">Economico</label>
+	 			 	<div class="col-lg-8">
+	 			 	<div class="input-group">
+			 		 <input id="economico" type="text" class="form-control" name="economico">
+	 				    <span class="input-group-btn">
+	 				        <button class="btn btn-default" type="button">Buscar</button>
+	 				    </span>
+	 				</div>		 
+	 			 </div>
+	 			</div>
+	 			<br>
+	 			<br>
+
+	 			<div class="form-group">
+	 			 	<label class="col-lg-2 control-label" for="operador">Operador</label>
+	 			 	<div class="col-lg-8">
+	 			 	<div class="input-group">
+			 			<input id="operador" type="text" class="form-control" name="operador">
+		 				   <!-- <span class="input-group-btn">
+		 				        <button class="btn btn-default" type="button">Go!</button>
+		 				    </span> -->
+	 				</div>		 
+	 			 </div>
+	 			</div>
+ 			</div>
+ 			<br><br>
+ 			<div class="col-lg-4 well">
+ 				<select class="form-control" id="detalle_viaje"></select>
+ 			</div>
+
+ 			<br><br>
+
+ 			<div class="col-lg-8 active">
+ 				<BR><BR>
+
+		 		<div class="form-group">
+	 			 	<label class="col-lg-2 control-label" for="agencia">Agencia</label>
+	 			 	<div class="col-lg-8">
+	 			 	<div class="input-group">
+			 			<select class="form-control" name="agencia">
+			 			</select>
+		 				  <!--  <span class="input-group-btn">
+		 				        <button class="btn btn-default" type="button">Go!</button>
+		 				    </span> -->
+	 			 		</div>		 
+			 		</div>
+			 	</div>
+			 	<br><br>
+	 			<div class="form-group">
+	 			 	<label class="col-lg-2 control-label" for="cliente">Cliente</label>
+	 			 	<div class="col-lg-8">
+	 			 	<div class="input-group">
+			 			<input id="cliente" type="text" class="form-control" name="cliente">
+		 				    <span class="input-group-btn">
+		 				        <button class="btn btn-default" type="button">Buscar</button>
+		 				    </span>
+	 				</div>		 
+	 			 </div>
+	 			</div>
+
+				<br><br>
+	 			<div class="form-group">
+	 			 	<label class="col-lg-2 control-label" for="sucursal">Sucursal</label>
+	 			 	<div class="col-lg-8">
+	 			 	<div class="input-group">
+			 			<input id="sucursal" type="text" class="form-control" name="sucursal">
+		 				  <!--  <span class="input-group-btn">
+		 				        <button class="btn btn-default" type="button">Go!</button>
+		 				    </span> -->
+	 				</div>		 
+	 			 </div>
+	 			</div>
+ 			</div>
+
+ 			<br><br><br><br><br><br>
+ 			<div class="col-lg-4 well">
+
+		 		<div>
+		 			<select class="form-control" id="detalle_cliente">
+		 			</select>
+		 		</div>
+ 			</div>
+
+
+ 			<br><br>
+
+ 		</div>
+
+ 		<div class="tab-pane col-lg-12" id="soc">
+
+ 			  <div class="radio-inline">
+	 			    <label>
+	 			      <input type="radio" name="optionsRadios" id="optionsRadios2" value="Sencillo" checked />Sencillo
+	 			    </label>
+	 			    <br>
+	 			    <label>
+	 			      <input type="radio" name="optionsRadios" id="optionsRadios2" value="Full" />Full
+	 			    </label>
+ 			  </div>
+
+ 			  <br><br>
+ 			  <div class="well col-lg-10">
+ 			  	<h4>Contenedores</h4>
+ 			  	<br><br>
+ 			  	 <div class="form-group">
+ 			  		  <label class="col-lg-2 control-label" for="agencia">WorkOrder</label>
+ 			  		  <div class="col-lg-10">
+ 			  		    <input id="agencia" type="text" class="form-control col-lg-4" name="agencia">
+ 			  		  </div>	  	  
+ 			  	 </div>
+ 			  	 <br>
+ 			  	  <div class="form-group">
+ 			  	 	  <label class="col-lg-2 control-label" for="agencia">Contenedor</label>
+ 			  	 	  <div class="col-lg-10">
+ 			  	 	    <input id="agencia" type="text" class="form-control col-lg-4" name="agencia">
+ 			  	 	  </div>	  	  
+ 			  	  </div>
+ 			  	  <br>
+ 			  	   <div class="form-group">
+ 			  	  	  <label class="col-lg-2 control-label" for="agencia">Booking</label>
+ 			  	  	  <div class="col-lg-10">
+ 			  	  	    <input id="agencia" type="text" class="form-control col-lg-4" name="agencia">
+ 			  	  	  </div>	  	  
+ 			  	   </div>
+
+ 			  </div>
+
+ 		</div>
+ 	</div>
+
+
+  </form>
+
+
+ {% endblock %}
+ 
  
