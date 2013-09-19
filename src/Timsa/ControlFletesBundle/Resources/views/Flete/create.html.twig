@@ -10,16 +10,14 @@
 
  {% block content %}
 
- <form>
-
+ <form method="post" action="">
 
  	<ul class="nav nav-tabs nav-justified" id="tabla">
  	  <li class="active"><a href="#eco" data-toggle="tab">Viaje<span class="badge"></span></a>  </li>
- 	  <li>	<a href="#soc" data-toggle="tab">WorkOrder </a>	 </li>
+ 	  <li><a href="#soc" data-toggle="tab">WorkOrder </a></li>
  	</ul>
 
  	<div class="tab-content">
-
  		<div class="tab-pane col-lg-12 active" id="eco">
  			<div class="col-lg-8 active">
 	 			<br><br>
@@ -29,7 +27,7 @@
 	 			 	<div class="input-group">
 			 		 <input id="economico" type="text" class="form-control" name="economico">
 	 				    <span class="input-group-btn">
-	 				        <button class="btn btn-default" type="button">Buscar</button>
+	 				        <button id="search_economico" class="btn btn-default" type="button">Buscar</button>
 	 				    </span>
 	 				</div>		 
 	 			 </div>
@@ -41,11 +39,11 @@
 	 			 	<label class="col-lg-2 control-label" for="operador">Operador</label>
 	 			 	<div class="col-lg-8">
 	 			 	<div class="input-group">
-			 			<input id="operador" type="text" class="form-control" name="operador">
+			 			<input disabled id="operador" type="text" class="form-control" name="operador">
 		 				   <!-- <span class="input-group-btn">
 		 				        <button class="btn btn-default" type="button">Go!</button>
 		 				    </span> -->
-	 				</div>		 
+	 				</div>
 	 			 </div>
 	 			</div>
  			</div>
@@ -64,11 +62,14 @@
 	 			 	<div class="col-lg-8">
 	 			 	<div class="input-group">
 			 			<select class="form-control" name="agencia">
+			 				{% for agencia in agencias %}
+			 					<option val="{{agencia.id}}"> {{agencia}} </option>
+			 				{% endfor %}
 			 			</select>
 		 				  <!--  <span class="input-group-btn">
 		 				        <button class="btn btn-default" type="button">Go!</button>
 		 				    </span> -->
-	 			 		</div>		 
+	 			 		</div>	 
 			 		</div>
 			 	</div>
 			 	<br><br>
@@ -78,7 +79,7 @@
 	 			 	<div class="input-group">
 			 			<input id="cliente" type="text" class="form-control" name="cliente">
 		 				    <span class="input-group-btn">
-		 				        <button class="btn btn-default" type="button">Buscar</button>
+		 				        <button id="search_sucursal" class="btn btn-default" type="button">Buscar</button>
 		 				    </span>
 	 				</div>		 
 	 			 </div>
@@ -89,7 +90,7 @@
 	 			 	<label class="col-lg-2 control-label" for="sucursal">Sucursal</label>
 	 			 	<div class="col-lg-8">
 	 			 	<div class="input-group">
-			 			<input id="sucursal" type="text" class="form-control" name="sucursal">
+			 			<input disabled id="sucursal" type="text" class="form-control" name="sucursal">
 		 				  <!--  <span class="input-group-btn">
 		 				        <button class="btn btn-default" type="button">Go!</button>
 		 				    </span> -->
@@ -109,11 +110,11 @@
 
 
  			<br><br>
-
+ 			tabla horizontal del detalle del viaje
  		</div>
 
  		<div class="tab-pane col-lg-12" id="soc">
-
+ 			<!--
  			  <div class="radio-inline">
 	 			    <label>
 	 			      <input type="radio" name="optionsRadios" id="optionsRadios2" value="Sencillo" checked />Sencillo
@@ -123,40 +124,193 @@
 	 			      <input type="radio" name="optionsRadios" id="optionsRadios2" value="Full" />Full
 	 			    </label>
  			  </div>
+			-->
+			<br><br>
+ 			<div class="col-lg-12">
+ 				<div class="titulo col-lg-8">
+ 					<br><br>
+ 					<h3>Contenedores</h3>
+ 					<br><br>
+ 				</div>
 
- 			  <br><br>
- 			  <div class="well col-lg-10">
- 			  	<h4>Contenedores</h4>
- 			  	<br><br>
- 			  	 <div class="form-group">
- 			  		  <label class="col-lg-2 control-label" for="agencia">WorkOrder</label>
- 			  		  <div class="col-lg-10">
- 			  		    <input id="agencia" type="text" class="form-control col-lg-4" name="agencia">
- 			  		  </div>	  	  
- 			  	 </div>
- 			  	 <br>
- 			  	  <div class="form-group">
- 			  	 	  <label class="col-lg-2 control-label" for="agencia">Contenedor</label>
- 			  	 	  <div class="col-lg-10">
- 			  	 	    <input id="agencia" type="text" class="form-control col-lg-4" name="agencia">
- 			  	 	  </div>	  	  
- 			  	  </div>
- 			  	  <br>
- 			  	   <div class="form-group">
- 			  	  	  <label class="col-lg-2 control-label" for="agencia">Booking</label>
- 			  	  	  <div class="col-lg-10">
- 			  	  	    <input id="agencia" type="text" class="form-control col-lg-4" name="agencia">
- 			  	  	  </div>	  	  
- 			  	   </div>
+				<div class="panel panel-default pull-left col-lg-4">
+				  <div class="panel-body">
+					<div class="btn-group" data-toggle="buttons">
+		 			    <label class="btn btn-info active">
+		 			      <input value="importacion" type="radio" name="importacion" id="importacion" checked> Importacion
+		 			    </label>
+		 			    <label class="btn btn-info">
+		 			      <input type="radio" value="exportacion" name="exportacion" id="exportacion"> Exportacion
+		 			    </label>
+		 			  </div>
 
+		 			  <div class="btn-group" data-toggle="buttons">
+		 			    <label class="btn btn-primary active">
+		 			      <input value="sencillo" type="radio" name="sencillo" id="sencillo" class="viaje"> Sencillo
+		 			    </label>
+		 			    <label class="btn btn-primary">
+		 			      <input value="full" type="radio" name="full" id="full" class="viaje"> Full
+		 			    </label>
+		 			  </div>
+	 			  </div>
+	  			</div>
+ 			  	
+ 			  	<div class="panel panel-default">
+ 			  	  <div class="panel-body">
+
+ 			  	  	<div id="contenedor1">
+ 			  	  	<div class="col-lg-8">
+ 			  	  		
+	 			  	 <div class="form-group">
+	 			  		  <label class="col-lg-2 control-label" for="workorder1">WorkOrder</label>
+	 			  		  <div class="col-lg-10">
+	 			  		    <input id="workorder1" type="text" class="form-control col-lg-4" name="workorder1">
+	 			  		  </div>	  	  
+	 			  	 </div>
+	 			  	  <br><br>
+	 			  	   <div class="form-group">
+	 			  	  	  <label class="col-lg-2 control-label" for="booking1">Booking</label>
+	 			  	  	  <div class="col-lg-10">
+	 			  	  	    <input id="booking1" type="text" class="form-control col-lg-4" name="booking1">
+	 			  	  	  </div>	  	  
+			  	  	  </div>
+	 			  	 <br><br>
+	 			  	  <div class="form-group">
+	 			  	 	  <label class="col-lg-2 control-label" for="contenedor1">Contenedor</label>
+	 			  	 	  <div class="col-lg-10">
+	 			  	 	    <input id="contenedor1" type="text" class="form-control col-lg-4" name="contenedor1">
+	 			  	 	  </div>	  	  
+	 			  	  </div>
+	 			  	  <br><br>
+	 			  	   <div class="form-group">
+	 			  	  	  <label class="col-lg-2 control-label" for="contenedor1">Size</label>
+	 			  	  	  <div class="col-lg-10">
+	 			  	  	    <select name="contenedor_tipo1" class="form-control">
+	 			  	  	    	<option>40HC</option>
+	 			  	  	    	<option>40DC</option>
+	 			  	  	    	<option>20HC</option>
+	 			  	  	    	<option>20DC</option>
+	 			  	  	    </select>
+	 			  	  	  </div>	  	  
+	 			  	   </div>
+
+					</div>
+ 			  	  	  <div id="sellos1" class="col-lg-4">
+ 			  	  	  		<ul class="list-group">
+ 			  	  	  		  <li class="list-group-item">Cras justo odio</li>
+ 			  	  	  		  <li class="list-group-item"> <input type="text" class="form-control">
+ 			  	  	  		  <button type="button" class="btn btn-success">Agregar Sello</button> </li>
+ 			  	  	  		</ul>
+ 			  	  	  </div>
+ 			  	  	</div>
+
+ 			  	  <br><br><br>
+ 			  	  <div id="contenedor2">
+ 			  	  <div  class="col-lg-8">
+ 			  	  	<br><br>
+	 			  	   <div class="form-group">
+	 			  	  	  <label class="col-lg-2 control-label" for="workorder2">WorkOrder</label>
+	 			  	  	  <div class="col-lg-10">
+	 			  	  	    <input id="workorder2" type="text" class="form-control col-lg-4" name="workorder2">
+	 			  	  	  </div>	  	  
+	 			  	   </div>
+
+	 			  	   <br><br>
+	 			  	    <div class="form-group">
+	 			  	   	  <label class="col-lg-2 control-label" for="booking">Booking</label>
+	 			  	   	  <div class="col-lg-10">
+	 			  	   	    <input id="booking" type="text" class="form-control col-lg-4" name="booking">
+	 			  	   	  </div>	  	  
+	 			  	    </div>
+
+	 			  	   <br><br>
+	 			  	    <div class="form-group">
+	 			  	   	  <label class="col-lg-2 control-label" for="contenedor2">Contenedor</label>
+	 			  	   	  <div class="col-lg-10">
+	 			  	   	    <input id="contenedor2" type="text" class="form-control col-lg-4" name="contenedor2">
+	 			  	   	  </div>	  	  
+	 			  	    </div>
+	 			  	    <br><br>
+	 			  	     <div class="form-group">
+	 			  	    	  <label class="col-lg-2 control-label" for="contenedor1">Size</label>
+	 			  	    	  <div class="col-lg-10">
+	 			  	    	    <select name="contenedor_tipo2" class="form-control">
+	 			  	    	    	<option>40HC</option>
+	 			  	    	    	<option>40DC</option>
+	 			  	    	    	<option>20HC</option>
+	 			  	    	    	<option>20DC</option>
+	 			  	    	    </select>
+	 			  	    	  </div>	  	  
+	 			  	     </div>
+
+ 			  	    </div>
+
+ 			  	    <div id="sellos1" class="col-lg-4">
+ 			  	    	<br><br>
+ 			  	    	<ul class="list-group">
+ 			  	    	  <li class="list-group-item">Cras justo odio</li>
+ 			  	    	  <li class="list-group-item"> <input type="text" class="form-control">
+ 			  	    	  <button type="button" class="btn btn-success">Agregar Sello</button> </li>
+ 			  	    	</ul>
+ 			  	    </div>
+ 			  	</div>
  			  </div>
-
+ 			  </div>
+ 			
  		</div>
  	</div>
-
-
   </form>
 
+
+ {% endblock %}
+
+ {% block javascripts %}
+ 	{{ parent() }}
+ 	<script type="text/javascript">
+ 		$(function(){
+
+ 			$('#contenedor2').hide();
+
+ 			$('.viaje').change(function(event) {
+ 				var val = $(this).val();
+
+ 				if(val === "sencillo"){
+ 					$('#contenedor2').hide('fade');
+ 				}
+ 				else{
+ 					$('#contenedor2').show('fade');
+ 				}
+ 			});
+
+ 		$('#search_sucursal').click(function(event) {
+ 			
+ 		});
+
+ 		$('#search_economico').click(function(event) {
+ 			var parametros = {"tipo" : "economico", "value" : $('#economico').val() }
+ 			createAjax(parametros);
+
+ 		});
+
+ 		 		function createAjax(parametros){
+ 					 			$.ajax({
+ 					 				  cache:    false,
+ 						 			  type: 	"POST",
+ 						 			  dataType: "json",
+ 						 			  url: 		"{{path('_filtro')}}",
+ 						 			  data: 	parametros,
+ 						 			  success: function(response){
+ 								 			  		alert("ajax");
+ 							 			  		},
+ 							 		  error: function() {
+ 							 		 	alert("error");
+ 							 		 }
+ 							 	});
+ 		 		}
+ 	});
+
+
+ 	</script>
 
  {% endblock %}
  

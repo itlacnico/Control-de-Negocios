@@ -76,7 +76,7 @@ Economicos
 			        $('#filtro_socio').load($(this).parent().attr('id')); //carga por ajax a la capa "notice_viewer"
 			});
 
-			$('body').on('click','ul.nav.nav-justified li a', function(a) { 
+			$('body').on('click','ul.nav.nav-justified li a', function(a) {
 				a.preventDefault();        
 			    $(this).parent().addClass('active').siblings().removeClass('active');
 			    //$(this).tab("show");  

@@ -68,3 +68,7 @@ flete_detalle:
 create_flete:
    pattern: /main/CreateFlete
    defaults: {_controller: TimsaControlFletesBundle:Flete:create}
+
+_filtro:
+   pattern: /main/filtro
+   defaults: {_controller: TimsaControlFletesBundle:Flete:ajax}
