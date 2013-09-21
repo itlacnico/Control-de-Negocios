@@ -72,3 +72,7 @@ create_flete:
 _filtro:
    pattern: /main/filtro
    defaults: {_controller: TimsaControlFletesBundle:Flete:ajax}
+
+_sucursales:
+   pattern: /main/sucursal/{idCliente}
+   defaults: {_controller: TimsaControlFletesBundle:Cliente:sucursal}

@@ -43,14 +43,15 @@ class FleteController extends Controller{
 	}
 
 	public function ajaxAction(){
+
 		$economicos = $this->getDoctrine()
-			  ->getRepository('TimsaControlFletesBundle:Economico')
+			  ->getRepository('TimsaControlFletesBundle:Relacion')
 			  ->findAll();
 
 		$html = "";
 
 		foreach ($economicos as $economico) {
-			$html .= "<option>". $economico->getPlacas() . "</option>";
+			$html .= "<option>". $economico . "</option>";
 		}
 
 		$array = array('economicos' => $html, );

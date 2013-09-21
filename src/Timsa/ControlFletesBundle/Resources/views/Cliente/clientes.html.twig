@@ -1,34 +1,103 @@
-{% extends 'TimsaControlFletesBundle::layout.html.twig' %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+    </style>
+    <link href="{{ asset('css/bootstrap.css') }}" type="text/css" rel="stylesheet" />
+    <link href="{{ asset('css/bootstrap-glyphicons.css') }}" type="text/css" rel="stylesheet" />
+    <link href="{{ asset('css/docs.css') }}" type="text/css" rel="stylesheet" />
 
-{% block title %}
-Clientes
-{% endblock %}
+  </head>
+  <body onload="initialize()">
 
-{% block cabecera %}
-Clientes
-{% endblock %}
+  			<div class="navbar navbar-inverse">
 
-{% block content %}
-	<div class="row" style="width:100%; height:80%">
-	  <div id="Mapa" class="span5" style="width:60%; height:100%">
-        
-      </div>
+  				<!-- .navbar-toggle is used as the toggle for collapsed navbar content -->
+  				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+  				  <span class="icon-bar"> </span>
+  				  <span class="icon-bar"> </span>
+  				  <span class="icon-bar"> </span>
+  				</button>
+
+  			  <a class="navbar-brand" href="{{path('_homepage')}}">  <img src="{{ asset('images/logo.png') }}" height="20" width="40"> </a>
+
+  			  <div class="navbar-responsive-collapse">
+  				  <ul class="nav navbar-nav">
+  				    <li><a href="{{ path('_operadores')  }}">Operadores</a></li>
+  				    {#<li><a href="{{ path('_socios')}}">Socios</a></li>#}
+  				    <li><a href="{{ path('_economicos')}}">Economicos</a></li>
+  				    <li><a href="{{ path('_clientes')}}">Clientes</a></li>
+  				    <li><a href="{{ path('_cuotas')}}">Tarifario</a></li>
+  				    <li><a href="{{ path('_fletes')}}">Fletes</a></li>
+  				    <li><a href="{{ path('_contenedores') }}">Contenedores</a></li>
+  				  </ul>
+  				  <ul class="nav navbar-nav pull-left">
+  	                <li class="dropdown">
+  	                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Acciones <b class="caret"></b></a>
+  	                  <ul class="dropdown-menu">
+  	                    <li><a href="{{path('sonata_admin_dashboard')}}">Administrar</a></li>
+  	                   {# <li><a href="#">Economicos</a></li>#}
+  	                    {#<li><a href="#">Socios</a></li>#}
+  	                    <li class="divider"></li>
+  	                    <li><a href="{{path('fos_user_security_logout')}}" class="glyphicon glyphicon-off"> Log out</a></li>
+  	                  </ul>
+  	                </li>
+  	              </ul>
+  			</div>
+  			</div>
+
+    <div id="Mapa" style="width:100%; height:600px" ></div>
+    <div id="content">
+    	<h1>Clientes</h1>
+    	<div class="col-lg-4">
+    		<ul class="nav nav-tabs nav-pills nav-stacked" style="max-width: 300px;" id="myTab">
+    			{% for cliente in clientes %}
+    				<li id="{{ path('_sucursales', {'idCliente': cliente.id}) }}"><a class="socio" href="#filtro_sucursal" data-toggle="tab"> {{cliente}} </a></li>
+    			{% else %}
+    				<li><a href="">No existen clientes registrados</a></li>
+    			{% endfor %}
+    		</ul>
+    	</div>
+
+    	<div class="tab-content">
+    		<div class="tab-pane col-lg-8" id="filtro_sucursal">
+    			<h1>Filtro</h1>
+    		</div>
+    	</div>
     </div>
-{% endblock %}
 
-{% block javascripts %}
-	{{ parent() }}
+
+
+    <script type="text/javascript" src="{{ asset('js/jquery-2.0.3.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('js/bootstrap.js') }}"></script>
+    <script type="text/javascript">
+    	$('ul.nav.nav-pills.nav-stacked li a').click(function(a) { 
+    		a.preventDefault();          
+    	    $(this).parent().addClass('active').siblings().removeClass('active');           
+    	});
+
+    	$('#myTab').click(function(event) {
+    		$('#myTab a').tab('show');
+    	});
+
+    	$('a.socio').click(function(event){
+    	        event.preventDefault(); //cancela el comportamiento por defecto
+    	        $('#filtro_sucursal').empty();
+    	        $('#filtro_sucursal').append('<img src="{{asset("images/loading.gif")}}">');
+    	        $('#filtro_sucursal').load($(this).parent().attr('id')); //carga por ajax a la capa "notice_viewer"
+    	});
+
+      $('.down').click(function(){
+        $('html, body').animate({scrollTop: $elem.height()}, 800);
+      });
+
+    </script>
  	<script type="text/javascript"
       src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBtcuK-xlIB2HQfUw9MGxt2boubzDNgALI&sensor=false">
     </script>
 	<script type="text/javascript" src="{{ asset('js/mapa.js') }}"></script>
-	<script>
-	//google.maps.event.addDomListener(window, 'load', initialize);
-	
-		$(function(){
-			initialize();
-		});
-
-	</script>
-
-{% endblock %}
+  </body>
+</html>

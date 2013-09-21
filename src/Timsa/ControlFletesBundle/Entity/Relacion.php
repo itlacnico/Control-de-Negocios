@@ -160,7 +160,7 @@ class Relacion{
     }
 
     public function __toString(){
-        return (string) $this->operador->getNombre() . ' '. $this->socio->getNombre() . ' ' .$this->economico->getNumero() ;
+        return (string) $this->operador->getNombre() . ' ' .$this->economico->getNumero() ;
     }
 
     /**
