@@ -3,6 +3,7 @@
 namespace Timsa\ControlFletesBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class FleteController extends Controller{
 
@@ -43,11 +44,20 @@ class FleteController extends Controller{
 
 	public function ajaxAction(){
 		$economicos = $this->getDoctrine()
-			  ->getRepository('TimsaControlFletesBundle:Agencia')
+			  ->getRepository('TimsaControlFletesBundle:Economico')
 			  ->findAll();
 
-		$array = array('economicos' => $economicos, );
+		$html = "";
 
-		return json_encode($array);
+		foreach ($economicos as $economico) {
+			$html .= "<option>". $economico->getPlacas() . "</option>";
+		}
+
+		$array = array('economicos' => $html, );
+
+		$response = new JsonResponse();
+		$response->setData($array);
+
+		return $response;
 	}
 }

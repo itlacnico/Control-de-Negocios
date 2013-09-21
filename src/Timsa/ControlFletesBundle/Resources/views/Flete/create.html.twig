@@ -48,8 +48,9 @@
 	 			</div>
  			</div>
  			<br><br>
- 			<div class="col-lg-4 well">
- 				<select class="form-control" id="detalle_viaje"></select>
+ 			<div class="col-lg-4 well" id="detalle_viaje">
+ 				<select class="form-control">
+ 				</select>
  			</div>
 
  			<br><br>
@@ -287,12 +288,25 @@
  		});
 
  		$('#search_economico').click(function(event) {
- 			var parametros = {"tipo" : "economico", "value" : $('#economico').val() }
- 			createAjax(parametros);
+ 			var parametros = {"tipo" : "economico", "value" : $('#economico').val() };
+			var funcion =function(reponse, variable){
+						alert(variable);
+						alert(response.economicos);
 
- 		});
+						var x =  "<select class='form-control' name='detalle_viaje'>" + response + "</select>";
 
- 		 		function createAjax(parametros){
+						alert("as");
+		 				$('#detalle_viaje').empty()
+			 			  				   .append(x);
+			 	}
+
+			createAjax(parametros,funcion);
+
+			});
+
+
+
+ 		 	function createAjax(parametros, funcion){
  					 			$.ajax({
  					 				  cache:    false,
  						 			  type: 	"POST",
@@ -300,13 +314,16 @@
  						 			  url: 		"{{path('_filtro')}}",
  						 			  data: 	parametros,
  						 			  success: function(response){
- 								 			  		alert("ajax");
- 							 			  		},
+ 						 			  			alert(response);
+ 						 			  			var economicos = response.economicos;
+ 						 			  			
+ 						 			  			funcion(economicos, "hello");
+ 						 			  		},
  							 		  error: function() {
  							 		 	alert("error");
  							 		 }
  							 	});
- 		 		}
+ 		 	}
  	});
 
 
