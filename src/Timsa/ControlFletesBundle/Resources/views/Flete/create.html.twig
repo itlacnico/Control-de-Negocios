@@ -260,6 +260,7 @@
  			
  		</div>
  	</div>
+ 	 		 			  <button>Enviar</button>
   </form>
 
 
@@ -289,15 +290,11 @@
 
  		$('#search_economico').click(function(event) {
  			var parametros = {"tipo" : "economico", "value" : $('#economico').val() };
-			var funcion =function(reponse, variable){
-						alert(variable);
-						alert(response.economicos);
-
-						var x =  "<select class='form-control' name='detalle_viaje'>" + response + "</select>";
-
-						alert("as");
+			var funcion =function(response){
+  
 		 				$('#detalle_viaje').empty()
-			 			  				   .append(x);
+			 			  				   .append("<select class='form-control' name='detalle_viaje'>" + response.economicos + "</select>"
+			 			  				   	);
 			 	}
 
 			createAjax(parametros,funcion);
@@ -314,10 +311,7 @@
  						 			  url: 		"{{path('_filtro')}}",
  						 			  data: 	parametros,
  						 			  success: function(response){
- 						 			  			alert(response);
- 						 			  			var economicos = response.economicos;
- 						 			  			
- 						 			  			funcion(economicos, "hello");
+ 						 			  			funcion(response);
  						 			  		},
  							 		  error: function() {
  							 		 	alert("error");
