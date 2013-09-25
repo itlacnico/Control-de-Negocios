@@ -12,7 +12,7 @@
 		<div class="tab-pane col-lg-12" id="suc">
 			<br>
 			<div>
-				<button class="btn btn-primary">Crear Nueva sucursal</button>
+				<button id="nuevaSucursal" class="btn btn-primary">Crear Nueva sucursal</button>
 			</div>
 			<br>
 			<div class="panel-group" id="accordion">
@@ -26,7 +26,14 @@
 				<div id="{{sucursal.id}}" class="panel-collapse collapse">
 					<div class="panel panel-default">
 						<div class="panel-body">
-							Mensaje
+							<address>
+							  <strong>{{sucursal.nombre}}</strong><br>
+							  	{{sucursal.estado}} <br>
+							    {{sucursal.ciudad}}, {{sucursal.localidad}} <br>
+							    {{sucursal.colonia}}, {{sucursal.calle}}#{{sucursal.calle}}<br>
+							  <abbr title="Phone">P:</abbr> {{sucursal.telefono}}
+							</address>
+							<button value="{{sucursal.id}}" class="btn btn-default">Editar Sucursal</button>
 						</div>
 					</div>
 				</div>
@@ -43,4 +50,9 @@
 			</ul>#}
 		</div>
 	</div>
+</div>
+
+<div id="formSucursal" >
+	<button id="cancelarSucursal">Cancelar</button>
+	Formulario
 </div>

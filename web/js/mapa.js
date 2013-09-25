@@ -24,6 +24,32 @@ function initialize() {
 
   map = new google.maps.Map(mapDiv, mapOptions);
   directionsDisplay.setMap(map);
+
+  var marker = new google.maps.Marker({
+      position  :  new google.maps.LatLng(22.850033, -101.6500523),
+      animation : google.maps.Animation.DROP,
+  });
+
+  marker.setMap(map);
+
+}
+
+
+
+function addNewListener(){
+
+  google.maps.event.addListenerOnce(map,'click', function (evento){
+       temporalMarker = new google.maps.Marker({
+          position : evento.latLng,
+          map      : map,
+          draggable : true
+      });
+});
+}
+
+function removeListener(){
+  google.maps.event.clearListeners(map, 'click');
+  temporalMarker.setMap(null);
 }
 
 

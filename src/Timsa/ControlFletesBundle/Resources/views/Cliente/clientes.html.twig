@@ -73,31 +73,52 @@
 
     <script type="text/javascript" src="{{ asset('js/jquery-2.0.3.min.js')}}"></script>
     <script type="text/javascript" src="{{ asset('js/bootstrap.js') }}"></script>
+    <script type="text/javascript"
+        src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBtcuK-xlIB2HQfUw9MGxt2boubzDNgALI&sensor=false">
+    </script>
+    <script type="text/javascript" src="{{ asset('js/mapa.js') }}"></script>
     <script type="text/javascript">
-    	$('ul.nav.nav-pills.nav-stacked li a').click(function(a) { 
-    		a.preventDefault();          
-    	    $(this).parent().addClass('active').siblings().removeClass('active');           
-    	});
+    $(function(){
 
-    	$('#myTab').click(function(event) {
-    		$('#myTab a').tab('show');
-    	});
+        $('#formSucursal').hide();
 
-    	$('a.socio').click(function(event){
-    	        event.preventDefault(); //cancela el comportamiento por defecto
-    	        $('#filtro_sucursal').empty();
-    	        $('#filtro_sucursal').append('<img src="{{asset("images/loading.gif")}}">');
-    	        $('#filtro_sucursal').load($(this).parent().attr('id')); //carga por ajax a la capa "notice_viewer"
-    	});
+      	$('ul.nav.nav-pills.nav-stacked li a').click(function(a) {
+      		a.preventDefault();          
+      	    $(this).parent().addClass('active').siblings().removeClass('active');           
+      	});
 
-      $('.down').click(function(){
-        $('html, body').animate({scrollTop: $elem.height()}, 800);
+      	$('#myTab').click(function(event) {
+      		$('#myTab a').tab('show');
+      	});
+
+      	$('a.socio').click(function(event){
+      	        event.preventDefault(); //cancela el comportamiento por defecto
+      	        $('#filtro_sucursal').empty();
+      	        $('#filtro_sucursal').append('<img src="{{asset("images/loading.gif")}}">');
+      	        $('#filtro_sucursal').load($(this).parent().attr('id')); //carga por ajax a la capa "notice_viewer"
+      	});
+
+        $('.down').click(function(){
+          $('html, body').animate({scrollTop: $elem.height()}, 800);
+        });
+
+        $('body').on('click', '#nuevaSucursal', function(){
+          addNewListener();
+
+          var sucursal = $('#suc');
+
+          sucursal.data('info', sucursal.html()).empty().append($('#formSucursal').html());
+
+        });
+
+        $('body').on('click', '#cancelarSucursal', function(){
+          var sucursal = $('#suc')
+            sucursal.empty().append(sucursal.data('info'));
+            removeListener();
+        });
+
       });
 
     </script>
- 	<script type="text/javascript"
-      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBtcuK-xlIB2HQfUw9MGxt2boubzDNgALI&sensor=false">
-    </script>
-	<script type="text/javascript" src="{{ asset('js/mapa.js') }}"></script>
   </body>
 </html>
