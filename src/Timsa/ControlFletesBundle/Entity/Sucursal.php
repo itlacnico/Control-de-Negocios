@@ -431,7 +431,7 @@ class Sucursal{
      */
     public function setLon($lon)
     {
-        $this->long = $long;
+        $this->long = $lon;
     
         return $this;
     }
@@ -443,7 +443,7 @@ class Sucursal{
      */
     public function getLon()
     {
-        return $this->long;
+        return $this->lon;
     }
 
     /**
