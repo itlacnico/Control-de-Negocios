@@ -44,6 +44,16 @@ function addNewListener(){
           map      : map,
           draggable : true
       });
+
+  $('#lat').val(temporalMarker.getPosition().lat());
+  $('#lng').val(temporalMarker.getPosition().lng());
+
+  google.maps.event.addListener(temporalMarker, 'dragend', function(){
+    $('#lat').val(temporalMarker.getPosition().lat());
+    $('#lng').val(temporalMarker.getPosition().lng());
+  });
+
+
 });
 }
 

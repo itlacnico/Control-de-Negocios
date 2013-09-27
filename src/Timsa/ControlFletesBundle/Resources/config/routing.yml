@@ -76,3 +76,7 @@ _filtro:
 _sucursales:
    pattern: /main/sucursal/{idCliente}
    defaults: {_controller: TimsaControlFletesBundle:Cliente:sucursal}
+
+_createSucursal:
+   pattern: /main/sucursal/create
+   defaults: {_controller: TimsaControlFletesBundle:Cliente:create}

@@ -26,11 +26,20 @@ class ClienteController extends Controller{
 								  ->getRepository('TimsaControlFletesBundle:Cliente')
 								  ->find($idCliente);
 
+		$tarifa = $this->getDoctrine()
+								  ->getRepository('TimsaControlFletesBundle:Tarifa')
+								  ->findAll();
+
 
 		return $this->render("TimsaControlFletesBundle:Cliente:sucursal.html.twig", 
 								array("clientes" => $sucursal,
-									  "cliente"  => $cliente
+									  "cliente"  => $cliente,
+									  "tarifas"	 => $tarifa
 									)
 							);
+	}
+
+	public function createAction(){
+		
 	}
 }

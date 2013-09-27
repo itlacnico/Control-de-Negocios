@@ -51,9 +51,10 @@
 
     <div id="Mapa" style="width:100%; height:600px" ></div>
     <div id="content">
-    	<h1>Clientes</h1>
+      <br>
     	<div class="col-lg-4">
     		<ul class="nav nav-tabs nav-pills nav-stacked" style="max-width: 300px;" id="myTab">
+          <li id="allClients"><a>Clientes</a></li>
     			{% for cliente in clientes %}
     				<li id="{{ path('_sucursales', {'idCliente': cliente.id}) }}"><a class="socio" href="#filtro_sucursal" data-toggle="tab"> {{cliente}} </a></li>
     			{% else %}
@@ -111,7 +112,8 @@
 
         });
 
-        $('body').on('click', '#cancelarSucursal', function(){
+        $('body').on('click', '#cancelarSucursal', function(e){
+            e.preventDefault();
             var sucursal = $('#suc')
             sucursal.empty().append(sucursal.data('info'));
             removeListener();

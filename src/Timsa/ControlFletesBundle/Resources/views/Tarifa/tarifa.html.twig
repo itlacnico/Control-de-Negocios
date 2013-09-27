@@ -2,10 +2,10 @@
 		{% if agencias %}
 		<table class="table table-bordered">
 			<tr>
-				<th rowspan="2">Destino</th>
 				<th rowspan="2">Tarifa</th>
 				<th colspan="3">Sencillo</th>
 				<th colspan="3">Full</th>
+				<th rowspan="2">Detalle</th>
 			</tr>
 			<tr>
 				<th>Exportacion</th>
@@ -18,7 +18,6 @@
 			</tr>
 			{% for agencia in agencias %}
 			<tr>
-				<td> {{agencia.destino}} </td>
 				<td> {{agencia.tarifa}} </td>
 
 				<td> {{agencia.exportacions}} </td>
@@ -28,6 +27,7 @@
 				<td> {{agencia.importacionf}} </td>
 				<td> {{agencia.reutilizadof}} </td>
 
+				<td><button class="btn btn-primary">Accion</button></td>
 			</tr>
 			{% endfor %}			
 		</table>
