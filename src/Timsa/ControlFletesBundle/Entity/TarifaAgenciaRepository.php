@@ -15,7 +15,7 @@ class TarifaAgenciaRepository extends EntityRepository
 		public function findTarifaPorAgencia($agencia){
 
 			return $this->getEntityManager()
-						->createQuery("SELECT t.nombre as tarifa, s.nombre as destino, c.exportacionSencillo as exportacions,
+						->createQuery("SELECT t.nombre as tarifa, t.id idTarifa , s.nombre as destino, c.exportacionSencillo as exportacions,
 										c.importacionSencillo as importacions, c.reutilizadoSencillo as reutilizados,
 										c.exportacionFull as exportacionf, c.importacionFull as importacionf,
 										c.reutilizadoFull as reutilizadof
@@ -29,6 +29,52 @@ class TarifaAgenciaRepository extends EntityRepository
 									   where 
 									   ta.statusA = true and
 									   ta.agencia = $agencia"
+									   )
+						->getResult();
+		}
+
+
+		public function findDetalleTarifaActual($agencia, $tarifa){
+
+			return $this->getEntityManager()
+						->createQuery("SELECT t.nombre as tarifa, t.id idTarifa , s.nombre as destino, c.exportacionSencillo as exportacions,
+										c.importacionSencillo as importacions, c.reutilizadoSencillo as reutilizados,
+										c.exportacionFull as exportacionf, c.importacionFull as importacionf,
+										c.reutilizadoFull as reutilizadof
+									   FROM
+
+									   TimsaControlFletesBundle:TarifaAgencia ta
+
+									   JOIN ta.cuota  c
+									   JOIN ta.tarifa t
+									   JOIN t.sucursales s
+									   where
+									   ta.statusA = true and
+									   ta.agencia = $agencia and
+									   ta.tarifa  = $tarifa"
+									   )
+						->getResult();
+		}
+
+
+		public function findDetalleTarifas($agencia, $tarifa){
+
+			return $this->getEntityManager()
+						->createQuery("SELECT t.nombre as tarifa, t.id idTarifa , s.nombre as destino, c.exportacionSencillo as exportacions,
+										c.importacionSencillo as importacions, c.reutilizadoSencillo as reutilizados,
+										c.exportacionFull as exportacionf, c.importacionFull as importacionf,
+										c.reutilizadoFull as reutilizadof
+									   FROM
+
+									   TimsaControlFletesBundle:TarifaAgencia ta
+
+									   JOIN ta.cuota  c
+									   JOIN ta.tarifa t
+									   JOIN t.sucursales s
+									   where
+									   ta.statusA = false and
+									   ta.agencia = $agencia and
+									   ta.tarifa  = $tarifa"
 									   )
 						->getResult();
 		}

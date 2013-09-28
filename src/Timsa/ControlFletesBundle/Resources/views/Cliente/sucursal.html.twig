@@ -42,7 +42,7 @@
 								
 
 							</div>
-							<button value="{{sucursal.id}}" class="btn btn-default">Editar Sucursal</button>
+							{#<button value="{{sucursal.id}}" class="btn btn-default">Editar Sucursal</button>#}
 						</div>
 					</div>
 				</div>
@@ -63,14 +63,15 @@
 
 <div id="formSucursal" >
 	<br>
-	<form class="form-horizontal" role="form" action="{{path('_createSucursal')}}">
+	<form class="form-horizontal" role="form" action="{{path('_createSucursal')}}" method="post">
+		<input id="cliente" type="hidden" value="" name="cliente">
 		<div  class="form-group">
 			<label class="col-lg-2 control-label" >Ubicacion</label>
 			<div class="col-lg-3">
-				<input class="form-control input-sm" id="lat" readonly type="text" name="lat">
+				<input required class="form-control input-sm" id="lat" readonly type="text" name="lat">
 			</div>
 			<div class="col-lg-3">
-				<input class="form-control input-sm" id="lng" readonly type="text" name="lon">
+				<input required class="form-control input-sm" id="lng" readonly type="text" name="lng">
 			</div>
 
 			<div class="col-lg-3">
@@ -82,62 +83,61 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label" for="cliente">Nombre</label>
 			<div class="col-lg-10">
-				<input class="form-control" type="text" name="nombre">
+				<input required class="form-control" type="text" name="nombre">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label" for="cliente">Correo</label>
 			<div class="col-lg-10">
-				<input class="form-control" type="text" name="nombre">
+				<input class="form-control" type="email" name="email">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label" for="cliente">Telefono</label>
 			<div class="col-lg-10">
-				<input class="form-control" type="text" name="nombre">
+				<input class="form-control" type="text" name="telefono">
 			</div>
 		</div>
 
 		<div class="form-group">
 			<label class="col-lg-2 control-label" for="cliente">Calle</label>
 			<div class="col-lg-7">
-				<input class="form-control" type="text" name="nombre">
+				<input class="form-control" type="text" name="calle">
 			</div>
 			<div class="col-lg-3">
 				<span>
 				<div class="input-group">
 					<span class="input-group-addon">#</span>				
-						<input type="text" class="form-control col-lg-3" placeholder="Numero">
+						<input type="text" class="form-control col-lg-3" name="numero" placeholder="Numero">
 				</div>
 				</span>
 			</div>
-
 		</div>
 
 		<div class="form-group">
 			<label class="col-lg-2 control-label" for="cliente">Colonia</label>
 			<div class="col-lg-10">
-				<input class="form-control" type="text" name="nombre">
+				<input class="form-control" type="text" name="colonia">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label" for="cliente">Localidad</label>
 			<div class="col-lg-10">
-				<input class="form-control" type="text" name="nombre">
+				<input class="form-control" type="text" name="localidad">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label" for="cliente">Estado</label>
 			<div class="col-lg-10">
-				<input class="form-control" type="text" name="nombre">
+				<input class="form-control" type="text" name="estado">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-lg-2 control-label" for="cliente">Tarifa</label>
 			<div class="col-lg-10">
-				<select class="form-control">
+				<select class="form-control" name="tarifa">
 					{% for tarifa in tarifas %}
-						<option {{tarifa.id}}> {{tarifa.nombre}} </option>
+						<option value="{{tarifa.id}}"> {{tarifa.nombre}} </option>
 					{% endfor %}
 				</select>
 			</div>

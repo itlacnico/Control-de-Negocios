@@ -39,7 +39,7 @@ class Operador{
 	protected $fecha_ingreso;
 
 	/**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
 	protected $statusA = true;
 

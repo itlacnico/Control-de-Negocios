@@ -1,0 +1,76 @@
+	<div class="tarifas">
+		{% if actual %}
+			<h2>Tarifa Actual</h2>
+			{% for agencia in actual %}
+			
+				 {{agencia.tarifa}}
+
+				 {{agencia.exportacions}} 
+				 {{agencia.importacions}}
+				 {{agencia.reutilizados}}
+				 {{agencia.exportacionf}}
+				 {{agencia.importacionf}}
+				 {{agencia.reutilizadof}}
+
+				{#<td><button class="btn btn-primary detalle" value="{{agencia.idTarifa}}">Accion</button></td>#}
+			{#</tr>#}
+			{% endfor %}
+
+			<h4>Tarifas anteriores</h4>
+
+			{% if tarifas %}
+				{% for agencia in tarifas %}
+				
+					 {{agencia.tarifa}}
+
+					 {{agencia.exportacions}} 
+					 {{agencia.importacions}}
+					 {{agencia.reutilizados}}
+					 {{agencia.exportacionf}}
+					 {{agencia.importacionf}}
+					 {{agencia.reutilizadof}}
+
+					{#<td><button class="btn btn-primary detalle" value="{{agencia.idTarifa}}">Accion</button></td>#}
+				{#</tr>#}
+				{% endfor %}
+		{% endif %}
+{#
+		<table class="table table-bordered">
+			<tr>
+				<th rowspan="2">Tarifa</th>
+				<th colspan="3">Sencillo</th>
+				<th colspan="3">Full</th>
+				<th rowspan="2">Detalle</th>
+			</tr>
+			<tr>
+				<th>Exportacion</th>
+				<th>Importacion</th>
+				<th>Reutilizado</th>
+
+				<th>Exportacion</th>
+				<th>Importacion</th>
+				<th>Reutilizado</th>
+			</tr>
+			{% for agencia in tarifas %}
+			<tr>
+				<td> {{agencia.tarifa}} </td>
+
+				<td> {{agencia.exportacions}} </td>
+				<td> {{agencia.importacions}} </td>
+				<td> {{agencia.reutilizados}} </td>
+				<td> {{agencia.exportacionf}} </td>
+				<td> {{agencia.importacionf}} </td>
+				<td> {{agencia.reutilizadof}} </td>
+
+				<td><button class="btn btn-primary detalle" value="{{agencia.idTarifa}}">Accion</button></td>
+			</tr>
+			{% endfor %}			
+		</table>
+		#}
+		{% else %}
+			<h1> No existen cuotas definidas </h1>
+		{% endif %}
+
+		<br>
+		<button class="btn btn-lg btn-success col-md-6 col-md-offset-3 nuevaTarifa" >Nueva Cuota</button>
+	</div>

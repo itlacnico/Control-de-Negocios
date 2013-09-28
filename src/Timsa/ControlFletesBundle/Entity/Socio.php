@@ -45,7 +45,7 @@ class Socio
     /**
      * @var string
      *
-     * @ORM\Column(name="statusA", type="boolean")
+     * @ORM\Column(name="statusA", type="boolean", nullable=true)
      */
     private $statusA;
 

@@ -42,7 +42,7 @@ class Economico
     private $actividad = 1;
 
     /**
-     * @ORM\Column(name="statusA", type="boolean")
+     * @ORM\Column(name="statusA", type="boolean", nullable=true)
      */
     protected $statusA = true;
 

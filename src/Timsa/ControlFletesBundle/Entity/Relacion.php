@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Relacion
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Timsa\ControlFletesBundle\Entity\RelacionRepository")
 */
 class Relacion{
 
@@ -23,7 +23,7 @@ class Relacion{
 	/**
 	 * @var boolean
 	 *
-	 * @ORM\Column(name="statusA", type="boolean", length=45)
+	 * @ORM\Column(name="statusA", type="boolean", length=45, nullable=true)
 	 */
 	private $statusA;
 

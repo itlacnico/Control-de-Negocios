@@ -56,7 +56,7 @@
     		<ul class="nav nav-tabs nav-pills nav-stacked" style="max-width: 300px;" id="myTab">
           <li id="allClients"><a>Clientes</a></li>
     			{% for cliente in clientes %}
-    				<li id="{{ path('_sucursales', {'idCliente': cliente.id}) }}"><a class="socio" href="#filtro_sucursal" data-toggle="tab"> {{cliente}} </a></li>
+    				<li id="{{ path('_sucursales', {'idCliente': cliente.id}) }}" class="cliente" value="{{cliente.id}}"><a class="socio" href="#filtro_sucursal" data-toggle="tab"> {{cliente}} </a></li>
     			{% else %}
     				<li><a href="">No existen clientes registrados</a></li>
     			{% endfor %}
@@ -98,7 +98,6 @@
                     $('#formSucursal').hide();
                 }); //carga por ajax a la capa "notice_viewer"
                 //$('#formSucursal').hide("fade");
-                
       	});
 
         $('.down').click(function(){
@@ -108,6 +107,7 @@
         $('body').on('click', '#nuevaSucursal', function(){
           addNewListener();
           var sucursal = $('#suc');
+          $('#cliente').val( $('li.cliente.active').attr("value") );
           sucursal.data('info', sucursal.html()).empty().append($('#formSucursal').html());
 
         });

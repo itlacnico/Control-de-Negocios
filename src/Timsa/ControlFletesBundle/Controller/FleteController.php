@@ -43,10 +43,12 @@ class FleteController extends Controller{
 	}
 
 	public function ajaxAction(){
+		$request = $this->getRequest();
+		$numero  = $request->request->get('value', 0);
 
 		$economicos = $this->getDoctrine()
 			  ->getRepository('TimsaControlFletesBundle:Relacion')
-			  ->findAll();
+			  ->filtrarRelaciones($numero);
 
 		$html = "";
 
@@ -60,5 +62,15 @@ class FleteController extends Controller{
 		$response->setData($array);
 
 		return $response;
+	}
+
+	public function createFleteAction(){
+
+		$agencias = $this->getDoctrine()
+					  ->getRepository('TimsaControlFletesBundle:Agencia')
+					  ->findAll();
+
+		return $this->render("TimsaControlFletesBundle:Flete:create.html.twig", 
+							array('agencias' => $agencias, ));
 	}
 }

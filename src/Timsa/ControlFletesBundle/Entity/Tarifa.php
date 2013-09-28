@@ -27,7 +27,7 @@ class Tarifa{
 	protected $nombre;
 
 	/**
-	 * @ORM\Column(type="boolean")
+	 * @ORM\Column(type="boolean", nullable=true)
 	 */
 	protected $statusA = true;
 

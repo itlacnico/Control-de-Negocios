@@ -21,12 +21,10 @@ class TarifaAgencia{
 	protected $id;
 
 	/**
-	 * @ORM\Column(type="boolean")
+	 * @ORM\Column(type="boolean", nullable=true)
 	 */
 
-	protected $statusA = true;
-
-
+	protected $statusA;
 
 	/**
 	* @ORM\ManyToOne(targetEntity="Tarifa", inversedBy="tarifas")
@@ -215,5 +213,6 @@ class TarifaAgencia{
 
     public function __construct(){
         $this->setFechaIngreso(new \DateTime(date('Y-m-d H:i:s')));
+        $this->setStatusA(true);
     }
 }

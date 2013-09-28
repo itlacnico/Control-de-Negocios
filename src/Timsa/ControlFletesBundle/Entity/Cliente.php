@@ -33,7 +33,7 @@ class Cliente{
 	protected  $fechaIngreso;
 	
 	/**
-	 * @ORM\Column(name="statusA", type="boolean")
+	 * @ORM\Column(name="statusA", type="boolean", nullable=true)
 	 */
 	protected  $statusA = true;
 

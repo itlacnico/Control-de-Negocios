@@ -12,7 +12,7 @@ Tarifas
 	<div class="col-lg-4">
 		<ul class="nav nav-tabs nav-pills nav-stacked" style="max-width: 300px;" id="myTab">
 			{% for agencia in agencias %}
-				<li id="{{ path('_tarifa', {'idAgencia': agencia.id}) }}"><a class="agencias" href="#filtro_agencia" data-toggle="tab"> {{agencia}} </a></li>
+				<li value="{{agencia.id}}" id="{{ path('_tarifa', {'idAgencia': agencia.id}) }}"><a class="agencias" href="#filtro_agencia" data-toggle="tab"> {{agencia}} </a></li>
 			{% else %}
 				<li><a href="">No existen agencias registrados</a></li>
 			{% endfor %}
@@ -65,8 +65,6 @@ Tarifas
 	<script>
 		$(function(){
 
-			
-
 			$('#myTab').click(function(event) {
 				$('#myTab a').tab('show');
 			});
@@ -77,6 +75,36 @@ Tarifas
 			        $('#filtro_agencia').append('<img src="{{asset("images/loading.gif")}}">');
 			        $('#filtro_agencia').load($(this).parent().attr('id')); //carga por ajax a la capa "notice_viewer"
 			});
+
+			$('body').on('click', '.detalle', function(e){
+				var agencia = $('ul.nav li.active ').attr("value");
+				var tarifa  = $(this).attr("value");
+
+				parametros = {"agencia" : agencia, "tarifa" : tarifa};
+				$('#filtro_agencia').empty();
+		        $('#filtro_agencia').append('<img src="{{asset("images/loading.gif")}}">');
+
+				createAjax(parametros, function(response){
+					$('#filtro_agencia').empty();
+					$('#filtro_agencia').append(response.html);
+				});
+			});
+
+		 	function createAjax(parametros, funcion){
+					 			$.ajax({
+					 				  cache:    false,
+						 			  type: 	"POST",
+						 			  dataType: "json",
+						 			  url: 		"{{path('_tarifaDetalle')}}",
+						 			  data: 	parametros,
+						 			  success: function(response){
+						 			  			funcion(response);
+						 			  		},
+							 		  error: function() {
+							 		 	alert("error");
+							 		 }
+							 	});
+		 	}
 /*
 			$('body').on('click','ul.nav.nav-justified li a', function(a) { 
 				a.preventDefault();        
@@ -84,6 +112,10 @@ Tarifas
 			    //$(this).tab("show");  
 			});
 */
+			$('body').on('click', '.nuevaTarifa', function(e){
+				alert("accion");
+			});
+
 		});
 	</script>
 

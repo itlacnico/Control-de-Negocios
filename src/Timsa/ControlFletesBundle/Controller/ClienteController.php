@@ -3,6 +3,9 @@
 namespace Timsa\ControlFletesBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Timsa\ControlFletesBundle\Entity\Sucursal;
+use Timsa\ControlFletesBundle\Entity\Tarifa;
+
 
 class ClienteController extends Controller{
 
@@ -30,7 +33,6 @@ class ClienteController extends Controller{
 								  ->getRepository('TimsaControlFletesBundle:Tarifa')
 								  ->findAll();
 
-
 		return $this->render("TimsaControlFletesBundle:Cliente:sucursal.html.twig", 
 								array("clientes" => $sucursal,
 									  "cliente"  => $cliente,
@@ -40,6 +42,34 @@ class ClienteController extends Controller{
 	}
 
 	public function createAction(){
-		
+		$request = $this->getRequest();
+
+		$sucursal = new Sucursal();
+
+		$sucursal->setNombre($request->request->get('nombre',0));
+		$sucursal->setEmail($request->request->get('email', 0));
+		$sucursal->setCalle($request->request->get('calle', 0));
+		$sucursal->setNumero($request->request->get('numero', 0));
+		$sucursal->setColonia($request->request->get('colonia', 0));
+		$sucursal->setLocalidad($request->request->get('localidad', 0));
+		$sucursal->setEstado($request->request->get('estado', 0));
+		$sucursal->setTelefono($request->request->get('telefono', 0));
+		$sucursal->setFechaIngreso( new \DateTime(date('Y')) );
+
+		$sucursal->addTarifa($this->getDoctrine()
+								  ->getRepository('TimsaControlFletesBundle:Tarifa')
+								  ->find($request->request->get('tarifa', 0))
+							);
+
+		$sucursal->setCliente($this->getDoctrine()
+						  ->getRepository('TimsaControlFletesBundle:Cliente')
+						  ->find($request->request->get('cliente', 0))
+					);
+
+		$em = $this->getDoctrine()->getManager();
+		$em->persist($sucursal);
+		$em->flush();
+
+		return $this->redirect($this->generateUrl('_clientes'));
 	}
 }

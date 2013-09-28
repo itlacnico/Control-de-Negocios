@@ -52,6 +52,8 @@ _fletes:
 _tarifa:
     pattern: /main/tarifa/{idAgencia}
     defaults: {_controller: TimsaControlFletesBundle:Tarifa:index}
+    requirements:
+        idAgencia: \d+
 
 #_procesar:
     #pattern: /main/procesar/{tipo}
@@ -64,10 +66,16 @@ _contenedores:
 flete_detalle:
     pattern: /main/fleteDetalle/{flete}
     defaults: {_controller: TimsaControlFletesBundle:Flete:detalle, flete: 0 }
+    requirements:
+        flete: \d+
 
 create_flete:
    pattern: /main/CreateFlete
    defaults: {_controller: TimsaControlFletesBundle:Flete:create}
+
+create_new_flete:
+   pattern: /main/flete/create
+   defaults: {_controller: TimsaControlFletesBundle:Flete:createFlete}
 
 _filtro:
    pattern: /main/filtro
@@ -76,7 +84,13 @@ _filtro:
 _sucursales:
    pattern: /main/sucursal/{idCliente}
    defaults: {_controller: TimsaControlFletesBundle:Cliente:sucursal}
+   requirements:
+       idCliente: \d+
 
 _createSucursal:
    pattern: /main/sucursal/create
    defaults: {_controller: TimsaControlFletesBundle:Cliente:create}
+
+_tarifaDetalle:
+   pattern: /main/tarifa/detalle
+   defaults: {_controller: TimsaControlFletesBundle:Tarifa:ajax}
