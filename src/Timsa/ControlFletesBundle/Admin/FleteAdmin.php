@@ -53,7 +53,7 @@ class FleteAdmin extends Admin{
 	                ->add('fecha')
 	                ->add('fecha_facturacion')
 	            ->end()
-	            ->with('Relacion', array('collapsed' => true))
+	            ->with('Relacion')
 	            	->add('relacion','sonata_type_model' , array('expanded' => true, 'compound' => true))
 	            ->end()
 	            ->with('Viajes')
@@ -67,7 +67,7 @@ class FleteAdmin extends Admin{
 	            	->add('fleteHijo')
 	            ->end()
 	            ->with('Contenedores')
-	            	->add('workorders')
+	            	->add('workorders' )
 	            ->end()
 	            ;
 	            

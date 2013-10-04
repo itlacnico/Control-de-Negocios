@@ -135,7 +135,7 @@ services:
         arguments:
               - ~
               - Timsa\ControlFletesBundle\Entity\Flete
-              - 'TimsaControlFletesBundle:FleteAdmin'
+              - 'TimsaControlFletesBundle:Admin'
 
     sonata.admin.user:
         class: Timsa\ControlFletesBundle\Admin\UserAdmin

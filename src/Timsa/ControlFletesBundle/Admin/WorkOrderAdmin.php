@@ -42,7 +42,7 @@ class WorkOrderAdmin extends Admin{
 	            	->add("workorder")
 	            	->add("contenedor")
 	            	->add("sellos",'sonata_type_model' , array('expanded' => true, 'compound' => true, 'multiple' => true))
-	            	->add("flete")
+	            	//->add("flete")
 	            ;
 	            
 	        }

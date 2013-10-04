@@ -5,7 +5,7 @@ namespace Timsa\ControlFletesBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- *@ORM\Entity(repositoryClass="Timsa\ControlFletesBundle\Entity\FleteRepository")
+ *@ORM\Entity(repositoryClass="Timsa\ControlFletesBundle\Entity\TipoViajeRepository")
  *@ORM\HasLifecycleCallbacks
  *@ORM\Table(name="tipo_viaje")
 */

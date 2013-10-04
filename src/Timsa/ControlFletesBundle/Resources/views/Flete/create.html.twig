@@ -62,9 +62,9 @@
 	 			 	<label class="col-lg-2 control-label" for="agencia">Agencia</label>
 	 			 	<div class="col-lg-8">
 	 			 	<div class="input-group">
-			 			<select class="form-control" name="agencia">
+			 			<select class="form-control" name="agencia" id="agencia">
 			 				{% for agencia in agencias %}
-			 					<option val="{{agencia.id}}"> {{agencia}} </option>
+			 					<option value="{{agencia.id}}"> {{agencia}} </option>
 			 				{% endfor %}
 			 			</select>
 		 				  <!--  <span class="input-group-btn">
@@ -103,8 +103,8 @@
  			<br><br><br><br><br><br>
  			<div class="col-lg-4 well">
 
-		 		<div>
-		 			<select class="form-control" id="detalle_cliente">
+		 		<div id="detalle_cliente">
+		 			<select class="form-control" >
 		 			</select>
 		 		</div>
 		 		<br><br><br><br>
@@ -134,22 +134,25 @@
 				<div class="panel panel-default pull-left col-lg-4">
 				  <div class="panel-body">
 					<div class="btn-group" data-toggle="buttons">
-		 			    <label class="btn btn-info active">
-		 			      <input value="importacion" type="radio" name="importacion" id="importacion" checked> Importacion
+		 			    <label class="btn btn-info">
+		 			      <input  type="radio" value="importacion" name="viaje" id="importacion"> Importacion
 		 			    </label>
 		 			    <label class="btn btn-info">
-		 			      <input type="radio" value="exportacion" name="exportacion" id="exportacion"> Exportacion
+		 			      <input type="radio" value="exportacion" name="viaje" id="exportacion"> Exportacion
 		 			    </label>
 		 			  </div>
 
 		 			  <div class="btn-group" data-toggle="buttons">
-		 			    <label class="btn btn-primary active">
-		 			      <input value="sencillo" type="radio" name="sencillo" id="sencillo" class="viaje"> Sencillo
+		 			    <label class="btn btn-primary">
+		 			      <input  type="radio" value="sencillo" name="trafico" id="sencillo" class="viaje"> Sencillo
 		 			    </label>
 		 			    <label class="btn btn-primary">
-		 			      <input value="full" type="radio" name="full" id="full" class="viaje"> Full
+		 			      <input type="radio"  value="full" name="trafico" id="full" class="viaje"> Full
 		 			    </label>
 		 			  </div>
+	 			  </div>
+	 			  <div class="checkbox">
+	 			  	<label><input type="checkbox" name="contenedores_boolean" id="boleano">Dejar Pendiente el registro de contenedores</label>
 	 			  </div>
 	  			</div>
  			  	
@@ -195,10 +198,11 @@
 					</div>
  			  	  	  <div id="sellos1" class="col-lg-4">
  			  	  	  		<ul class="list-group">
- 			  	  	  		  <li class="list-group-item">Cras justo odio</li>
- 			  	  	  		  <li class="list-group-item"> <input type="text" class="form-control">
- 			  	  	  		  <button type="button" class="btn btn-success">Agregar Sello</button> </li>
+ 			  	  	  		  <li class="list-group-item">
+ 			  	  	  		  	<input type="text" class="form-control">
+ 			  	  	  		  </li>
  			  	  	  		</ul>
+ 			  	  	  		<button type="button" class="btn btn-success">Agregar Sello</button> 
  			  	  	  </div>
  			  	  	</div>
 
@@ -240,35 +244,33 @@
 	 			  	    	    </select>
 	 			  	    	  </div>	  	  
 	 			  	     </div>
-
  			  	    </div>
 
- 			  	    <div id="sellos1" class="col-lg-4">
+ 			  	    <div id="sellos2" class="col-lg-4">
  			  	    	<br><br>
- 			  	    	<ul class="list-group">
- 			  	    	  <li class="list-group-item">Cras justo odio</li>
- 			  	    	  <li class="list-group-item"> <input type="text" class="form-control">
- 			  	    	  <button type="button" class="btn btn-success">Agregar Sello</button> </li>
+ 			  	    	<ul class="list-group" id="lista_sellos2">
+ 			  	    	  <li class="list-group-item">
+ 			  	    	  	<input type="text" class="form-control">
+ 			  	    	  </li>
  			  	    	</ul>
+ 			  	    	<button type="button" class="btn btn-success">Agregar Sello</button>
  			  	    </div>
  			  	</div>
  			  </div>
  			  </div>
- 			
  		</div>
  	</div>
  	<div>
  		<table class="table table-bordered">
  			<tr >
  				<th>Socio</th>
+ 				<th>Destino</th>
  				<th>Agencia</th>
- 				<th>Precio de Viaje</th>
  			</tr>
  			<tr>
- 				<td>Roberto Medina Rincon</td>
- 				<td>Maersk</td>
- 				<td>75360</td>
- 			</tr>
+ 				<td id="socio"></td>
+ 				<td id="destino"> </td>
+ 				<td id="naviera">Maersk</td>
  		</table>
  		<br>
 
@@ -284,43 +286,108 @@
  	<script type="text/javascript">
  		$(function(){
 
+ 			$('#agencia').change(function(event) {
+ 				$('#naviera').empty().append( $('#agencia').val() );
+ 			});
+
+ 			$('#contenedor1').hide();
  			$('#contenedor2').hide();
 
  			$('.viaje').change(function(event) {
  				var val = $(this).val();
 
- 				if(val === "sencillo"){
- 					$('#contenedor2').hide('fade');
+ 				if(! $('#boleano').is(":checked") ){
+
+ 					if(val === "sencillo"){
+ 						$('#contenedor1').show('fade');
+ 						$('#contenedor2').hide('fade');
+ 					}
+ 					else{
+ 						$('#contenedor2').show('fade');
+ 					}
  				}
- 				else{
- 					$('#contenedor2').show('fade');
- 				}
+
  			});
 
- 		$('#search_sucursal').click(function(event) {
- 			
- 		});
+	 		$('#boleano').change(function(event) {
+	 			event.preventDefault();
+	 			/* Act on the event */
+	 			if ($(this).is(":checked")) {
+		 			$('#contenedor1').hide();
+		 			$('#contenedor2').hide();
+	 			}
+	 			else{
+	 				$('#contenedor1').show();
 
- 		$('#operador_economico').change(function(){
- 			alert("actin");
- 		});
+	 				//if($('#full').parent().hasClass('active') ){
+	 				if($('#full').is(":checked") ){
+	 					$('#contenedor2').show();
+	 				}
+	 			}
+	 		});
 
  		$('#search_economico').click(function(event) {
  			var parametros = {"tipo" : "economico", "value" : $('#economico').val() };
+
+ 			var detalle_viaje = $('#detalle_viaje');
+
+ 			detalle_viaje.empty().append('<img src="{{asset("images/loading.gif")}}">')
+
 			var funcion =function(response){
   
-		 				$('#detalle_viaje').empty()
-			 			  				   .append("<select class='form-control' name='detalle_viaje'>" + response.economicos + "</select>"
+		 					  detalle_viaje.empty()
+			 			  				   .append("<select class='form-control' name='detalle_viaje' id='operador_economico'>" + response.economicos + "</select>"
 			 			  				   	);
-
-
 			 	}
 
 			createAjax(parametros,funcion);
 
 			});
 
+	 		$('#search_sucursal').click(function(event) {
+	 			var parametros = {"tipo" : "cliente", "value" : $('#cliente').val() };
 
+	 			var detalle_cliente = $('#detalle_cliente')
+
+	 			detalle_cliente.empty().append('<img src="{{asset("images/loading.gif")}}">')
+
+				var funcion =function(response){
+	  
+		 				detalle_cliente.empty()
+			 			  				   .append("<select class='form-control' name='detalle_cliente' id='cliente_sucursal'>" + response.sucursales + "</select>"
+			 			  				   	);
+				 	}
+
+				createAjax(parametros,funcion);
+
+				});
+
+	 		$('body').on('change', '#operador_economico', function(){
+	 			parametros = { 
+	 								"tipo" : "relacion",
+	 			  					"value" : $('#operador_economico').val() 
+	 			  			 };
+
+	 			createAjax(parametros, function(response){
+	 				$('#economico').val(response.economico);
+	 				$('#operador').val(response.operador);
+	 				$('#socio').empty().append(response.socio);
+	 			});
+	 		});
+
+	 		$('body').on('change', '#cliente_sucursal', function(){
+	 			parametros = { 
+	 								"tipo" : "destino",
+	 			  					"value" : $(this).val()
+	 			  			 };
+	 			
+	 			createAjax(parametros, function(response){
+	 				$('#cliente').val(response.cliente);
+	 				$('#sucursal').val(response.sucursal);
+	 				$('#destino').empty().append(response.direccion);
+
+	 			});
+	 		});
 
  		 	function createAjax(parametros, funcion){
  					 			$.ajax({

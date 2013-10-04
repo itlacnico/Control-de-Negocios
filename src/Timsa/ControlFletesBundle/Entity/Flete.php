@@ -6,7 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  *@ORM\Entity(repositoryClass="Timsa\ControlFletesBundle\Entity\FleteRepository")
- *@ORM\HasLifecycleCallbacks
  *@ORM\Table(name="flete")
 */
 
@@ -74,7 +73,7 @@ class Flete{
 	#Cuota para el Flete
 	/**
      * @ORM\ManyToOne(targetEntity="Sucursal")
-     * @ORM\JoinColumn(name="flete_hijo_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="sucursal", referencedColumnName="id")
      */
 	protected $sucursal;
 
@@ -93,7 +92,7 @@ class Flete{
     protected $tipo_viaje;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WorkOrder", inversedBy="flete")
+     * @ORM\OneToMany(targetEntity="WorkOrder", mappedBy="flete")
      * @ORM\JoinTable(name="contenedores_flete")
      */
 
@@ -101,6 +100,8 @@ class Flete{
 
 	public function __construct(){
         $this->workorders = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->fecha = new \DateTime(date('Y'));
+        $this->fleteHijo = null;
 	}
 
     /**

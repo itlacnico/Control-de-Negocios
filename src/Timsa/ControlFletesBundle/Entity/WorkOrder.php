@@ -22,17 +22,17 @@ class WorkOrder{
 	protected $workorder;
 
 	/**
-	 * @ORM\OneToOne(targetEntity="Contenedor", mappedBy="workorder")
+	 * @ORM\ManyToOne(targetEntity="Contenedor", inversedBy="workorder")
 	 */
 	protected $contenedor;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="Sello", inversedBy="workorder")
+	 * @ORM\OneToMany(targetEntity="Sello", mappedBy="workorder")
 	 */
 	protected $sellos;
 
     /**
-     * @ORM\OneToOne(targetEntity="Flete", mappedBy="workorders")
+     * @ORM\ManyToOne(targetEntity="Flete", inversedBy="workorders")
      */
 
     protected $flete;
@@ -43,9 +43,8 @@ class WorkOrder{
     protected $booking; 
 
     public function __construct(){
-        $sellos = new  \Doctrine\Common\Collections\ArrayCollection();
+        $this->sellos = new \Doctrine\Common\Collections\ArrayCollection();
     }
-
 
     /**
      * Get id

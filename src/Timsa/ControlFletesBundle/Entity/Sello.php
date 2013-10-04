@@ -31,7 +31,7 @@ class Sello{
 	protected $numero_sello;
 
     /**
-     * @ORM\OneToOne(targetEntity="WorkOrder", mappedBy="sellos")
+     * @ORM\OneToOne(targetEntity="WorkOrder", inversedBy="sellos")
      */
     protected $workorder;
 
@@ -39,6 +39,10 @@ class Sello{
 	 * @ORM\Column(type="date")
 	 */
 	protected $fecha_sellado;
+
+    public function __toString(){
+        return $this->sello;
+    }
 
 
     /**

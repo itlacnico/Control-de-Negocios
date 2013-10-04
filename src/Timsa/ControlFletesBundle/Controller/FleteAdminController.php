@@ -34,10 +34,6 @@ class FleteAdminController extends Controller{
 	        // persist if the form was valid and if in preview mode the preview was approved
 	        if ($isFormValid && (!$this->isInPreviewMode() || $this->isPreviewApproved())) {
 
-	        	if($object instanceof Flete){
-
-	        	}
-
 	            $this->admin->create($object);
 
 	            if ($this->isXmlHttpRequest()) {

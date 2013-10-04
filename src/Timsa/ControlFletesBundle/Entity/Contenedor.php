@@ -30,7 +30,7 @@ class Contenedor{
      */
 	protected $tipo;
 	/**
-	 * @ORM\ManyToOne(targetEntity="WorkOrder", inversedBy="contenedor")
+	 * @ORM\OneToMany(targetEntity="WorkOrder", mappedBy="contenedor")
 	 */
 	protected $workorder;
 

@@ -3,7 +3,6 @@
 namespace Timsa\ControlFletesBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
-
 /**
  * OperadorRepository
  *
@@ -20,4 +19,23 @@ class SucursalRepository extends EntityRepository
 					->getResult();
 	}
 
+	public function getSucursalesLikeCliente($nombre){
+		$query = "SELECT s FROM TimsaControlFletesBundle:Sucursal s
+											JOIN s.cliente c
+											WHERE c.nombre LIKE  '%$nombre%'";
+
+		return $this->getEntityManager()
+					->createQuery( $query )
+					->getResult();
+	}
+/*
+	public function find($numero){
+		$query = "SELECT s FROM TimsaControlFletesBundle:Sucursal s
+											WHERE s.id = $numero";
+
+		return $this->getEntityManager()
+					->createQuery( $query )
+					->getResult();
+	}
+*/
 }
