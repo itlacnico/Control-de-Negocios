@@ -66,9 +66,9 @@ class FleteAdmin extends Admin{
 	            	->add('fletePadre')
 	            	->add('fleteHijo')
 	            ->end()
-	            ->with('Contenedores')
-	            	->add('workorders' )
-	            ->end()
+	            //->with('Contenedores')
+	            //	->add('workorders' )
+	            //->end()
 	            ;
 	            
 	        }

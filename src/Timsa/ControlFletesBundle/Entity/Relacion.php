@@ -161,7 +161,7 @@ class Relacion{
 
     public function __toString(){
         if($this->operador && $this->economico)
-            return (string) $this->operador->getNombre() . ' ' .$this->economico->getNumero();
+            return (string) $this->operador->getNombre() . ' = ' .$this->economico->getNumero();
         else
             return "";
     }

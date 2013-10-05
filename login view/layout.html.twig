@@ -1,0 +1,15 @@
+{% extends 'TimsaControlFletesBundle::layout.html.twig' %}
+{% block body %}
+    <div class="well">
+        {{parent()}}
+    </div>
+{% endblock %}
+    {% block navigationBar %}
+    {% endblock %}
+    {% block content %}
+    
+        {% block fos_user_content %}
+        {% endblock fos_user_content %}
+    
+    {% endblock %}
+

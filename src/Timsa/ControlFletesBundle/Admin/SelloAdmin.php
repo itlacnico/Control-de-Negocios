@@ -27,7 +27,7 @@ class SelloAdmin extends Admin{
 	        $formMapper
 	        	->add('sello')
 	        	->add('numero_sello')
-	        	//->add('workorder')
+	        	->add('workorder')
 	        	->add('fecha_sellado')
 				#->add('imagen')
 	        ;

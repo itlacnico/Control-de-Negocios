@@ -30,6 +30,10 @@ class Booking{
 		$this->workorders = new  \Doctrine\Common\Collections\ArrayCollection();
 	}
 
+    public function __toString(){
+        return (String) $this->booking;
+    }
+
     /**
      * Get id
      *

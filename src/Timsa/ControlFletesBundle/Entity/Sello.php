@@ -31,7 +31,7 @@ class Sello{
 	protected $numero_sello;
 
     /**
-     * @ORM\OneToOne(targetEntity="WorkOrder", inversedBy="sellos")
+     * @ORM\ManyToOne(targetEntity="WorkOrder", inversedBy="sellos")
      */
     protected $workorder;
 

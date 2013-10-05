@@ -20,6 +20,7 @@ class WorkOrderAdmin extends Admin{
 		        	->add("workorder")
 		        	->add("contenedor")
 		        	->add("sellos")
+		        	->add('booking')
 		        	->add("flete")
 		            ->add('_action', 'actions', array(
 		                'actions' => array(
@@ -39,11 +40,12 @@ class WorkOrderAdmin extends Admin{
 	        {
 	        	
 	            $formMapper
-	            	->add("workorder")
-	            	->add("contenedor")
-	            	->add("sellos",'sonata_type_model' , array('expanded' => true, 'compound' => true, 'multiple' => true))
-	            	//->add("flete")
-	            ;
+		            	->add("workorder")
+		            	->add("contenedor")
+		            	->add("booking")
+		            	->add("flete")
+	            		//->add("sellos")
+	            	;
 	            
 	        }
 }

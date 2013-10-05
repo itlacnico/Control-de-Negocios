@@ -152,7 +152,7 @@
 		 			  </div>
 	 			  </div>
 	 			  <div class="checkbox">
-	 			  	<label><input type="checkbox" name="contenedores_boolean" id="boleano">Dejar Pendiente el registro de contenedores</label>
+	 			  	<label><input type="checkbox" name="contenedores_boolean" id="boleano" value="true">Dejar Pendiente el registro de contenedores</label>
 	 			  </div>
 	  			</div>
  			  	
@@ -166,8 +166,7 @@
 	 			  		  <label class="col-lg-2 control-label" for="workorder1">WorkOrder</label>
 	 			  		  <div class="col-lg-10">
 	 			  		    <input id="workorder1" type="text" class="form-control col-lg-4" name="workorder1">
-	 			  		  </div>	  	  
-	 			  	 </div>
+	 			  		  </div> 			  	 </div>
 	 			  	  <br><br>
 	 			  	   <div class="form-group">
 	 			  	  	  <label class="col-lg-2 control-label" for="booking1">Booking</label>
@@ -219,9 +218,9 @@
 
 	 			  	   <br><br>
 	 			  	    <div class="form-group">
-	 			  	   	  <label class="col-lg-2 control-label" for="booking">Booking</label>
+	 			  	   	  <label class="col-lg-2 control-label" for="booking2">Booking</label>
 	 			  	   	  <div class="col-lg-10">
-	 			  	   	    <input id="booking" type="text" class="form-control col-lg-4" name="booking">
+	 			  	   	    <input id="booking2" type="text" class="form-control col-lg-4" name="booking2">
 	 			  	   	  </div>	  	  
 	 			  	    </div>
 
@@ -303,6 +302,7 @@
  						$('#contenedor2').hide('fade');
  					}
  					else{
+ 						$('#contenedor1').show('fade');
  						$('#contenedor2').show('fade');
  					}
  				}
@@ -317,12 +317,15 @@
 		 			$('#contenedor2').hide();
 	 			}
 	 			else{
-	 				$('#contenedor1').show();
+	 				if($('#sencillo').is(":checked")){
+		 				$('#contenedor1').show();
 
-	 				//if($('#full').parent().hasClass('active') ){
-	 				if($('#full').is(":checked") ){
-	 					$('#contenedor2').show();
-	 				}
+		 				//if($('#full').parent().hasClass('active') ){
+		 			}
+		 			if($('#full').is(":checked") ){
+		 				$('#contenedor1').show();
+		 				$('#contenedor2').show();
+		 			}
 	 			}
 	 		});
 
@@ -338,10 +341,11 @@
 		 					  detalle_viaje.empty()
 			 			  				   .append("<select class='form-control' name='detalle_viaje' id='operador_economico'>" + response.economicos + "</select>"
 			 			  				   	);
+
+			 			  	 $('#operador_economico').change();  	  
 			 	}
 
 			createAjax(parametros,funcion);
-
 			});
 
 	 		$('#search_sucursal').click(function(event) {
@@ -356,6 +360,8 @@
 		 				detalle_cliente.empty()
 			 			  				   .append("<select class='form-control' name='detalle_cliente' id='cliente_sucursal'>" + response.sucursales + "</select>"
 			 			  				   	);
+
+			 			$('#cliente_sucursal').change();
 				 	}
 
 				createAjax(parametros,funcion);

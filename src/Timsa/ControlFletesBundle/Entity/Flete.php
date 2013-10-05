@@ -101,7 +101,6 @@ class Flete{
 	public function __construct(){
         $this->workorders = new \Doctrine\Common\Collections\ArrayCollection();
         $this->fecha = new \DateTime(date('Y'));
-        $this->fleteHijo = null;
 	}
 
     /**

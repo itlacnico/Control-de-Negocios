@@ -7,3 +7,12 @@ Encontrar la manera de crear formularios mas dinamicos para muchos registros en 
 Configurar la creacion de fletes de sonata, con alguna clase de FleteAdmin, para que de esta manera se modifiquen los estados de los economicos y los operadores cada vez que se altere el estado de este
 
 Crear clase de "Actividades", la cual sostenga los estados de los operadores o fletes.
+
+*****************************************************************************************
+
+Crear el formulario de sellos, para incluirlos al crear un flete
+Validar los datos de entrada de contenedores, cuando el boleano no esta seleccionado.
+Generar la cuota a la hora de crear el flete.
+Crear el detalle de un flete, desde la ventana tabulada.
+En detalle, modificar datos de flete.
+Crear control de contenedores, workorder y booking.
