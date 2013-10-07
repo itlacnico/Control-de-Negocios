@@ -7,3 +7,75 @@
 </div>
 
  {% endblock %}
+
+{% block content %}
+	<div>
+		<div class="alert alert-info col-lg-10"> {{flete.actividad}} </div>
+		<div class="col-lg-2">
+			<button class="btn btn-success btn-lg">Reutilizar</button>
+		</div>
+		<br>
+		<br>
+		<br>
+		<br>
+
+		{% if flete.fletePadre %}
+			<h4>Flete Padre</h4>
+			<div class="alert alert-success"> {{flete.fletePadre}} </div>
+		{% endif %}
+
+		{% if flete.fleteHijo %}
+			<h4>Flete Hijo</h4>
+			<div class="alert alert-success"> {{flete.fleteHijo}} </div>
+		{% endif %}
+
+		<dl class="dl-horizontal">
+		  <dt>Agencia</dt>
+		  <dd>{{flete.agencia}}</dd>
+
+		  <dt>Tipo de Viaje</dt>
+		  <dd>{{flete.tipoviaje}}</dd>
+
+		  <dt>Tarifa</dt>
+		  <dd></dd>
+		</dl>
+
+		<div >
+			{% set relacion = flete.relacion %}
+			<dl class="dl-horizontal">
+			  <dt>Contenedor</dt>
+			  <dd>{{relacion.operador}}</dd>
+			  <dt>Size</dt>
+			  <dd>{{relacion.economico}}</dd>
+			  <dt>Booking</dt>
+			  <dd>{{relacion.socio}}</dd>
+			</dl>
+
+		</div>		
+
+		{% for workorder in flete.workorders %}
+		<div class="col-lg-6">
+		<div class="panel panel-primary">
+			<div class="panel-heading"> {{workorder}}</div>
+			<div class="panel-body">
+				{% set contenedor = workorder.contenedor %}
+				
+				<dl class="dl-horizontal">
+				  <dt>Contenedor</dt>
+				  <dd>{{contenedor}}</dd>
+				  <dt>Size</dt>
+				  <dd>{{contenedor.tipo}}</dd>
+				  <dt>Booking</dt>
+				  <dd>{{workorder.booking}}</dd>
+				</dl>
+			</div>
+		</div>
+		</div>
+		{% endfor %}
+
+		<div>
+			<p>{{flete.comentarios}}</p>
+		</div>
+
+	</div>
+{% endblock %}

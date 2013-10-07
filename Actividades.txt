@@ -16,3 +16,7 @@ Generar la cuota a la hora de crear el flete.
 Crear el detalle de un flete, desde la ventana tabulada.
 En detalle, modificar datos de flete.
 Crear control de contenedores, workorder y booking.
+Pestaña para colocar comentarios al crear un flete
+Hacer funcionales los filtros en la tabla de fletes.
+Buscar un dataFilter que funcione en la tabla de fletes
+Mejorar el despliegue de informacion en la tabla de fletes.

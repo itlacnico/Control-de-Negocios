@@ -30,6 +30,7 @@ class OperadorAdmin extends Admin{
 	    {
 	        $formMapper
 	            ->add('nombre')
+	            ->add('actividad')
 	            ->add('statusA')
 	            ->add('telefono')
 	            #->add('statusA', null, array('required' => false))

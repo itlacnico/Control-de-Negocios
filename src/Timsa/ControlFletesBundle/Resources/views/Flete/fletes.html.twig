@@ -111,33 +111,54 @@
 
                     {% if flete.tipoviaje.trafico == 'Sencillo'%}
                         {% set x = "rowspan=2" %}
-                        {% else %} 
+                        {% else %}
                         {% set x = "rowspan=1" %}
                     {% endif %}
-                    <td {{x}}> book</td>
-                    <td {{x}}></td>
-                    <td rowspan="2">
-                        <span class="label label-info">{{flete.tipoviaje.viaje}}</span>
-                    </td>
-                    <td rowspan="2"></td>
-                    <td {{x}}></td>
-                    <td {{x}}></td>
-                    <td {{x}}></td>
-                    <td rowspan="2"><a href="{{path('flete_detalle',{'flete': flete.id})}}"><button class="btn btn-success">Detalles</button></a></td>
-        			{#<td>{{flete.licencia}}</td>#}
-        		</tr>
 
-                {% if flete.tipoviaje.trafico == 'Full'%}
-                    <tr class="{{ items[( flete.actividad ~ "")] }}">
-                        <td>book</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                {% else %}
-                    <tr></tr>
-                {% endif %}
+                    {% for workorder in  flete.workorders %}
+                        {% if loop.first == false %}
+                            <tr>
+                        {% endif %}
+
+                            <td {{x}}> {{ workorder.booking}}  </td>
+                            <td {{x}}> {{workorder.workorder}} </td>
+
+                            {% if loop.first %}
+                                <td rowspan="2">
+                                    <span class="label label-info">{{flete.tipoviaje.viaje}}</span>
+                                </td>
+                                <td rowspan="2"> {{flete.sucursal}} </td>
+
+                            {% endif %}
+
+                            <td {{x}}> {{workorder.contenedor}} </td>
+                            <td {{x}}> {{workorder.contenedor.tipo}} </td>
+                            <td {{x}}></td>
+
+                        {% if loop.first %}
+                            <td rowspan="2"><a href="{{path('flete_detalle',{'flete': flete.id})}}"><button class="btn btn-success">Detalles</button></a></td>
+                            {#<td>{{flete.licencia}}</td>#}
+                        
+
+                        {% endif %}
+
+                        {#}
+                            {% if flete.tipoviaje.trafico == 'Full' %}
+                                <tr class="{{ items[( flete.actividad ~ "")] }}">
+
+                                    <td>book</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            {% else %}
+                                <tr></tr>
+                            {% endif %}
+
+
+                        #}
+                    {% endfor %}
 
         		{% endfor %}
         	</table>

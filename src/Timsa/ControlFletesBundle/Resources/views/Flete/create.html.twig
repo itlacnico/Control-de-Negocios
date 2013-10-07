@@ -26,14 +26,18 @@
 	 			 	<div class="col-lg-8">
 	 			 	<div class="input-group">
 			 		 <input id="economico" type="text" class="form-control" name="economico">
+			 		 <br>
 	 				    <span class="input-group-btn">
 	 				        <button id="search_economico" class="btn btn-default" type="button">Buscar</button>
 	 				    </span>
-	 				</div>		 
+	 				</div>
+	 				
+	 				<div id="mesageEconomico" class="alert" ></div>
 	 			 </div>
 	 			</div>
 	 			<br>
 	 			<br>
+	 			<br><br><br>
 
 	 			<div class="form-group">
 	 			 	<label class="col-lg-2 control-label" for="operador">Operador</label>
@@ -44,6 +48,7 @@
 		 				        <button class="btn btn-default" type="button">Go!</button>
 		 				    </span> -->
 	 				</div>
+	 				<div id="mesageOperador" class="alert" ></div>
 	 			 </div>
 	 			</div>
  			</div>
@@ -57,7 +62,6 @@
 
  			<div class="col-lg-8 active">
  				<BR><BR>
-
 		 		<div class="form-group">
 	 			 	<label class="col-lg-2 control-label" for="agencia">Agencia</label>
 	 			 	<div class="col-lg-8">
@@ -376,7 +380,27 @@
 
 	 			createAjax(parametros, function(response){
 	 				$('#economico').val(response.economico);
+	 				$('#mesageEconomico').text(response.statusEconomico);
+
+	 				if(response.statusEconomico === "Libre"){
+	 					$('#mesageEconomico').removeClass('alert-danger').addClass('alert-success')
+	 				}
+	 				else{
+	 					$('#mesageEconomico').removeClass('alert-success').addClass('alert-danger')
+	 				}
+
+
 	 				$('#operador').val(response.operador);
+	 				$('#mesageOperador').text(response.statusOperador);
+
+	 				if(response.statusOperador === "Libre"){
+	 					$('#mesageOperador').removeClass('alert-danger').addClass('alert-success')
+	 				}
+	 				else{
+	 					$('#mesageOperador').removeClass('alert-success').addClass('alert-danger')
+	 				}
+
+
 	 				$('#socio').empty().append(response.socio);
 	 			});
 	 		});

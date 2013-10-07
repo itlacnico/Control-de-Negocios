@@ -21,7 +21,7 @@ class FleteController extends Controller{
 		$fletes_paginados = 	$pagination_libre = $paginator->paginate(
 									$fletes,
 									$this->get('request')->query->get('pagina', 1)/*page number*/,
-									           4,/*limit per page*/
+									           15,/*limit per page*/
 									           array('pageParameterName' => 'pagina',)
 									       );
 
@@ -32,8 +32,14 @@ class FleteController extends Controller{
 
 	public function detalleAction($flete){
 
-		return $this->render("TimsaControlFletesBundle:Flete:detalle_flete.html.twig"
-							);
+		$entidadFlete = $this->getDoctrine()
+					  			->getRepository('TimsaControlFletesBundle:Flete')
+					  			->find($flete);
+
+
+		return $this->render("TimsaControlFletesBundle:Flete:detalle_flete.html.twig",
+			array("flete" => $entidadFlete )
+				);
 	}
 
 	public function createAction(){
@@ -142,11 +148,19 @@ class FleteController extends Controller{
 
 		if(! ($relacion == 0 || $sucursal == 0)){
 
-
-		$flete->setRelacion( $this->getDoctrine()
+		$entidadRelacion = $this->getDoctrine()
 								  ->getRepository('TimsaControlFletesBundle:Relacion')
-								  ->find($relacion) 
-							);
+								  ->find($relacion);
+
+		$entidadActividad = $this->getDoctrine()
+								  ->getRepository('TimsaControlFletesBundle:Actividades')
+								  ->find(2);
+
+		$entidadRelacion->getOperador()->setActividad($entidadActividad);
+
+		$entidadRelacion->getEconomico()->setActividad($entidadActividad);
+
+		$flete->setRelacion( $entidadRelacion );
 
 		$entidadSucursal =  $this->getDoctrine()
 								->getRepository('TimsaControlFletesBundle:Sucursal')
@@ -228,7 +242,7 @@ class FleteController extends Controller{
 		return $this->render("TimsaControlFletesBundle:Flete:debugflete.html.twig",
 							array(
 								'variabledebug' => "",
-								'variabledebug2' => $mensaje
+								'variabledebug2' => ""
 							 )
 							);
 	}
