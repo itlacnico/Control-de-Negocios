@@ -102,65 +102,108 @@
 
         		{% for flete in fletes %}
 
-        		<tr class="{{ items[( flete.actividad ~ "")] }}">
-        			<td rowspan="2" >{{flete.id}}</td>
-        			<td rowspan="2">{{flete.relacion.economico}}</td>
-        			<td rowspan="2">{{flete.relacion.operador}}</td>
-                    <td rowspan="2"></td>
-        			<td rowspan="2">{{flete.relacion.socio}}</td>
+                {% if flete.tipoviaje.trafico == 'Sencillo' %}
+                    {% set rowspan = 'rowspan=1' %}
+                {% else %}
+                    {% set rowspan = 'rowspan=2' %}
+                {% endif %}
 
-                    {% if flete.tipoviaje.trafico == 'Sencillo'%}
-                        {% set x = "rowspan=2" %}
-                        {% else %}
-                        {% set x = "rowspan=1" %}
-                    {% endif %}
+        		<tr  class="{{ items[( flete.actividad ~ "")] }}" >
+        			<td {{rowspan}} >{{flete.id}}</td>
+        			<td {{rowspan}}>{{flete.relacion.economico}}</td>
+        			<td {{rowspan}}>{{flete.relacion.operador}}</td>
+                    <td {{rowspan}}></td>
+        			<td {{rowspan}}>{{flete.relacion.socio}}</td>
 
+                    {#} Si hay workOrders  #}
+                    {% if flete.workorders|length > 0 %}
+                    {# Itera sobre las workorders #}
                     {% for workorder in  flete.workorders %}
+
+                        {% set rowspan2 = 'rowspan=1' %}
+
+
                         {% if loop.first == false %}
-                            <tr>
+                            <tr class="{{ items[( flete.actividad ~ "")] }}">
                         {% endif %}
 
-                            <td {{x}}> {{ workorder.booking}}  </td>
-                            <td {{x}}> {{workorder.workorder}} </td>
-
-                            {% if loop.first %}
-                                <td rowspan="2">
-                                    <span class="label label-info">{{flete.tipoviaje.viaje}}</span>
-                                </td>
-                                <td rowspan="2"> {{flete.sucursal}} </td>
-
-                            {% endif %}
-
-                            <td {{x}}> {{workorder.contenedor}} </td>
-                            <td {{x}}> {{workorder.contenedor.tipo}} </td>
-                            <td {{x}}></td>
+                            <td {{rowspan2}}> {{ workorder.booking}}  </td>
+                            <td {{rowspan2}}> {{workorder.workorder}} </td>
 
                         {% if loop.first %}
-                            <td rowspan="2"><a href="{{path('flete_detalle',{'flete': flete.id})}}"><button class="btn btn-success">Detalles</button></a></td>
-                            {#<td>{{flete.licencia}}</td>#}
-                        
 
+                            <td {{rowspan}}>
+                                <span class="label label-info">
+                                    {{flete.tipoviaje.viaje}}
+                                    {{flete.tipoviaje.trafico}}
+                                </span>
+                            </td>
+                            <td {{rowspan}}> {{flete.sucursal}} </td>
+
+                        {% endif %}
+
+                            <td {{rowspan2}}> {{workorder.contenedor}} </td>
+                            <td {{rowspan2}}> {{workorder.contenedor.tipo}} </td>
+                            <td {{rowspan2}}></td>
+
+                        {% if loop.first == false %}
+                            </tr>
+                        {% endif %}
+
+                        {% if loop.first %}
+                            <td {{rowspan}}>
+                                <a href="{{path('flete_detalle',{'flete': flete.id})}}">
+                                    <button class="btn btn-success">Detalles</button>
+                                </a>
+                            </td>
+                            {#<td>{{flete.licencia}}</td>#}
+                            </tr>
                         {% endif %}
 
                         {#}
                             {% if flete.tipoviaje.trafico == 'Full' %}
-                                <tr class="{{ items[( flete.actividad ~ "")] }}">
-
-                                    <td>book</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                            {% else %}
-                                <tr></tr>
-                            {% endif %}
-
-
                         #}
                     {% endfor %}
-
+                    {#} Si no  hay workOrders  #}
+                    {% else %}
+                        <td rowspan="1" >  </td>
+                        <td rowspan="1" >  </td>
+                        <td {{rowspan}}>
+                            <span class="label label-info">
+                                {{flete.tipoviaje.viaje}}
+                                {{flete.tipoviaje.trafico}}
+                            </span>
+                        </td>
+                        <td {{rowspan}} > {{flete.sucursal}} </td>
+                        <td  rowspan="1"></td>
+                        <td  rowspan="1"></td>
+                        <td rowspan="1" ></td>
+                        <td {{rowspan}}>
+                         <a href="{{path('flete_detalle',{'flete': flete.id})}}" >
+                            <button class="btn btn-success">Detalles</button>
+                        </a> 
+                        </td>
+                    </tr>
+                        
+                    {% endif %}
+                    {# Si el viaje es full #}
+                    {% if flete.tipoviaje.trafico == 'Full'%}
+                        {% if flete.workorders|length < 2 %}
+                            <tr class="{{ items[( flete.actividad ~ "")] }}" >
+                                <td rowspan="1" >  </td>
+                                <td rowspan="1" >  </td>
+                                <td rowspan="1" >  </td>
+                                <td rowspan="1" >  </td>
+                                <td rowspan="1" >  </td>
+                            </tr>
+                        {# Termina si el viaje es full #}
+                        {% endif %}
+                        {# Termina el despliegue de workorders #}
+                    {% endif %}
+                    
+                    {# Termina de colocarse los fletes #}
         		{% endfor %}
+
         	</table>
         	{#</div>#}
         	{% else %}
@@ -183,54 +226,6 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 		   $('#reservation').daterangepicker();
-		});
-	</script>
-
-	<script type="text/javascript">
-		$(document).ready(function() {
-		   $('#reportrange').daterangepicker(
-		      {
-		         startDate: moment().subtract('days', 29),
-		         endDate: moment(),
-		         minDate: '01/01/2013',
-		         maxDate: '12/31/2014',
-		         dateLimit: { days: 60 },
-		         showDropdowns: true,
-		         showWeekNumbers: true,
-		         timePicker: false,
-		         timePickerIncrement: 1,
-		         timePicker12Hour: true,
-		         ranges: {
-		            'Hoy': [moment(), moment()],
-		            'Ayer': [moment().subtract('days', 1), moment().subtract('days', 1)],
-		            'Ultimos 7 dias': [moment().subtract('days', 6), moment()],
-		            'Ultimos 30 dias': [moment().subtract('days', 29), moment()],
-		            'Este mes': [moment().startOf('month'), moment().endOf('month')],
-		            'Mes pasado': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')],
-		         },
-		         opens: 'left',
-		         buttonClasses: ['btn btn-default'],
-		         applyClass: 'btn-small btn-primary',
-		         cancelClass: 'btn-small',
-		         format: 'MM/DD/YYYY',
-		         separator: ' to ',
-		         locale: {
-		             applyLabel: 'Filtro',
-		             fromLabel: 'Desde',
-		             toLabel: 'Hasta',
-		             customRangeLabel: 'Especificar Rango',
-		             daysOfWeek: ['Do', 'Lu', 'Mar', 'Mie', 'Jue', 'Vie','Sa'],
-		             monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Marzo'],
-		             firstDay: 1
-		         }
-		      },
-		      function(start, end) {
-		       console.log("Callback has been called!");
-		       $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-		      }
-		   );
-		   //Set the initial state of the picker label
-		   $('#reportrange span').html(moment().subtract('days', 29).format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
 		});
 	</script>
 {% endblock %}
