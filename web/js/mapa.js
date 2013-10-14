@@ -25,15 +25,90 @@ function initialize() {
   map = new google.maps.Map(mapDiv, mapOptions);
   directionsDisplay.setMap(map);
 
-  var marker = new google.maps.Marker({
-      position  :  new google.maps.LatLng(22.850033, -101.6500523),
-      animation : google.maps.Animation.DROP,
-  });
-
-  marker.setMap(map);
+//Colocar en el mapa las posiciones de todas las sucursales.
+//Se consultara a la base de datos por las posiciones de todos los destinos(Sucursales)
 
 }
 
+var xhrMap
+
+function getPosicionDeSucursales( cliente ){
+
+  if(xhrMap != null){
+    xhrMap.abort();
+  }
+
+
+      parametros = {"cliente" : cliente }
+
+  xhrMap =$.ajax({
+          cache:    false,
+          type:   "POST",
+          dataType: "json",
+          url:    rutaPosicion,
+          data:   parametros,
+          success: function(response){
+            clearOverlays();
+
+            for (var i = 0; i < response.sucursales.length; i++) {
+
+                sucursalesClientes( response.sucursales[i] );
+                
+            };
+
+            showSucursales();
+
+              },
+          error: function() {
+          alert("error");
+         }
+      });
+}
+
+function placeMarker(location, nombreSucursal, cliente) {
+
+  var marker = new google.maps.Marker({
+      position  : location,
+      animation : google.maps.Animation.DROP
+  });
+  marker.set("cliente", cliente)
+  marker.set("nombre", nombreSucursal);
+
+  return marker;
+  }
+
+  function sucursalesClientes(sucursal){
+    var marker = placeMarker(new google.maps.LatLng(sucursal.lat, sucursal.lng),sucursal.nombre, sucursal.cliente);
+    markersArray.push(marker);
+  }
+
+  function showSucursales(){
+    directionsDisplay.setMap(null);
+    if (markersArray) {
+      for (i in markersArray) {
+        markersArray[i].setMap(map);
+
+          google.maps.event.addListener(markersArray[i],'click', function(){
+            infoWindow = new google.maps.InfoWindow();
+
+            content = "<strong>" + markersArray[i].get("cliente") +  "</strong><br>" 
+                      +  markersArray[i].get("nombre");
+
+            infoWindow.setContent(content);
+            infoWindow.open(map, this); 
+          });
+      }
+    }
+  }
+
+  function clearOverlays(){
+    if (markersArray) {
+      for (i in markersArray) {
+        markersArray[i].setMap(null);
+      }
+      markersArray = [];
+    }
+  }
 
 
 function addNewListener(){

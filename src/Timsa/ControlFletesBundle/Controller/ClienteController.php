@@ -5,6 +5,7 @@ namespace Timsa\ControlFletesBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Timsa\ControlFletesBundle\Entity\Sucursal;
 use Timsa\ControlFletesBundle\Entity\Tarifa;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 
 class ClienteController extends Controller{
@@ -52,8 +53,11 @@ class ClienteController extends Controller{
 		$sucursal->setNumero($request->request->get('numero', 0));
 		$sucursal->setColonia($request->request->get('colonia', 0));
 		$sucursal->setLocalidad($request->request->get('localidad', 0));
+		$sucursal->setCiudad($request->request->get('ciudad', 0));
 		$sucursal->setEstado($request->request->get('estado', 0));
 		$sucursal->setTelefono($request->request->get('telefono', 0));
+		$sucursal->setLat($request->request->get('lat', 0));
+		$sucursal->setLon($request->request->get('lng', 0));
 		$sucursal->setFechaIngreso( new \DateTime(date('Y')) );
 
 		$sucursal->addTarifa($this->getDoctrine()
@@ -71,5 +75,50 @@ class ClienteController extends Controller{
 		$em->flush();
 
 		return $this->redirect($this->generateUrl('_clientes'));
+	}
+
+	public function posicionAction(){
+		$sucursales;
+		$request = $this->getRequest();
+		$cliente = $request->request->get('cliente', 0);
+
+
+		if($cliente == 0){
+			$sucursales = 	$this->getDoctrine()
+					             ->getRepository('TimsaControlFletesBundle:Sucursal')
+					             ->findAll();
+		}
+		else{
+			$sucursales = 	$this->getDoctrine()
+					             ->getRepository('TimsaControlFletesBundle:Sucursal')
+					             ->getSucursalesPorCliente($cliente);
+			
+		}
+
+		$arrayt =  array();
+
+		foreach ($sucursales as $index=>$sucursal ) {
+
+			$clienteEntity = $sucursal->getCliente();
+			$nombreCliente = "";
+
+			if($clienteEntity) $nombreCliente = $clienteEntity->getNombre();
+			else $nombreCliente = "desconocido";
+
+			array_push($arrayt , array(
+												"nombre" => $sucursal->getNombre(),
+												"lat"	=>  $sucursal->getLat(),
+												"lng"	=>  $sucursal->getLon(),
+												"cliente" => $nombreCliente,
+												 )  );
+		}
+
+		$array = array("sucursales" => $arrayt);
+
+		$response = new JsonResponse();
+		$response->setData($array);
+
+		return $response;
+
 	}
 }

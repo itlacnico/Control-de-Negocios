@@ -20,7 +20,6 @@ class ClienteAdmin extends Admin{
 		            ->add('statusA')
 		            ->add('fechaIngreso')
 		            ->add('fechaSalida')
-		            ->add('imagen')
 		            ->add('_action', 'actions', array(
 		                'actions' => array(
 		                    'edit' => array(),
@@ -42,7 +41,7 @@ class ClienteAdmin extends Admin{
 		            ->add('nombre')
 		            ->add('statusA')
 		            ->add('fechaIngreso')
-		            ->add('imagen')
+		            ->add('description', 'textarea', array())
 	            ->end()
 	            #->with('Roles')
 	            #	->add('roles', 'sonata_type_model',array('expanded' => true, 'compound' => true, 'multiple' => true))

@@ -10,7 +10,7 @@
 
  {% block content %}
 
- <form method="post" action="{{path('create_new_flete')}}">
+ <form method="post" action="{{path('create_new_flete')}}" id="form_flete">
 
  	<ul class="nav nav-tabs nav-justified" id="tabla">
  	  <li class="active"><a href="#eco" data-toggle="tab">Viaje<span class="badge"></span></a>  </li>
@@ -54,7 +54,7 @@
  			</div>
  			<br><br>
  			<div class="col-lg-4 well" id="detalle_viaje">
- 				<select class="form-control" id="operador_economico">
+ 				<select class="form-control" id="operador_economico" required>
  				</select>
  			</div>
 
@@ -66,7 +66,7 @@
 	 			 	<label class="col-lg-2 control-label" for="agencia">Agencia</label>
 	 			 	<div class="col-lg-8">
 	 			 	<div class="input-group">
-			 			<select class="form-control" name="agencia" id="agencia">
+			 			<select class="form-control" name="agencia" id="agencia" required>
 			 				{% for agencia in agencias %}
 			 					<option value="{{agencia.id}}"> {{agencia}} </option>
 			 				{% endfor %}
@@ -108,7 +108,7 @@
  			<div class="col-lg-4 well">
 
 		 		<div id="detalle_cliente">
-		 			<select class="form-control" >
+		 			<select class="form-control" name='detalle_cliente' required>
 		 			</select>
 		 		</div>
 		 		<br><br><br><br>
@@ -277,7 +277,7 @@
  		</table>
  		<br>
 
- 	 	<button class="btn btn-success col-md-6 col-md-offset-3">Enviar</button>
+ 	 	<button id="enviar" class="btn btn-success col-md-6 col-md-offset-3">Enviar</button>
  	 </div>
   </form>
 
@@ -343,7 +343,7 @@
 			var funcion =function(response){
   
 		 					  detalle_viaje.empty()
-			 			  				   .append("<select class='form-control' name='detalle_viaje' id='operador_economico'>" + response.economicos + "</select>"
+			 			  				   .append("<select class='form-control' name='detalle_viaje' id='operador_economico' required>" + response.economicos + "</select>"
 			 			  				   	);
 
 			 			  	 $('#operador_economico').change();  	  
@@ -362,7 +362,7 @@
 				var funcion =function(response){
 	  
 		 				detalle_cliente.empty()
-			 			  				   .append("<select class='form-control' name='detalle_cliente' id='cliente_sucursal'>" + response.sucursales + "</select>"
+			 			  				   .append("<select class='form-control' name='detalle_cliente' id='cliente_sucursal' required>" + response.sucursales + "</select>"
 			 			  				   	);
 
 			 			$('#cliente_sucursal').change();
@@ -434,8 +434,9 @@
  							 		 }
  							 	});
  		 	}
- 	});
 
+
+ 	});
 
  	</script>
 

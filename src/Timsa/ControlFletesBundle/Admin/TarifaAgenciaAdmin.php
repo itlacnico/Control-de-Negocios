@@ -17,6 +17,7 @@ class TarifaAgenciaAdmin extends Admin{
 		protected function configureListFields(ListMapper $listMapper)
 		    {
 		        $listMapper
+		        	->add('clasificacion')
 		            ->add('statusA')
 		            ->add('tarifa')
 		            ->add('agencia')
@@ -30,17 +31,18 @@ class TarifaAgenciaAdmin extends Admin{
 		        ;
 		    }
 
-		    /**
-		     * @param \Sonata\AdminBundle\Form\FormMapper $formMapper
-		     *
-		     * @return void
-		     */
+	    /**
+	     * @param \Sonata\AdminBundle\Form\FormMapper $formMapper
+	     *
+	     * @return void
+	     */
 
 	    protected function configureFormFields(FormMapper $formMapper)
 	        {
 
 	            $formMapper
 	            ->with('General')
+	            	->add('clasificacion')
 		            ->add('statusA')
 		            ->add('tarifa')
 		            ->add('agencia')

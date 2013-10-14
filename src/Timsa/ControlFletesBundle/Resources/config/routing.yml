@@ -94,3 +94,7 @@ _createSucursal:
 _tarifaDetalle:
    pattern: /main/tarifa/detalle
    defaults: {_controller: TimsaControlFletesBundle:Tarifa:ajax}
+
+_posicionSucursales:
+   pattern: /main/sucursal/posicion/{cliente}
+   defaults: {_controller: TimsaControlFletesBundle:Cliente:posicion, cliente:0}

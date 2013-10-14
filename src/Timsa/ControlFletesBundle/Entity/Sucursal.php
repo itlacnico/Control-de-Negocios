@@ -87,12 +87,12 @@ class Sucursal{
 	 */
 	private $fechaDeprecated;
 	/**
-	 * @ORM\Column(type="string", length=100, nullable=true)
+	 * @ORM\Column(type="string", length=150, nullable=true)
 	 */
 
 	private $lat;
 	/**
-	 * @ORM\Column(type="string", length=100, nullable=true)
+	 * @ORM\Column(type="string", length=150, nullable=true)
 	 */
 
 	private $lon;
@@ -431,7 +431,7 @@ class Sucursal{
      */
     public function setLon($lon)
     {
-        $this->long = $lon;
+        $this->lon = $lon;
     
         return $this;
     }

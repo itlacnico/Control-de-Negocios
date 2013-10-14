@@ -136,6 +136,7 @@ class FleteController extends Controller{
 	}
 
 	public function createFleteAction(){
+		$mensaje = "";
 
 		$flete = new Flete();
 		$request = $this->getRequest();
@@ -168,11 +169,23 @@ class FleteController extends Controller{
 
 		$flete->setSucursal( $entidadSucursal );
 
+
 		$entidadAgencia = $this->getDoctrine()
 								  ->getRepository('TimsaControlFletesBundle:Agencia')
 								  ->find($agencia);
 
 		$flete->setAgencia( $entidadAgencia );
+
+		$entidadCuota = $this->getDoctrine()
+								->getRepository('TimsaControlFletesBundle:TarifaAgencia')
+								->findCuotaActiva($entidadSucursal->getTarifas() , $entidadAgencia );
+
+		if($entidadCuota){
+			$flete->setCuota( $entidadCuota[0]->getCuota() );
+		}
+			else{
+				$mensaje .= "No se pudo asignar la cuota";
+			}
 
 		$this->generarCuota($entidadAgencia, $entidadSucursal);
 
@@ -183,11 +196,17 @@ class FleteController extends Controller{
 
 		$contenedores_boolean = $request->request->get('contenedores_boolean', false);
 
+		$actividadFlete = $this->getDoctrine()
+								->getRepository('TimsaControlFletesBundle:ActividadesFlete')
+								->find( 5);
+
+		$flete->setActividad($actividadFlete);
+
 		$em = $this->getDoctrine()->getManager();
 		$em->persist($flete);
 
 		if( $contenedores_boolean === false ){
-			$mensaje = "";
+			
 
 			$workorder1 = $request->request->get('workorder1', "");
 			$booking1   = $request->request->get('booking1', "");
@@ -196,35 +215,76 @@ class FleteController extends Controller{
 
 
 			if( $this->workorderExists($workorder1) ){
-				$mensaje.= "La workorder $workorder1 introducida ya existe, si desea introducir una nueva coloquela en la pagina de detalle";
+				$mensaje.= "La workorder $workorder1 introducida ya existe, si desea introducir una nueva coloquela en la pagina de detalle
+							Por el momento el campo workOrder del flete se ha dejado vacio.";
 			}
 			else{
+				if( isEmpty($workorder1) ){
+					$mensaje.= "No se introdujo una workorder para el contenedor 1.
+								Se dejará en blanco, para modificarse en detalle.";
+				}
+				else{
+					$workorder = new WorkOrder();
+					$workorder->setWorkorder($workorder1);
+					$workorder->setFlete($flete);
 
-				$workorder = new WorkOrder();
-				$workorder->setWorkorder($workorder1);
-				$workorder->setContenedor( $this->getContenedorInstance( $contenedor1, $contenedor_tipo1, $em ) ); // funcion de busqueda o inicializacion de contenedor
-				$workorder->setFlete($flete);
-				$workorder->setBooking( $this->getBookingInstance( $booking1, $em ));   // funcion para busqueda o inicializacion de booking
-				$em->persist($workorder);
+					if( isEmpty($contenedor1) ) {
+						$mensaje.= "No se introdujo un contenedor para la workOrder 1.
+									Se dejará en blanco, para modificarse en detalle.";
+					}
+					else{
+						$workorder->setContenedor( $this->getContenedorInstance( $contenedor1, $contenedor_tipo1, $em ) ); // funcion de busqueda o inicializacion de contenedor
+					}
+					if (isEmpty($booking1 )) {
+						$mensaje.= "No se introdujo un booking para la workOrder 1.
+									Se dejará en blanco, para modificarse en detalle.";
+					}
+					else{
+						$workorder->setBooking( $this->getBookingInstance( $booking1, $em ));   // funcion para busqueda o inicializacion de booking
+					}
+
+					$em->persist($workorder);
+				}
 			}
 
 			if (strcasecmp($trafico, "full") == 0) {
+
 			    $workorder2 = $request->request->get('workorder2', "");
 			    $booking2   = $request->request->get('booking2', "");
 			    $contenedor2   = $request->request->get('contenedor2', "");
 			    $contenedor_tipo2   = $request->request->get('contenedor_tipo2', "");
 
 			    if( $this->workorderExists($workorder2) ){
-			    	$mensaje.= "La workorder $workorder2 introducida ya existe, si desea introducir una nueva coloquela en la pagina de detalle";
+			    	$mensaje.= "La workorder $workorder2 introducida ya existe, si desea introducir una nueva coloquela en la pagina de detalle
+			    				Por el momento el campo workOrder del flete se ha dejado vacio.";
 			    }
 			    else{
+			    	if( isEmpty($workorder2) ){
+			    		$mensaje.= "No se introdujo una workorder para el contenedor 2.
+			    					Se dejará en blanco, para modificarse en detalle.";
+			    	}
+			    	else{
+			    		$workorder = new WorkOrder();
+			    		$workorder->setWorkorder($workorder2);
+			    		$workorder->setFlete($flete);
 
-			    	$workorder = new WorkOrder();
-			    	$workorder->setWorkorder($workorder2);
-			    	$workorder->setContenedor( $this->getContenedorInstance( $contenedor2, $contenedor_tipo2, $em ) ); // funcion de busqueda o inicializacion de contenedor
-			    	$workorder->setFlete($flete);
-			    	$workorder->setBooking( $this->getBookingInstance( $booking2, $em ));   // funcion para busqueda o inicializacion de booking
-			    	$em->persist($workorder);
+			    		if( isEmpty($contenedor2) ) {
+			    			$mensaje.= "No se introdujo un contenedor para la workOrder 2.
+			    						Se dejará en blanco, para modificarse en detalle.";
+			    		}
+			    		else{
+			    			$workorder->setContenedor( $this->getContenedorInstance( $contenedor2, $contenedor_tipo2, $em ) ); // funcion de busqueda o inicializacion de contenedor
+			    		}
+			    		if (isEmpty($booking2 )) {
+			    			$mensaje.= "No se introdujo un booking para la workOrder 2.
+			    						Se dejará en blanco, para modificarse en detalle.";
+			    		}
+			    		else{
+			    			$workorder->setBooking( $this->getBookingInstance( $booking2, $em ));   // funcion para busqueda o inicializacion de booking
+			    		}
+
+			    		$em->persist($workorder);
+			    	}
 			    }
 
 			}
@@ -241,7 +301,7 @@ class FleteController extends Controller{
 
 		return $this->render("TimsaControlFletesBundle:Flete:debugflete.html.twig",
 							array(
-								'variabledebug' => "",
+								'variabledebug' => $mensaje,
 								'variabledebug2' => ""
 							 )
 							);
@@ -258,6 +318,7 @@ class FleteController extends Controller{
 	}
 
 	public function getContenedorInstance($contenedorID, $contenedorTipo, $em){
+
 
 		$contenedor = $this->getDoctrine()
 						   ->getRepository('TimsaControlFletesBundle:Contenedor')

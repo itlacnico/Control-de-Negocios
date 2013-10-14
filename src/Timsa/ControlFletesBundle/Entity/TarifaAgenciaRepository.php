@@ -15,7 +15,7 @@ class TarifaAgenciaRepository extends EntityRepository
 		public function findTarifaPorAgencia($agencia){
 
 			return $this->getEntityManager()
-						->createQuery("SELECT t.nombre as tarifa, t.id idTarifa , s.nombre as destino, c.exportacionSencillo as exportacions,
+						->createQuery("SELECT t.nombre as tarifa, t.id idTarifa , c.exportacionSencillo as exportacions,
 										c.importacionSencillo as importacions, c.reutilizadoSencillo as reutilizados,
 										c.exportacionFull as exportacionf, c.importacionFull as importacionf,
 										c.reutilizadoFull as reutilizadof
@@ -25,7 +25,6 @@ class TarifaAgenciaRepository extends EntityRepository
 
 									   JOIN ta.cuota  c
 									   JOIN ta.tarifa t
-									   JOIN t.sucursales s
 									   where 
 									   ta.statusA = true and
 									   ta.agencia = $agencia"
@@ -33,7 +32,22 @@ class TarifaAgenciaRepository extends EntityRepository
 						->getResult();
 		}
 
+		public function findCuotaActiva($tarifa, $agencia){
+			$entidadTarifa =  $tarifa->last()->getId();
+			$entidadAgencia = $agencia->getId();
 
+			return $this->getEntityManager()
+						->createQuery("SELECT ta
+									   FROM 
+									   TimsaControlFletesBundle:TarifaAgencia ta
+									   WHERE
+									   ta.tarifa = $entidadTarifa and
+									   ta.agencia = $entidadAgencia")
+						->setMaxResults(1)
+						->getResult();
+		}
+
+/*
 		public function findDetalleTarifaActual($agencia, $tarifa){
 
 			return $this->getEntityManager()
@@ -55,12 +69,12 @@ class TarifaAgenciaRepository extends EntityRepository
 									   )
 						->getResult();
 		}
-
+*/
 
 		public function findDetalleTarifas($agencia, $tarifa){
 
 			return $this->getEntityManager()
-						->createQuery("SELECT t.nombre as tarifa, t.id idTarifa , s.nombre as destino, c.exportacionSencillo as exportacions,
+						->createQuery("SELECT ta.clasificacion titulo, ta.statusA status, t.nombre as tarifa, t.id idTarifa , c.exportacionSencillo as exportacions,
 										c.importacionSencillo as importacions, c.reutilizadoSencillo as reutilizados,
 										c.exportacionFull as exportacionf, c.importacionFull as importacionf,
 										c.reutilizadoFull as reutilizadof
@@ -70,11 +84,10 @@ class TarifaAgenciaRepository extends EntityRepository
 
 									   JOIN ta.cuota  c
 									   JOIN ta.tarifa t
-									   JOIN t.sucursales s
 									   where
-									   ta.statusA = false and
 									   ta.agencia = $agencia and
-									   ta.tarifa  = $tarifa"
+									   ta.tarifa  = $tarifa
+									   order by ta.fecha_ingreso"									   
 									   )
 						->getResult();
 		}

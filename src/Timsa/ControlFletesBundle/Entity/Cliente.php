@@ -48,6 +48,12 @@ class Cliente{
 	 */
 	protected  $imagen = "user.jpg";
 
+    /**
+     * @ORM\Column(type="string", length=550, nullable=true)
+     */
+
+    protected $description;
+
 	/**
 	 * @ORM\OneToMany(targetEntity="Sucursal", mappedBy="cliente")
 	 *
@@ -218,5 +224,28 @@ class Cliente{
 
     public function __toString(){
     	return $this->nombre;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Cliente
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

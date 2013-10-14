@@ -49,12 +49,12 @@
   			</div>
   			</div>
 
-    <div id="Mapa" style="width:100%; height:600px" ></div>
+    <div id="Mapa" style="width:100%; height:470px" ></div>
     <div id="content">
       <br>
     	<div class="col-lg-4">
     		<ul class="nav nav-tabs nav-pills nav-stacked" style="max-width: 300px;" id="myTab">
-          <li id="allClients"><a>Clientes</a></li>
+          <li id="allClients"><a  href="#filtro_sucursal" data-toggle="tab" id="allClients">Clientes</a></li>
     			{% for cliente in clientes %}
     				<li id="{{ path('_sucursales', {'idCliente': cliente.id}) }}" class="cliente" value="{{cliente.id}}"><a class="socio" href="#filtro_sucursal" data-toggle="tab"> {{cliente}} </a></li>
     			{% else %}
@@ -81,6 +81,8 @@
     <script type="text/javascript">
     $(function(){
 
+        var xhr;
+
       	$('ul.nav.nav-pills.nav-stacked li a').click(function(a) {
       		a.preventDefault();          
       	    $(this).parent().addClass('active').siblings().removeClass('active');           
@@ -88,16 +90,52 @@
 
       	$('#myTab').click(function(event) {
       		$('#myTab a').tab('show');
+
       	});
+
+        $('#myTab li').click(function(event) {
+            getPosicionDeSucursales($(this).attr("value"));
+          });
 
       	$('a.socio').click(function(event){
       	        event.preventDefault(); //cancela el comportamiento por defecto
+                /*
       	        $('#filtro_sucursal').empty();
       	        $('#filtro_sucursal').append('<img src="{{asset("images/loading.gif")}}">');
       	        $('#filtro_sucursal').load($(this).parent().attr('id'), function(){
+
                     $('#formSucursal').hide();
                 }); //carga por ajax a la capa "notice_viewer"
                 //$('#formSucursal').hide("fade");
+
+                */
+                if(xhr != null){
+                  xhr.abort();
+                  xhrMap.abort();
+                }
+
+            xhr = $.ajax({
+                  url: $(this).parent().attr('id'),
+                  type: 'POST',
+                  dataType: 'html',
+                  beforeSend: function(){
+                      $('#filtro_sucursal').empty();
+                      $('#filtro_sucursal').append('<img src="{{asset("images/loading.gif")}}">');
+                  },
+                })
+                .done(function(response) {
+                  $('#filtro_sucursal').empty();
+                  $('#filtro_sucursal').append(response);
+                  $('#formSucursal').hide();
+                  $('html, body').animate({scrollTop: $(document).height()}, 'slow');
+                })
+                .fail(function() {
+                  console.log("error");
+                })
+                .always(function() {
+                  console.log("complete");
+                });
+                
       	});
 
         $('.down').click(function(){
@@ -118,6 +156,25 @@
             sucursal.empty().append(sucursal.data('info'));
             removeListener();
         });
+
+        $('body').on("click", '#tabla', function(){
+            $('html, body').animate({scrollTop: $(document).height()}, 'slow');
+        });
+         
+        $('body').on("click", '#accordion', function(){
+             $('html, body').animate({scrollTop: $(document).height()}, 'slow');
+         });
+
+        $('#allClients').click(function(event) {
+          if(xhr != null){
+            xhr.abort();
+          }
+
+          $('#filtro_sucursal').empty();
+          $('#filtro_sucursal').append("<h2>En el mapa se muestran todos los destinos</h2>");
+        });
+
+          rutaPosicion = "{{path('_posicionSucursales')}}";
 
       });
 

@@ -22,13 +22,6 @@ class TarifaController extends Controller{
 
 		$request = $this->getRequest();
 
-		$actual = $this->getDoctrine()
-						 ->getRepository('TimsaControlFletesBundle:TarifaAgencia')
-						 ->findDetalleTarifaActual(
-						 		$request->request->get('agencia', 0),
-						 		$request->request->get('tarifa', 0)
-						  );
-
 		$tarifa = $this->getDoctrine()
 						 ->getRepository('TimsaControlFletesBundle:TarifaAgencia')
 						 ->findDetalleTarifas(
@@ -38,7 +31,10 @@ class TarifaController extends Controller{
 
 		$content = $this->renderView(
 									'TimsaControlFletesBundle:Tarifa:detalleTarifa.html.twig',
-									array("tarifas" => $tarifa, "actual" => $actual )
+									array( "tarifas" => $tarifa, 
+										"nombreAgencia" => $request->request->get('nombreAgencia', "No se pudo Acceder"),
+										"nombreTarifa" => $request->request->get('nombreTarifa', "No se pudo Acceder")
+										 )
 									);
 
 		$array = array('html' => $content,);

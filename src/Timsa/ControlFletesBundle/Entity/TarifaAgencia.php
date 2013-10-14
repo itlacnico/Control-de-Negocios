@@ -58,6 +58,11 @@ class TarifaAgencia{
     protected $fecha_salida;
 
     /**
+     * @ORM\Column( type="string")
+     */
+    protected $clasificacion;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -214,5 +219,28 @@ class TarifaAgencia{
     public function __construct(){
         $this->setFechaIngreso(new \DateTime(date('Y-m-d H:i:s')));
         $this->setStatusA(true);
+    }
+
+    /**
+     * Set clasificacion
+     *
+     * @param string $clasificacion
+     * @return TarifaAgencia
+     */
+    public function setClasificacion($clasificacion)
+    {
+        $this->clasificacion = $clasificacion;
+    
+        return $this;
+    }
+
+    /**
+     * Get clasificacion
+     *
+     * @return string 
+     */
+    public function getClasificacion()
+    {
+        return $this->clasificacion;
     }
 }

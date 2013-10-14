@@ -56,7 +56,6 @@ Tarifas
 		</div>
 	</div>
 
-		
 {% endblock %}
 
 
@@ -73,14 +72,20 @@ Tarifas
 			        event.preventDefault(); //cancela el comportamiento por defecto
 			        $('#filtro_agencia').empty();
 			        $('#filtro_agencia').append('<img src="{{asset("images/loading.gif")}}">');
-			        $('#filtro_agencia').load($(this).parent().attr('id')); //carga por ajax a la capa "notice_viewer"
+
+			        //carga por ajax a la capa "notice_viewer"
+			        $('#filtro_agencia').load($(this).parent().attr('id'));
+
+
 			});
 
 			$('body').on('click', '.detalle', function(e){
 				var agencia = $('ul.nav li.active ').attr("value");
+				var nombreAgencia = $('ul.nav li.active ').text();
 				var tarifa  = $(this).attr("value");
+				var nombreTarifa = $(this).parent().parent().children("td:eq(0)").text();
 
-				parametros = {"agencia" : agencia, "tarifa" : tarifa};
+				parametros = {"agencia" : agencia, "tarifa" : tarifa, "nombreAgencia" : nombreAgencia, "nombreTarifa" : nombreTarifa };
 				$('#filtro_agencia').empty();
 		        $('#filtro_agencia').append('<img src="{{asset("images/loading.gif")}}">');
 

@@ -10,13 +10,31 @@ Crear clase de "Actividades", la cual sostenga los estados de los operadores o f
 
 *****************************************************************************************
 
-Crear el formulario de sellos, para incluirlos al crear un flete
-Validar los datos de entrada de contenedores, cuando el boleano no esta seleccionado.
-Generar la cuota a la hora de crear el flete.
-Crear el detalle de un flete, desde la ventana tabulada.
-En detalle, modificar datos de flete.
-Crear control de contenedores, workorder y booking.
-Pestaña para colocar comentarios al crear un flete
-Hacer funcionales los filtros en la tabla de fletes.
-Buscar un dataFilter que funcione en la tabla de fletes
-Mejorar el despliegue de informacion en la tabla de fletes.
+Crear el formulario de sellos, para incluirlos al crear un flete   * Pendiente
+Validar los datos de entrada de contenedores, cuando el boleano no esta seleccionado. * Realizado, pruebas pendientes.
+Generar la cuota a la hora de crear el flete. * Pendiente validacion de cuota creada
+Crear el detalle de un flete, desde la ventana tabulada. * Mejorar
+En detalle, modificar datos de flete. * Pendiente
+Crear control de contenedores, workorder y booking. * Pendiente
+Pestaña para colocar comentarios al crear un flete * Pendiente
+Hacer funcionales los filtros en la tabla de fletes. * Pendiente
+Buscar un dataPicker que funcione en la tabla de fletes * Pendiente
+Mejorar el despliegue de informacion en la tabla de fletes. * Mejorar
+
+Que los fletes se muestren como pila y no como cola. * pendiente
+
+Optimizar la consulta de fletes, para que no se tengan que buscar en todos antes de ser mostrados. * pendiente
+
+Pegar el mapa de clientes a a la barra de tareas. * No solucionado, pero aun funcional.
+
+Mostrar en el mapa los lugares donde se encuentran las sucursales segun sus coordenadas. * Completo
+
+Crear formulario para editar los datos de una sucursal.  * Por el momento solucionado con el *modificador de sonata
+
+Siguiente actividad en la lista:
+
+Arreglar el despliegue de tarifas, y poder editar y comprobar por fecha. * Se puede mejorar
+
+****************************************************
+
+Los isEMpty() no funcionan correctamente. Implementar Metodo.
