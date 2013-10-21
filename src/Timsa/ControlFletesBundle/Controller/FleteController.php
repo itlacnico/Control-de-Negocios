@@ -219,7 +219,7 @@ class FleteController extends Controller{
 							Por el momento el campo workOrder del flete se ha dejado vacio.";
 			}
 			else{
-				if( isEmpty($workorder1) ){
+				if( empty($workorder1) ){
 					$mensaje.= "No se introdujo una workorder para el contenedor 1.
 								Se dejará en blanco, para modificarse en detalle.";
 				}
@@ -228,14 +228,14 @@ class FleteController extends Controller{
 					$workorder->setWorkorder($workorder1);
 					$workorder->setFlete($flete);
 
-					if( isEmpty($contenedor1) ) {
+					if( empty($contenedor1) ) {
 						$mensaje.= "No se introdujo un contenedor para la workOrder 1.
 									Se dejará en blanco, para modificarse en detalle.";
 					}
 					else{
 						$workorder->setContenedor( $this->getContenedorInstance( $contenedor1, $contenedor_tipo1, $em ) ); // funcion de busqueda o inicializacion de contenedor
 					}
-					if (isEmpty($booking1 )) {
+					if (empty($booking1 )) {
 						$mensaje.= "No se introdujo un booking para la workOrder 1.
 									Se dejará en blanco, para modificarse en detalle.";
 					}
@@ -259,7 +259,7 @@ class FleteController extends Controller{
 			    				Por el momento el campo workOrder del flete se ha dejado vacio.";
 			    }
 			    else{
-			    	if( isEmpty($workorder2) ){
+			    	if( empty($workorder2) ){
 			    		$mensaje.= "No se introdujo una workorder para el contenedor 2.
 			    					Se dejará en blanco, para modificarse en detalle.";
 			    	}
@@ -268,14 +268,14 @@ class FleteController extends Controller{
 			    		$workorder->setWorkorder($workorder2);
 			    		$workorder->setFlete($flete);
 
-			    		if( isEmpty($contenedor2) ) {
+			    		if( empty($contenedor2) ) {
 			    			$mensaje.= "No se introdujo un contenedor para la workOrder 2.
 			    						Se dejará en blanco, para modificarse en detalle.";
 			    		}
 			    		else{
 			    			$workorder->setContenedor( $this->getContenedorInstance( $contenedor2, $contenedor_tipo2, $em ) ); // funcion de busqueda o inicializacion de contenedor
 			    		}
-			    		if (isEmpty($booking2 )) {
+			    		if (empty($booking2 )) {
 			    			$mensaje.= "No se introdujo un booking para la workOrder 2.
 			    						Se dejará en blanco, para modificarse en detalle.";
 			    		}

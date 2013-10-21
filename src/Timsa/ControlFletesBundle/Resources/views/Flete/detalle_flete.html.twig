@@ -33,21 +33,53 @@
 		  <dt>Agencia</dt>
 		  <dd>{{flete.agencia}}</dd>
 
+		  <dt>Destino</dt>
+		  <dd>{{ flete.sucursal }}</dd>
+
 		  <dt>Tipo de Viaje</dt>
 		  <dd>{{flete.tipoviaje}}</dd>
 
 		  <dt>Tarifa</dt>
-		  <dd></dd>
-		</dl>
+		  {% for tarifa in flete.sucursal.tarifas %}
+		  	{% if tarifa.statusA == true %}
+		  		<dd> {{ tarifa }} </dd>
+		  	{% endif  %}
+		  {% endfor %}
+
+		  <dt>Editar</dt>
+		  <dd><button class="btn btn-default btn-sm"> Cambiar </button></dd>
+		  
+		</dl>	
+
+
+	<dl class="dl-horizontal">
+		<dt>Precio de Viaje</dt>
+		<dd> <span class="label label-info">
+		{% if flete.tipoviaje == "Importacion Full" %}
+			{{flete.cuota.importacionFull}}
+		{% elseif flete.tipoviaje == "Importacion Sencillo"  %}
+			{{flete.cuota.importacionSencillo}}
+		{% elseif flete.tipoviaje == "Exportacion Full"  %}
+			{{flete.cuota.exportacionFull}}
+		{% elseif flete.tipoviaje == "Exportacion Sencillo"  %}
+			{{flete.cuota.exportacionSencillo}}
+		{% elseif flete.tipoviaje == "Reutilizado Full"  %}
+			{{flete.cuota.reutilizadoFull}}
+		{% elseif flete.tipoviaje == "Reutilizado Sencillo"  %}
+			{{flete.cuota.reutilizadoSencillo}}
+		{% endif %}
+		</span>
+		</dd>
+	</dl>
 
 		<div >
 			{% set relacion = flete.relacion %}
 			<dl class="dl-horizontal">
-			  <dt>Contenedor</dt>
+			  <dt>Operador</dt>
 			  <dd>{{relacion.operador}}</dd>
-			  <dt>Size</dt>
+			  <dt>Economico</dt>
 			  <dd>{{relacion.economico}}</dd>
-			  <dt>Booking</dt>
+			  <dt>Socio</dt>
 			  <dd>{{relacion.socio}}</dd>
 			</dl>
 
@@ -73,7 +105,7 @@
 		</div>
 		{% endfor %}
 
-		<div>
+		<div class="col-lg-12">
 			<p>{{flete.comentarios}}</p>
 		</div>
 
