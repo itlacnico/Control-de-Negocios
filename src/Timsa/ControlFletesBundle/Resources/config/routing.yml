@@ -44,10 +44,10 @@ _clientes:
 _cuotas:
     pattern: /main/cuota
     defaults: {_controller: TimsaControlFletesBundle:Cuota:index }
-
+#Antes el controlador era index
 _fletes:
     pattern: /main/flete
-    defaults: {_controller: TimsaControlFletesBundle:Flete:index }
+    defaults: {_controller: TimsaControlFletesBundle:Flete:list }
 
 _tarifa:
     pattern: /main/tarifa/{idAgencia}
@@ -63,19 +63,19 @@ _contenedores:
     pattern: /main/contenedores
     defaults: {_controller: TimsaControlFletesBundle:Contenedor:index}
 
-flete_detalle:
-    pattern: /main/fleteDetalle/{flete}
-    defaults: {_controller: TimsaControlFletesBundle:Flete:detalle, flete: 0 }
-    requirements:
-        flete: \d+
+#flete_detalle:
+ #   pattern: /main/fleteDetalle/{flete}
+ #   defaults: {_controller: TimsaControlFletesBundle:Flete:detalle, flete: 0 }
+ #   requirements:
+ #       flete: \d+
 
-create_flete:
-   pattern: /main/CreateFlete
-   defaults: {_controller: TimsaControlFletesBundle:Flete:create}
+#create_flete:
+#   pattern: /main/CreateFlete
+ #  defaults: {_controller: TimsaControlFletesBundle:Flete:create}
 
-create_new_flete:
-   pattern: /main/flete/create
-   defaults: {_controller: TimsaControlFletesBundle:Flete:createFlete}
+#create_new_flete:
+ #  pattern: /main/flete/create
+#   defaults: {_controller: TimsaControlFletesBundle:Flete:createFlete}
 
 _filtro:
    pattern: /main/filtro
@@ -98,3 +98,11 @@ _tarifaDetalle:
 _posicionSucursales:
    pattern: /main/sucursal/posicion/{cliente}
    defaults: {_controller: TimsaControlFletesBundle:Cliente:posicion, cliente:0}
+
+#flete_create:
+ #  pattern: /main/flete/list
+#   defaults: {_controller: TimsaControlFletesBundle:Flete:list}
+
+_fleteRest:
+  pattern: /main/flete/rest/{flete}
+  defaults: {_controller:TimsaControlFletesBundle:Flete:}

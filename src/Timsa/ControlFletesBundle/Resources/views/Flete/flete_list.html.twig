@@ -1,0 +1,62 @@
+{% extends 'TimsaControlFletesBundle::layout.html.twig' %}
+{% block header %}
+	<div class="page-header">
+	  <h1 class="text-center">Listado de Fletes <br>
+	    <button class="btn btn-primary btn-sm">Nuevo Flete</button>
+	</h1>
+</div>
+
+{% endblock %}
+{% block content %}
+	<div ng-app="fletesApp">
+		<div ng-controller="fleteListController">
+			<table>
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>economico</th>
+						<th>operador</th>
+						<th>licencia</th>
+						<th>socio</th>
+						<th>booking</th>
+						<th>workorder</th>
+						<th>trafico</th>
+						<th>cliente</th>
+						<th>contenedor</th>
+						<th>size</th>
+						<th>type</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="flete in fletes">
+						<td>{[{flete.numero}]}</td>
+						<td>{[{flete.economico}]}</td>
+						<td>{[{flete.operador}]}</td>
+						<td>{[{flete.licencia}]}</td>
+						<td>{[{flete.socio}]}</td>
+						<td>{[{flete.booking}]}</td>
+						<td>{[{flete.workorder}]}</td>
+						<td>{[{flete.trafico}]}</td>
+						<td>{[{flete.cliente}]}</td>
+						<td>{[{flete.contenedor}]}</td>
+						<td>{[{flete.size}]}</td>
+						<td>{[{flete.type}]}</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<pre>
+				{[{fletes}]}
+			</pre>
+
+		</div>
+	</div>
+	{% endblock %}
+	{% block javascripts %}
+	{{parent()}}
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+
+		<script type="text/javascript" src="http://code.angularjs.org/1.0.8/angular-resource.js"></script>
+
+		<script type="text/javascript" src="{{asset("js/flete/app_flete.js")}}"></script>
+	{% endblock %}

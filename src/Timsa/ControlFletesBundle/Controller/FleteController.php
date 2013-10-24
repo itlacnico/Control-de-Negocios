@@ -8,6 +8,7 @@ use Timsa\ControlFletesBundle\Entity\Flete;
 use Timsa\ControlFletesBundle\Entity\WorkOrder;
 use Timsa\ControlFletesBundle\Entity\Contenedor;
 use Timsa\ControlFletesBundle\Entity\Booking;
+use Symfony\Component\HttpFoundation\Response;
 
 class FleteController extends Controller{
 
@@ -361,5 +362,13 @@ class FleteController extends Controller{
 						  ->getRepository('TimsaControlFletesBundle:WorkOrder')
 						  ->findOneBy(array("workorder" => $workorder ));
 						  */
+	}
+
+	public function listAction(){
+		$content = $this->renderView(
+										'TimsaControlFletesBundle:Flete:flete_list.html.twig'
+									);
+
+		return new Response($content);
 	}
 }

@@ -3,7 +3,9 @@
 {% block header %}
 
 <div class="page-header">
-  <h1>Fletes <a href="{{path('create_flete')}}"><button class="btn">Crear Flete</button></a></h1>
+  <h1 class="text-center">Listado de Fletes <a href="{{path('create_flete')}}"><br>
+    <button class="btn btn-primary btn-sm">Nuevo Flete</button></a>
+</h1>
   
 </div>
  {% endblock %}
@@ -23,6 +25,7 @@
         </div>
 	</nav>
 -->
+<!--
     <div class="panel">
         <div class="panel-group" id="accordion">
           <div class="panel panel-default">
@@ -33,7 +36,7 @@
             </div>
             <div id="collapseOne" class="panel-collapse collapse">
                  <div class="panel-body">
-
+            
             <form class="form-inline" action="{{path('_operadores')}}">
                     <div id="reportrange" class="navbar navbar-right">
                         <span></span> <b class="caret"></b>
@@ -73,14 +76,15 @@
                     <br><br>
                 <button type="submit" class="btn btn-info">Buscar</button>
             </form>
+        
            </div>
         </div>
     </div>
-     
+     -->
         <div>
         	{% if fletes %}
         	{#<div class="table-responsive">#}
-        	<table class="table table-bordered">
+        	<table class="table table-bordered table-condensed">
         		<tr>
         			<th>#</th>
         			<th>Eco</th>
@@ -109,9 +113,9 @@
         		<tr  class="{{ items[( flete.actividad ~ "")] }}" >
         			<td {{rowspan}} >{{flete.id}}</td>
         			<td {{rowspan}}>{{flete.relacion.economico}}</td>
-        			<td {{rowspan}}>{{flete.relacion.operador}}</td>
+        			<td {{rowspan}}>{{flete.relacion.operador|title}}</td>
                     <td {{rowspan}}></td>
-        			<td {{rowspan}}>{{flete.relacion.socio}}</td>
+        			<td {{rowspan}}>{{flete.relacion.socio|title}}</td>
 
                     {#} Si hay workOrders  #}
                     {% if flete.workorders|length > 0 %}
@@ -125,8 +129,8 @@
                             <tr class="{{ items[( flete.actividad ~ "")] }}">
                         {% endif %}
 
-                            <td {{rowspan2}}> {{ workorder.booking}}  </td>
-                            <td {{rowspan2}}> {{workorder.workorder}} </td>
+                            <td {{rowspan2}}> {{ workorder.booking|upper}}  </td>
+                            <td {{rowspan2}}> {{workorder.workorder|upper}} </td>
 
                         {% if loop.first %}
 
@@ -140,7 +144,7 @@
 
                         {% endif %}
 
-                            <td {{rowspan2}}> {{workorder.contenedor}} </td>
+                            <td {{rowspan2}}> {{workorder.contenedor|upper}} </td>
                             <td {{rowspan2}}> {{workorder.contenedor.tipo}} </td>
                             <td {{rowspan2}}></td>
 
@@ -151,7 +155,7 @@
                         {% if loop.first %}
                             <td {{rowspan}}>
                                 <a href="{{path('flete_detalle',{'flete': flete.id})}}">
-                                    <button class="btn btn-success">Detalles</button>
+                                    <button class="btn btn-success btn-sm">Detalles</button>
                                 </a>
                             </td>
                             {#<td>{{flete.licencia}}</td>#}
@@ -178,7 +182,7 @@
                         <td rowspan="1" ></td>
                         <td {{rowspan}}>
                          <a href="{{path('flete_detalle',{'flete': flete.id})}}" >
-                            <button class="btn btn-success">Detalles</button>
+                            <button class="btn btn-success btn-sm">Detalles</button>
                         </a> 
                         </td>
                     </tr>

@@ -161,7 +161,7 @@
 	  			</div>
  			  	
  			  	<div class="panel panel-default">
- 			  	  <div class="panel-body">
+ 			  	  <div class="panel-body" ng-App>
 
  			  	  	<div id="contenedor1">
  			  	  	<div class="col-lg-8">
@@ -199,7 +199,7 @@
 	 			  	   </div>
 
 					</div>
- 			  	  	  <div id="sellos1" class="col-lg-4">
+ 			  	  	  <div id="sellos1" class="col-lg-4" ng>
  			  	  	  		<ul class="list-group">
  			  	  	  		  <li class="list-group-item">
  			  	  	  		  	<input type="text" class="form-control">
@@ -286,6 +286,9 @@
 
  {% block javascripts %}
  	{{ parent() }}
+ 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+ 	<script type="text/javascript" src="{{ asset("js/createflete_controller.js") }}"></script>
+
  	<script type="text/javascript">
  		$(function(){
 
