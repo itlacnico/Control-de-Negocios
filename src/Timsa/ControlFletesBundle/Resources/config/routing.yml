@@ -69,13 +69,13 @@ _contenedores:
  #   requirements:
  #       flete: \d+
 
-#create_flete:
-#   pattern: /main/CreateFlete
- #  defaults: {_controller: TimsaControlFletesBundle:Flete:create}
+create_flete:
+   pattern: /main/CreateFlete
+   defaults: {_controller: TimsaControlFletesBundle:Flete:create}
 
-#create_new_flete:
- #  pattern: /main/flete/create
-#   defaults: {_controller: TimsaControlFletesBundle:Flete:createFlete}
+create_new_flete:
+  pattern: /main/flete/create
+  defaults: {_controller: TimsaControlFletesBundle:Flete:createFlete}
 
 _filtro:
    pattern: /main/filtro
@@ -103,6 +103,8 @@ _posicionSucursales:
  #  pattern: /main/flete/list
 #   defaults: {_controller: TimsaControlFletesBundle:Flete:list}
 
-_fleteRest:
-  pattern: /main/flete/rest/{flete}
-  defaults: {_controller:TimsaControlFletesBundle:Flete:}
+_fleteRestAll:
+  pattern: /main/rest/flete
+  defaults: { _controller:TimsaControlFletesBundle:FleteRest:all, format: ~ }
+  requirements:
+     _method: GET

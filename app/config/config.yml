@@ -115,3 +115,19 @@ knp_paginator:
         # y para los controles que premiten reordenar los resultados
         pagination: KnpPaginatorBundle:Pagination:twitter_bootstrap_v3_pagination.html.twig
         sortable:   KnpPaginatorBundle:Pagination:sortable_link.html.twig
+
+sensio_framework_extra:
+    view:
+        annotations: false
+
+fos_rest:
+    view:
+        formats:
+                rss: true
+                xml: false
+                jsonp: true
+                json: true
+        mime_types:
+                json: ['application/json', 'application/x-json', 'application/vnd.example-com.foo+json']
+        jsonp_handler: ~
+        view_response_listener: true

@@ -8,8 +8,28 @@
 
 {% endblock %}
 {% block content %}
+	<style type="text/css">
+		.flete.ng-enter,
+		.flete.ng-leave,
+		.flete.ng-move,
+		.flete.ng-active {
+		  -webkit-transition: 0.5s linear all;
+		  -moz-transition: 0.5s linear all;
+		  -o-transition: 0.5s linear all;
+		  transition: 0.5s linear all;
+		  opacity:0;
+		}
+
+		.flete.ng-enter.ng-enter-active,
+		.flete.ng-move.ng-move-active {
+		  opacity:1;
+		}
+	</style>
 	<div ng-app="fletesApp">
 		<div ng-controller="fleteListController">
+			<div style="text-align: center;" >
+				<img class="" ng-src="{[{loadImage}]}" ng-hide="{[{load}]}" id="load">
+			</div>
 			<table>
 				<thead>
 					<tr>
@@ -28,35 +48,37 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="flete in fletes">
-						<td>{[{flete.numero}]}</td>
-						<td>{[{flete.economico}]}</td>
-						<td>{[{flete.operador}]}</td>
-						<td>{[{flete.licencia}]}</td>
-						<td>{[{flete.socio}]}</td>
+					<tr ng-repeat="flete in fletes" class="flete">
+						<td>{[{flete.id}]}</td>
+						<td>{[{flete.Economico}]}</td>
+						<td>{[{flete.Operador}]}</td>
+						<td>		Licencia 	</td>
 						<td>{[{flete.booking}]}</td>
 						<td>{[{flete.workorder}]}</td>
 						<td>{[{flete.trafico}]}</td>
 						<td>{[{flete.cliente}]}</td>
 						<td>{[{flete.contenedor}]}</td>
-						<td>{[{flete.size}]}</td>
-						<td>{[{flete.type}]}</td>
+						<td>Size</td>
+						<td>Type</td>
 					</tr>
 				</tbody>
 			</table>
 
-			<pre>
-				{[{fletes}]}
-			</pre>
+			<input type="text" class="input-form" ng-model="entrada">
+			<button class="btn btn-primary" ng-click="append()">Añadir</button>
 
 		</div>
 	</div>
 	{% endblock %}
 	{% block javascripts %}
 	{{parent()}}
-		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
 
-		<script type="text/javascript" src="http://code.angularjs.org/1.0.8/angular-resource.js"></script>
+		<script type="text/javascript" src="http://code.angularjs.org/1.2.0-rc.3/angular.min.js"></script>
+
+		<script type="text/javascript" src="http://code.angularjs.org/1.2.0-rc.3/angular-resource.min.js"></script>
+
+		<script type="text/javascript" src="http://code.angularjs.org/1.2.0-rc.3/angular-animate.min.js"></script>
 
 		<script type="text/javascript" src="{{asset("js/flete/app_flete.js")}}"></script>
+
 	{% endblock %}

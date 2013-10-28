@@ -1,12 +1,16 @@
 <?php
 
 namespace Timsa\ControlFletesBundle\Entity;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  *@ORM\Entity(repositoryClass="Timsa\ControlFletesBundle\Entity\FleteRepository")
  *@ORM\Table(name="flete")
+ *@ExclusionPolicy("all")
 */
 
 class Flete{
@@ -15,25 +19,32 @@ class Flete{
 	 *@ORM\id
 	 *@ORM\Column(type="integer")
 	 *@ORM\GeneratedValue(strategy="AUTO")
+     *@Expose
 	*/
 	protected $id;
 
 	/**
 	 * @ORM\Column(type="date")
+     * @Expose
 	 */
+
 	protected $fecha;
 	/**
 	 * @ORM\Column(type="boolean", nullable=true)
+     * @Expose
 	 */
 	protected $statusA = true;
 
     /**
      * @ORM\ManyToOne(targetEntity="ActividadesFlete")
      * @ORM\JoinColumn(name="actividad",  referencedColumnName="id")
+     * @Expose
      */
+
 	protected $actividad;
 	/**
 	 * @ORM\Column(type="string", length=700, nullable=true)
+     * @Expose
 	 */
 	protected $comentarios;
 
@@ -49,6 +60,7 @@ class Flete{
 	/**
 	 * @ORM\ManyToOne(targetEntity="Relacion")
 	 * @ORM\JoinColumn(name="relacion_id", referencedColumnName="id")
+     * @Expose
 	 */
 	protected $relacion;
 	#Objetos Foraneos;

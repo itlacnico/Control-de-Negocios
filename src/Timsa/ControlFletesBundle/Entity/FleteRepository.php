@@ -32,4 +32,45 @@ class FleteRepository extends EntityRepository
 									WHERE p.id = $flete ")
 					->getResult();
 	}
+
+	public function findAllFletes(){
+		return $this->getEntityManager()
+					->createQuery("SELECT f.id,
+										  f.fecha, 
+										  ac.actividad,
+										  f.comentarios, 
+										  f.fecha_llegada,
+										  f.fecha_facturacion,
+										  op.id as OperadorID,
+										  op.nombre as Operador,
+										  ec.id as EconomicoID,
+										  ec.numero as Economico,
+										  so.id as SocioID,
+										  so.nombre as SocioNombre,
+										  su.id as SucursalID,
+										  su.nombre as Sucursal,
+										  wo.workorder
+
+								   FROM TimsaControlFletesBundle:Flete f
+								   JOIN f.actividad ac
+								   JOIN f.relacion   r
+								   JOIN r.operador   op
+								   JOIN r.economico  ec
+								   JOIN r.socio 	 so
+								   JOIN f.sucursal   su
+								   LEFT JOIN f.workorders wo
+								   order by f.id"
+								   )
+					->getResult();
+	}
 }
+
+/*
+
+
+fh.id as FleteHijo,
+
+
+JOIN f.fleteHijo  fh
+
+*/
