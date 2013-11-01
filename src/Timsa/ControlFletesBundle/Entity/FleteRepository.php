@@ -36,9 +36,9 @@ class FleteRepository extends EntityRepository
 	public function findAllFletes(){
 		return $this->getEntityManager()
 					->createQuery("SELECT f.id,
-										  f.fecha, 
+										  f.fecha,
 										  ac.actividad,
-										  f.comentarios, 
+										  f.comentarios,
 										  f.fecha_llegada,
 										  f.fecha_facturacion,
 										  op.id as OperadorID,
@@ -47,21 +47,41 @@ class FleteRepository extends EntityRepository
 										  ec.numero as Economico,
 										  so.id as SocioID,
 										  so.nombre as SocioNombre,
-										  su.id as SucursalID,
-										  su.nombre as Sucursal,
-										  wo.workorder
+										  cl.id as SucursalID,
+										  cl.nombre as Cliente,
+										  CONCAT( CONCAT(tv.viaje ,' '), tv.trafico ) as Trafico
+
 
 								   FROM TimsaControlFletesBundle:Flete f
-								   JOIN f.actividad ac
-								   JOIN f.relacion   r
-								   JOIN r.operador   op
-								   JOIN r.economico  ec
-								   JOIN r.socio 	 so
-								   JOIN f.sucursal   su
-								   LEFT JOIN f.workorders wo
+
+								   LEFT JOIN f.actividad ac
+								   LEFT JOIN f.relacion   r
+								   LEFT JOIN r.operador   op
+								   LEFT JOIN r.economico  ec
+								   LEFT JOIN r.socio 	 so
+								   LEFT JOIN f.sucursal   su
+								   LEFT JOIN su.cliente   cl
+								   LEFT JOIN f.tipo_viaje tv
+
 								   order by f.id"
 								   )
 					->getResult();
+	}
+
+	public function fleteWorkorders( $flete ){
+		return $this->getEntityManager()
+					->createQuery("SELECT 
+										wo.workorder as Workorder,
+										c.codigo as Contenedor,
+										c.tipo as Type,
+										bo.booking as Booking
+
+									FROM TimsaControlFletesBundle:WorkOrder wo
+									INNER JOIN wo.contenedor c
+									INNER JOIN wo.booking bo
+
+									WHERE w.flete = $flete
+								  ");
 	}
 }
 

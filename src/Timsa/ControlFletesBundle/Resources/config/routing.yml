@@ -105,6 +105,6 @@ _posicionSucursales:
 
 _fleteRestAll:
   pattern: /main/rest/flete
-  defaults: { _controller:TimsaControlFletesBundle:FleteRest:all, format: ~ }
+  defaults: { _controller:TimsaControlFletesBundle:FleteRest:week, format: ~ }
   requirements:
      _method: GET

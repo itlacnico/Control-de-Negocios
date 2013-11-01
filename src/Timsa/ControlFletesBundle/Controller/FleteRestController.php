@@ -18,12 +18,23 @@ use FOS\RestBundle\View\View,
 
 class FleteRestController extends FOSRestController{
 
-	public function allAction(){
+	public function weekAction(){
 		$data = $this->getDoctrine()
 					 ->getRepository('TimsaControlFletesBundle:Flete')
 					 ->findAllFletes();
+
+		foreach ($data as &$row) {
+			if(! isset($row['Workorder'])){
+
+				$workorder_data = $this->getDoctrine()
+										->getRepository('TimsaControlFletesBundle:Flete')
+										->fleteWorkorders( $row['id'] );
+
+				$row['Workorder'] = $workorder_data;
+			}
+		}
 		
-		$view = View::create()->setStatusCode(200)->setData($data)->setFormat('json') ;
+		$view = View::create()->setStatusCode(200)->setData($data)->setFormat('json');
 
 		 return $this->handleView($view);
 	}

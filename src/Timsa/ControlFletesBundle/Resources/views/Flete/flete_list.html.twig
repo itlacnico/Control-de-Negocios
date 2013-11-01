@@ -30,7 +30,7 @@
 			<div style="text-align: center;" >
 				<img class="" ng-src="{[{loadImage}]}" ng-hide="{[{load}]}" id="load">
 			</div>
-			<table>
+			<table class="table">
 				<thead>
 					<tr>
 						<th>#</th>
@@ -38,13 +38,13 @@
 						<th>operador</th>
 						<th>licencia</th>
 						<th>socio</th>
-						<th>booking</th>
-						<th>workorder</th>
-						<th>trafico</th>
-						<th>cliente</th>
-						<th>contenedor</th>
-						<th>size</th>
-						<th>type</th>
+						<th >Booking</th>
+						<th>WorkOrder</th>
+						<th>Trafico</th>
+						<th>Cliente</th>
+						<th>Contenedor(s)</th>
+						<th>Size</th>
+						<th>Type</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -52,20 +52,25 @@
 						<td>{[{flete.id}]}</td>
 						<td>{[{flete.Economico}]}</td>
 						<td>{[{flete.Operador}]}</td>
-						<td>		Licencia 	</td>
-						<td>{[{flete.booking}]}</td>
-						<td>{[{flete.workorder}]}</td>
-						<td>{[{flete.trafico}]}</td>
-						<td>{[{flete.cliente}]}</td>
-						<td>{[{flete.contenedor}]}</td>
-						<td>Size</td>
-						<td>Type</td>
+						<td>NO de licencia</td>
+						<td>{[{flete.SocioNombre}]}</td>
+						<td>{[{flete.Booking}]}</td>
+						<td>{[{flete.Workorder}]}</td>
+						<td> {[{flete.Trafico}]} </td>
+						<td>{[{flete.Cliente}]}</td>
+						<td>{[{flete.Contenedor}]}</td>
+						<td></td>
+						<td></td>
 					</tr>
 				</tbody>
 			</table>
 
-			<input type="text" class="input-form" ng-model="entrada">
-			<button class="btn btn-primary" ng-click="append()">Añadir</button>
+			<input type="text" class="form-control" ng-model="entrada">
+			<button class="form-control btn btn-primary" ng-click="append()">Añadir</button>
+
+			<pre>
+				{[{fletes}]}
+			</pre>
 
 		</div>
 	</div>

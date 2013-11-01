@@ -27,7 +27,8 @@
         "knplabs/knp-paginator-bundle": "dev-master",
         "raulfraile/ladybug": "~1.0",
         "friendsofsymfony/rest-bundle": "dev-master",
-        "jms/serializer-bundle": "dev-master"
+        "jms/serializer-bundle": "dev-master",
+        "phpunit/phpunit": "3.7.*"
     },
     "scripts": {
         "post-install-cmd": [
