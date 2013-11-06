@@ -63,11 +63,11 @@ _contenedores:
     pattern: /main/contenedores
     defaults: {_controller: TimsaControlFletesBundle:Contenedor:index}
 
-#flete_detalle:
- #   pattern: /main/fleteDetalle/{flete}
- #   defaults: {_controller: TimsaControlFletesBundle:Flete:detalle, flete: 0 }
- #   requirements:
- #       flete: \d+
+flete_detalle:
+    pattern: /main/fleteDetalle/{flete}
+    defaults: {_controller: TimsaControlFletesBundle:Flete:detalle, flete: 0 }
+    requirements:
+        flete: \d+
 
 create_flete:
    pattern: /main/CreateFlete
@@ -108,3 +108,9 @@ _fleteRestAll:
   defaults: { _controller:TimsaControlFletesBundle:FleteRest:week, format: ~ }
   requirements:
      _method: GET
+
+_tarifaAgenciaRest:
+   pattern: /main/rest/agencia/tarifas/{agencia}
+   defaults: { _controller: TimsaControlFletesBundle:TarifaAgenciaRest:cuota, format: ~ }
+   requirements:
+      _method: GET

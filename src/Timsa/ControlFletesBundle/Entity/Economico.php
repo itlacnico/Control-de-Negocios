@@ -39,7 +39,7 @@ class Economico
      * @ORM\ManyToOne(targetEntity="Actividades")
      * @ORM\JoinColumn(name="actividad",  referencedColumnName="id")
      */
-    private $actividad = 1;
+    private $actividad;
 
     /**
      * @ORM\Column(name="statusA", type="boolean", nullable=true)

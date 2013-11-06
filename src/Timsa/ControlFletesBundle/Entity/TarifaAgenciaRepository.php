@@ -91,6 +91,26 @@ class TarifaAgenciaRepository extends EntityRepository
 									   )
 						->getResult();
 		}
+
+        public function findTarifaByAgencia($agencia){
+            return $this->getEntityManager()
+                        ->createQuery("SELECT t.nombre as tarifa, t.id idTarifa , c.exportacionSencillo as exportacions,
+										c.importacionSencillo as importacions, c.reutilizadoSencillo as reutilizados,
+										c.exportacionFull as exportacionf, c.importacionFull as importacionf,
+										c.reutilizadoFull as reutilizadof,
+										ta.clasificacion
+									   FROM
+
+									   TimsaControlFletesBundle:TarifaAgencia ta
+
+									   JOIN ta.cuota  c
+									   JOIN ta.tarifa t
+									   where
+									   ta.statusA = true and
+									   ta.agencia = $agencia"
+                                     )
+                        ->getResult();
+        }
 /*
 		public function findTarifaPorAgencia($agencia){
 

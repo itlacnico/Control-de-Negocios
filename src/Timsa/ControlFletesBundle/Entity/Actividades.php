@@ -26,6 +26,11 @@ class Actividades{
 
 	protected $actividad;
 
+    public function __construct($id){
+        $this->id = $id;
+    }
+
+
 	public function __toString(){
 		return (String) $this->actividad;
 	}

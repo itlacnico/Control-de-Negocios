@@ -61,7 +61,16 @@ Tarifas
 
 {% block javascripts %}
 	{{ parent() }}
+    <script type="text/javascript" src="http://code.angularjs.org/1.2.0-rc.3/angular.min.js"></script>
+
+    <script type="text/javascript" src="http://code.angularjs.org/1.2.0-rc.3/angular-resource.min.js"></script>
+
+    <script type="text/javascript" src="http://code.angularjs.org/1.2.0-rc.3/angular-animate.min.js"></script>
+
+    <script src="{{ asset('js/Tarifa/app_tarifa.js') }}"></script>
+<!--
 	<script>
+        /*
 		$(function(){
 
 			$('#myTab').click(function(event) {
@@ -116,12 +125,13 @@ Tarifas
 			    $(this).parent().addClass('active').siblings().removeClass('active');
 			    //$(this).tab("show");  
 			});
-*/
+
 			$('body').on('click', '.nuevaTarifa', function(e){
 				alert("accion");
 			});
 
 		});
+         */
 	</script>
-
+-->
 {% endblock %}

@@ -48,6 +48,7 @@ class EconomicoAdmin extends Admin{
 	            $formMapper
 	            		->add('numero')
 			            ->add('placas')
+                        ->add('actividad')
 			            #->add('statusA')
 			            ->add('fechaIngreso')
 			            #->add('fechaSalida')

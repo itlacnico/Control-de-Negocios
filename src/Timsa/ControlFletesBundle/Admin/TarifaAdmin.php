@@ -37,7 +37,7 @@ class TarifaAdmin extends Admin{
 	            $formMapper
 	            ->with('General')
 		            ->add('nombre')
-		            ->add('statusA', null, array('editable' => true))
+		            //->add('statusA', null, array('editable' => true))
 	            ->end()
 	            #->with('Roles')
 	            #	->add('roles', 'sonata_type_model',array('expanded' => true, 'compound' => true, 'multiple' => true))
