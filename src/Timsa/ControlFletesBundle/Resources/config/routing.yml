@@ -103,9 +103,15 @@ _posicionSucursales:
  #  pattern: /main/flete/list
 #   defaults: {_controller: TimsaControlFletesBundle:Flete:list}
 
+_angularPartials:
+  pattern: /main/angularPartials/{file}
+  defaults: {_controller: TimsaControlFletesBundle:Partial:index, format: ~, file: tarifa}
+  options:
+      expose: true
+
 _fleteRestAll:
   pattern: /main/rest/flete
-  defaults: { _controller:TimsaControlFletesBundle:FleteRest:week, format: ~ }
+  defaults: { _controller:TimsaControlFletesBundle:FleteRest:week, format: html }
   requirements:
      _method: GET
 
@@ -114,3 +120,4 @@ _tarifaAgenciaRest:
    defaults: { _controller: TimsaControlFletesBundle:TarifaAgenciaRest:cuota, format: ~ }
    requirements:
       _method: GET
+

@@ -28,7 +28,8 @@
         "raulfraile/ladybug": "~1.0",
         "friendsofsymfony/rest-bundle": "dev-master",
         "jms/serializer-bundle": "dev-master",
-        "phpunit/phpunit": "3.7.*"
+        "phpunit/phpunit": "3.7.*",
+        "friendsofsymfony/jsrouting-bundle": "1.4.1"
     },
     "scripts": {
         "post-install-cmd": [

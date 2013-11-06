@@ -9,10 +9,11 @@ Tarifas
 {% endblock %}
 
 {% block content %}
+    <div ng-app="tarifaApp">
 	<div class="col-lg-4">
 		<ul class="nav nav-tabs nav-pills nav-stacked" style="max-width: 300px;" id="myTab">
 			{% for agencia in agencias %}
-				<li value="{{agencia.id}}" id="{{ path('_tarifa', {'idAgencia': agencia.id}) }}"><a class="agencias" href="#filtro_agencia" data-toggle="tab"> {{agencia}} </a></li>
+				<li id="{{ path('_tarifa', {'idAgencia': agencia.id}) }}"><a class="agencias" href="#/agencia/{{agencia.id}}" data-toggle="tab"> {{agencia}} </a></li>
 			{% else %}
 				<li><a href="">No existen agencias registrados</a></li>
 			{% endfor %}
@@ -20,118 +21,32 @@ Tarifas
 	</div>
 
 	<div class="tab-content">
-		<div class="tab-pane active col-lg-8" id="economicos">
-{#
-			<nav class="navbar navbar-default" role="navigation">
-				<div class="navbar-responsive-collapse">
-					{{ knp_pagination_render(economicos) }}
-				</div>
-
-				<form class="navbar-form pull-right" action="{{path('_economicos')}}">
-					<input type="text" class="form-control" placeholder="Buscar.." id="search" style="width: 200px;" name="busquedaLibre">
-					<button type="submit" class="btn btn-primary">Buscar</button>
-				</form>
-			</nav>
-
-			{% for economico in economicos %}
-			<ul class="list-inline">
-				<li class="col-lg-3">
-					<div class="col-lg-8">
-						<img  src="{{ asset('images/camion.jpg') }}">
-						{% if economico.actividad == 'Libre' %}
-						<h5><span class="label label-info">{{economico.numero}}</span></h5>
-						{% else %}
-						<h5><span class="label label-warning">{{economico.numero}}</span></h5>
-						{% endif %}
-					</div>
-				</li>
-			</ul>
-
-			{% else %}
-				<h1>No existen Economicos</h1>
-			{% endfor %}
-#}		</div>
-		<div class="tab-pane col-lg-8" id="filtro_agencia">
-			<h1>Filtro</h1>
+		<div class="tab-pane col-lg-8" id="filtro_agencia"  ng-view >
+            
 		</div>
 	</div>
+    </div>
 
 {% endblock %}
 
 
 {% block javascripts %}
-	{{ parent() }}
-    <script type="text/javascript" src="http://code.angularjs.org/1.2.0-rc.3/angular.min.js"></script>
+	{{parent()}}
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+    <script type="text/javascript" src="http://code.angularjs.org/1.2.0-rc.3/angular.js"></script>
+    <script type="text/javascript" src="http://code.angularjs.org/1.2.0-rc.3/angular-route.min.js"></script>
 
     <script type="text/javascript" src="http://code.angularjs.org/1.2.0-rc.3/angular-resource.min.js"></script>
 
     <script type="text/javascript" src="http://code.angularjs.org/1.2.0-rc.3/angular-animate.min.js"></script>
+    <script>
+        var rutaHMTL = Routing.generate('_angularPartials' );
+    </script>
+
 
     <script src="{{ asset('js/Tarifa/app_tarifa.js') }}"></script>
-<!--
-	<script>
-        /*
-		$(function(){
 
-			$('#myTab').click(function(event) {
-				$('#myTab a').tab('show');
-			});
-
-			$('a.agencias').click(function(event){
-			        event.preventDefault(); //cancela el comportamiento por defecto
-			        $('#filtro_agencia').empty();
-			        $('#filtro_agencia').append('<img src="{{asset("images/loading.gif")}}">');
-
-			        //carga por ajax a la capa "notice_viewer"
-			        $('#filtro_agencia').load($(this).parent().attr('id'));
-
-
-			});
-
-			$('body').on('click', '.detalle', function(e){
-				var agencia = $('ul.nav li.active ').attr("value");
-				var nombreAgencia = $('ul.nav li.active ').text();
-				var tarifa  = $(this).attr("value");
-				var nombreTarifa = $(this).parent().parent().children("td:eq(0)").text();
-
-				parametros = {"agencia" : agencia, "tarifa" : tarifa, "nombreAgencia" : nombreAgencia, "nombreTarifa" : nombreTarifa };
-				$('#filtro_agencia').empty();
-		        $('#filtro_agencia').append('<img src="{{asset("images/loading.gif")}}">');
-
-				createAjax(parametros, function(response){
-					$('#filtro_agencia').empty();
-					$('#filtro_agencia').append(response.html);
-				});
-			});
-
-		 	function createAjax(parametros, funcion){
-					 			$.ajax({
-					 				  cache:    false,
-						 			  type: 	"POST",
-						 			  dataType: "json",
-						 			  url: 		"{{path('_tarifaDetalle')}}",
-						 			  data: 	parametros,
-						 			  success: function(response){
-						 			  			funcion(response);
-						 			  		},
-							 		  error: function() {
-							 		 	alert("error");
-							 		 }
-							 	});
-		 	}
-/*
-			$('body').on('click','ul.nav.nav-justified li a', function(a) { 
-				a.preventDefault();        
-			    $(this).parent().addClass('active').siblings().removeClass('active');
-			    //$(this).tab("show");  
-			});
-
-			$('body').on('click', '.nuevaTarifa', function(e){
-				alert("accion");
-			});
-
-		});
-         */
-	</script>
--->
 {% endblock %}
