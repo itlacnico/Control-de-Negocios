@@ -105,9 +105,11 @@ _posicionSucursales:
 
 _angularPartials:
   pattern: /main/angularPartials/{file}
-  defaults: {_controller: TimsaControlFletesBundle:Partial:index, format: ~, file: tarifa}
+  defaults: {_controller: TimsaControlFletesBundle:Partial:index, format: ~}
   options:
       expose: true
+  requirements:
+       _method: GET
 
 _fleteRestAll:
   pattern: /main/rest/flete

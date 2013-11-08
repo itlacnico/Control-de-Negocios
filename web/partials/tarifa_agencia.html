@@ -1,0 +1,44 @@
+<div>
+    <div class="centerImage" id="load">
+        <img  ng-src="{[{ loadImage }]}" >
+    </div>
+
+    <div class="col-lg-2">
+        <div class="list-group">
+            <a href="#" ng-click="setClasificacion({[{tarifa.clasificacion}]})" class="list-group-item" ng-repeat="tarifa in tarifas">{[{tarifa.clasificacion}]}</a>
+        </div>
+    </div>
+    <div class="col-lg-8">
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th rowspan="2" > Tarifa </th>
+                <th colspan="3"> Sencillo </th>
+                <th colspan="3" > Full </th>
+            </tr>
+            <tr>
+                <th> Importacion </th>
+                <th> Exportacion </th>
+                <th> Reutilizado </th>
+
+                <th> Importacion </th>
+                <th> Exportacion </th>
+                <th> Reutilizado </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="tarifa in tarifas | filter: clase ">
+                <td> {[{ tarifa.tarifa }]} </td>
+                <td> {[{ tarifa.importacions }]} </td>
+                <td> {[{ tarifa.exportacions }]} </td>
+                <td> {[{ tarifa.reutilizados }]} </td>
+                <td> {[{ tarifa.importacionf }]} </td>
+                <td> {[{ tarifa.exportacionf }]} </td>
+                <td> {[{ tarifa.reutilizadof }]} </td>
+
+            </tr>
+        </tbody>
+    </table>
+    </div>
+</div>

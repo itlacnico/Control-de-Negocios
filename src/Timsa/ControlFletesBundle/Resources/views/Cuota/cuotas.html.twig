@@ -4,49 +4,59 @@
 Tarifas
 {% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .centerImage{
+            text-align: center;
+        }
+    </style>
+{% endblock %}
+
 {% block cabecera %}
 Tarifas
 {% endblock %}
 
 {% block content %}
     <div ng-app="tarifaApp">
-	<div class="col-lg-4">
+	<div class="col-lg-2">
 		<ul class="nav nav-tabs nav-pills nav-stacked" style="max-width: 300px;" id="myTab">
 			{% for agencia in agencias %}
-				<li id="{{ path('_tarifa', {'idAgencia': agencia.id}) }}"><a class="agencias" href="#/agencia/{{agencia.id}}" data-toggle="tab"> {{agencia}} </a></li>
+				<li  id="{{ path('_tarifa', {'idAgencia': agencia.id}) }}">
+                    <a class="agencias" href="#/agencia/{{agencia.id}}"> {{agencia}} </a>
+                </li>
 			{% else %}
 				<li><a href="">No existen agencias registrados</a></li>
 			{% endfor %}
 		</ul>
 	</div>
+    <div class="col-lg-8" id="filtro_agencia"  ng-view>
+    </div>
 
-	<div class="tab-content">
-		<div class="tab-pane col-lg-8" id="filtro_agencia"  ng-view >
-            
-		</div>
-	</div>
     </div>
 
 {% endblock %}
 
 
 {% block javascripts %}
-	{{parent()}}
+    <script type="text/javascript" src="{{ asset('js/jquery-2.0.3.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('js/bootstrap.js')}}"></script>
+    <script type="text/javascript">
+        $('div.list-group a.list-group-item').click(function(a) {
 
-    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+            a.preventDefault();
+            $(this).parent().addClass('active').siblings().removeClass('active');
+        });
 
+        $('ul.nav.nav-pills.nav-stacked li a').click(function(a) {
+            $(this).parent().addClass('active').siblings().removeClass('active');
+        });
+
+    </script>
     <script type="text/javascript" src="http://code.angularjs.org/1.2.0-rc.3/angular.js"></script>
     <script type="text/javascript" src="http://code.angularjs.org/1.2.0-rc.3/angular-route.min.js"></script>
-
     <script type="text/javascript" src="http://code.angularjs.org/1.2.0-rc.3/angular-resource.min.js"></script>
-
     <script type="text/javascript" src="http://code.angularjs.org/1.2.0-rc.3/angular-animate.min.js"></script>
-    <script>
-        var rutaHMTL = Routing.generate('_angularPartials' );
-    </script>
-
-
     <script src="{{ asset('js/Tarifa/app_tarifa.js') }}"></script>
 
 {% endblock %}
