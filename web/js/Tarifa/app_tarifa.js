@@ -40,12 +40,19 @@ timsaControllers.controller('tarifaController', [ '$scope', 'TarifaAgencia', '$r
 
                                     $scope.clase = "2012";
 
-                                    $scope.setClasificacion = function(clase){
+                                    $scope.setClasificacion = function(evt, clase){
+                                        evt.preventDefault();
                                         $scope.clase = clase;
                                     }
 
                                     $scope.tarifas = TarifaAgencia.get( { agenciaID: $routeParams.agenciaID } ,function(){
-                                        $('#load').hide();
+                                        $scope.load = true;
+                                    });
+
+                                    $scope.classes = [];
+
+                                    angular.forEach( $scope.tarifas , function( value, key ){
+                                        $scope.classes.push(  );
                                     });
                                 }
                             ]);

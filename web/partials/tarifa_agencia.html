@@ -1,20 +1,22 @@
 <div>
     <div class="centerImage" id="load">
-        <img  ng-src="{[{ loadImage }]}" >
+        <img  ng-src="{[{ loadImage }]}" ng-hide="load">
     </div>
 
     <div class="col-lg-2">
         <div class="list-group">
-            <a href="#" ng-click="setClasificacion({[{tarifa.clasificacion}]})" class="list-group-item" ng-repeat="tarifa in tarifas">{[{tarifa.clasificacion}]}</a>
+            <a href="#" ng-click="setClasificacion($event, {[{class.clasificacion}]})" class="list-group-item" ng-repeat="class in classes">
+                {[{class.value}]}
+            </a>
         </div>
     </div>
-    <div class="col-lg-8">
+    <div class="col-lg-10">
 
-    <table class="table table-bordered">
+    <table class="table table-bordered" ng-show="load">
         <thead>
-            <tr>
+            <tr >
                 <th rowspan="2" > Tarifa </th>
-                <th colspan="3"> Sencillo </th>
+                <th colspan="3" > Sencillo </th>
                 <th colspan="3" > Full </th>
             </tr>
             <tr>
@@ -40,5 +42,8 @@
             </tr>
         </tbody>
     </table>
+        <pre>
+            {[{ tarifas }]}
+        </pre>
     </div>
 </div>
