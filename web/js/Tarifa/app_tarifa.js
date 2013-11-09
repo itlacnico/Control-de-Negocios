@@ -43,17 +43,65 @@ timsaControllers.controller('tarifaController', [ '$scope', 'TarifaAgencia', '$r
                                     $scope.setClasificacion = function(evt, clase){
                                         evt.preventDefault();
                                         $scope.clase = clase;
+                                        $scope.setMaster(clase);
                                     }
-
-                                    $scope.tarifas = TarifaAgencia.get( { agenciaID: $routeParams.agenciaID } ,function(){
-                                        $scope.load = true;
-                                    });
 
                                     $scope.classes = [];
 
-                                    angular.forEach( $scope.tarifas , function( value, key ){
-                                        $scope.classes.push(  );
+                                    $scope.tarifas = TarifaAgencia.get( { agenciaID: $routeParams.agenciaID } ,function(){
+                                        $scope.load = true;
+
+                                        angular.forEach( $scope.tarifas , function( value, key ){
+                                            clasificacion = { value : value.clasificacion };
+
+                                           if (! containsObject( clasificacion, $scope.classes ) ){
+                                               $scope.classes.push( clasificacion );
+                                           }
+
+                                        });
                                     });
+
+                                    $scope.selected = 2012;
+
+                                    $scope.setMaster = function(section) {
+                                        $scope.selected = section;
+                                    }
+
+                                    $scope.isSelected = function(section) {
+                                        return $scope.selected === section;
+                                    }
+
+
+                                    $scope.addClase = false;
+
+                                    $scope.mostrarInputClase = function(){
+                                        $scope.addClase = ! $scope.addClase;
+                                    }
+
+                                    $scope.appendInputClase = function(){
+                                        var nuevaClase = { value: $scope.nuevaClase };
+
+                                        if (! containsObject( nuevaClase , $scope.classes ) ){
+                                            $scope.classes.push( nuevaClase );
+                                            $scope.nuevaClase = "";
+                                        }
+                                        else{
+                                            alert("La clase ya existe.");
+                                        }
+                                    }
+
                                 }
                             ]);
+
+
+function containsObject(obj, list) {
+    var i;
+    for (i = 0; i < list.length; i++) {
+        if (list[i].value === obj.value) {
+            return true;
+        }
+    }
+
+    return false;
+}
 

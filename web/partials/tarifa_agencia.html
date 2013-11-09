@@ -1,13 +1,27 @@
 <div>
-    <div class="centerImage" id="load">
+    <div class="centerImage text-center" id="load">
         <img  ng-src="{[{ loadImage }]}" ng-hide="load">
     </div>
 
     <div class="col-lg-2">
-        <div class="list-group">
-            <a href="#" ng-click="setClasificacion($event, {[{class.clasificacion}]})" class="list-group-item" ng-repeat="class in classes">
-                {[{class.value}]}
+        <div class="list-group text-center">
+            <a href="#" ng-click="setClasificacion($event, {[{class.value}]} )" ng-class="{ active : isSelected({[{class.value}]}) }" class="list-group-item" ng-repeat="class in classes">
+                {[{ class.value }]}
             </a>
+            <br><br>
+
+
+               <button class="btn" ng-click="mostrarInputClase()">Añadir clasificacion</button>
+                <div ng-show="addClase">
+                    <div class="input-group">
+                        <input type="text" class="form-control col-lg-3" name="numero" placeholder="Año" ng-model="nuevaClase">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" ng-click="appendInputClase()"> Add </button>
+                         </span>
+                    </div>
+                </div>
+
+
         </div>
     </div>
     <div class="col-lg-10">
@@ -42,8 +56,8 @@
             </tr>
         </tbody>
     </table>
-        <pre>
-            {[{ tarifas }]}
-        </pre>
+        <button class="btn btn-success" > Añadir Tarifa </button>
+
     </div>
+
 </div>
