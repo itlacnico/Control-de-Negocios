@@ -119,6 +119,18 @@ _fleteRestAll:
 
 _tarifaAgenciaRest:
    pattern: /main/rest/agencia/tarifas/{agencia}
+   defaults: { _controller: TimsaControlFletesBundle:TarifaAgenciaRest:cuotaAgencia, format: ~ }
+   requirements:
+      _method: GET
+
+_tarifaRest:
+   pattern: /main/rest/tarifa
+   defaults: { _controller: TimsaControlFletesBundle:TarifaAgenciaRest:tarifa, format: ~ }
+   requirements:
+      _method: GET
+
+_tarifaCuotaRest:
+   pattern: /main/rest/cuota
    defaults: { _controller: TimsaControlFletesBundle:TarifaAgenciaRest:cuota, format: ~ }
    requirements:
       _method: GET

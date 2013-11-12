@@ -5,28 +5,31 @@
 
     <div class="col-lg-2">
         <div class="list-group text-center">
-            <a href="#" ng-click="setClasificacion($event, {[{class.value}]} )" ng-class="{ active : isSelected({[{class.value}]}) }" class="list-group-item" ng-repeat="class in classes">
+            <a href="#" ng-click="setClasificacion($event, '{[{class.value}]}' )" ng-class="{ active : isSelected('{[{class.value}]}') }" class="list-group-item" ng-repeat="class in classes">
                 {[{ class.value }]}
             </a>
             <br><br>
 
-
+           <div ng-show="load">
                <button class="btn" ng-click="mostrarInputClase()">Añadir clasificacion</button>
-                <div ng-show="addClase">
-                    <div class="input-group">
-                        <input type="text" class="form-control col-lg-3" name="numero" placeholder="Año" ng-model="nuevaClase">
+               <div ng-show="addClase">
+                   <div class="input-group">
+                       <input type="text" class="form-control col-lg-3" name="numero" placeholder="Año" ng-model="nuevaClase">
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="button" ng-click="appendInputClase()"> Add </button>
                          </span>
-                    </div>
-                </div>
+                   </div>
+               </div>
+           </div>
 
 
         </div>
     </div>
     <div class="col-lg-10">
+<div ng-show="load">
+    <div ng-show="addTarifa">
 
-    <table class="table table-bordered" ng-show="load">
+    <table class="table table-bordered">
         <thead>
             <tr >
                 <th rowspan="2" > Tarifa </th>
@@ -44,7 +47,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="tarifa in tarifas | filter: clase ">
+            <tr ng-repeat="tarifa in tarifas | filter: { clasificacion : clase } " >
                 <td> {[{ tarifa.tarifa }]} </td>
                 <td> {[{ tarifa.importacions }]} </td>
                 <td> {[{ tarifa.exportacions }]} </td>
@@ -56,8 +59,97 @@
             </tr>
         </tbody>
     </table>
-        <button class="btn btn-success" > Añadir Tarifa </button>
+        <button class="btn btn-success" ng-click="showAddTarifa()"> Añadir Tarifa </button>
+    </div>
+    <form class="form-horizontal" role="form" method="post" ng-hide="addTarifa">
 
+        <div  class="form-group">
+            <div class="col-lg-offset-9">
+                <button id="cancelarSucursal" class="btn btn-danger" ng-click="showAddTarifa()">Cancelar</button>
+                <input type="submit" value="Enviar" class="btn btn-primary">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-2 control-label" for="tarifaAvalible">Tarifa</label>
+            <div class="col-lg-10">
+                <select id="tarifaAvalible" class="form-control">
+                    <option value="{[{ tarifaAvalible.id }]}" ng-repeat="tarifaAvalible in tarifasAvalibles"> {[{ tarifaAvalible.nombre }]} </option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-2"></div>
+            <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-info active" ng-click="showAddTarifaMenu()">
+                    <input type="radio" value="importacion" name="viaje" id="importacion" > Reutilizar cuota
+                </label>
+                <label class="btn btn-info" ng-click="showAddTarifaMenu()">
+                    <input type="radio" value="exportacion" name="viaje" id="exportacion"  > Definir nueva cuota
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group" ng-show="addTarifaMenu">
+            <label class="col-lg-2 control-label" for="tarifa">Listado de cuotas actuales</label>
+            <div class="col-lg-10">
+                <select id="tarifa" class="form-control">
+                    <option value="{[{cuota.id}]}" ng-repeat="cuota in cuotasAvalibles">
+                        {[{ cuota.nombre  }]}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div ng-hide="addTarifaMenu">
+            <div class="form-group">
+                <label class="col-lg-2 control-label" for="tarifa">Nombre de la nueva cuota</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+
+            <div>
+                <h4 class="text-center"> Sencillo </h4>
+                <br/>
+                <label class="col-lg-2 control-label" for="tarifa">Importacion</label>
+                <div class="col-lg-2">
+                    <input type="text" class="form-control">
+                </div>
+
+                <label class="col-lg-2 control-label" for="tarifa">Exportacion</label>
+                <div class="col-lg-2">
+                    <input type="text" class="form-control">
+                </div>
+
+                <label class="col-lg-2 control-label" for="tarifa">Reutilizado</label>
+                <div class="col-lg-2">
+                    <input type="text" class="form-control">
+                </div>
+
+            </div>
+            <br/>
+            <div>
+                <br/>
+                <h4 class="text-center">  Full </h4>
+                <br/>
+                <label class="col-lg-2 control-label" for="tarifa">Importacion</label>
+                <div class="col-lg-2">
+                    <input type="text" class="form-control">
+                </div>
+
+                <label class="col-lg-2 control-label" for="tarifa">Exportacion</label>
+                <div class="col-lg-2">
+                    <input type="text" class="form-control">
+                </div>
+
+                <label class="col-lg-2 control-label" for="tarifa">Reutilizado</label>
+                <div class="col-lg-2">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+        </div>
+    </form>
+    </div>
     </div>
 
 </div>

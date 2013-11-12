@@ -30,21 +30,36 @@ timsaServices.factory('TarifaAgencia', ['$resource',
     }
 ]);
 
+timsaServices.factory('Tarifa', ['$resource',
+    function ($resource){
+        return $resource('http://localhost/controlTimsa/web/app_dev.php/main/rest/tarifa', {} ,{
+            // Sobrescribe el metdo de $resource, personalidandolo con un valor en default.
+            // los demas metodos REST de http se dejan como vienen predefinidos en $resource
+            get: { method:'GET', isArray: true }
+        });
+    }
+]);
+
+timsaServices.factory('Cuota', ['$resource',
+    function ($resource){
+        return $resource('http://localhost/controlTimsa/web/app_dev.php/main/rest/cuota', {} ,{
+            // Sobrescribe el metdo de $resource, personalidandolo con un valor en default.
+            // los demas metodos REST de http se dejan como vienen predefinidos en $resource
+            get: { method:'GET', isArray: true }
+        });
+    }
+]);
+
 var timsaControllers = angular.module('timsaControllers', [] );
 
-timsaControllers.controller('tarifaController', [ '$scope', 'TarifaAgencia', '$routeParams',
-                                function($scope, TarifaAgencia, $routeParams){
+timsaControllers.controller('tarifaController', [ '$scope', 'TarifaAgencia', '$routeParams', 'Tarifa', 'Cuota',
+                                function($scope, TarifaAgencia, $routeParams, Tarifa, Cuota){
+
+                                    $scope.agencia =  "#/agencia/" +$routeParams.agenciaID;
+                                    $('a[href$="' +  $scope.agencia + '"]').parent().addClass('active').siblings().removeClass('active');
 
                                     $scope.loadImage = "http://localhost/controlTimsa/web/images/loading.gif";
                                     $scope.load = false;
-
-                                    $scope.clase = "2012";
-
-                                    $scope.setClasificacion = function(evt, clase){
-                                        evt.preventDefault();
-                                        $scope.clase = clase;
-                                        $scope.setMaster(clase);
-                                    }
 
                                     $scope.classes = [];
 
@@ -59,16 +74,27 @@ timsaControllers.controller('tarifaController', [ '$scope', 'TarifaAgencia', '$r
                                            }
 
                                         });
+
+                                        $scope.clase = $scope.classes[0].value;
                                     });
 
-                                    $scope.selected = 2012;
+                                    $scope.tarifasAvalibles = Tarifa.get();
 
+                                    $scope.cuotasAvalibles = Cuota.get();
+
+                                    $scope.setClasificacion = function(evt, clase){
+                                        evt.preventDefault();
+                                        $scope.clase = clase;
+                                        $scope.setMaster(clase);
+                                    }
+
+                                    // metodo para desplegar las vistas por clase
                                     $scope.setMaster = function(section) {
-                                        $scope.selected = section;
+                                        $scope.clase = section;
                                     }
 
                                     $scope.isSelected = function(section) {
-                                        return $scope.selected === section;
+                                        return $scope.clase === section;
                                     }
 
 
@@ -79,7 +105,13 @@ timsaControllers.controller('tarifaController', [ '$scope', 'TarifaAgencia', '$r
                                     }
 
                                     $scope.appendInputClase = function(){
+                                        if( ! $scope.nuevaClase ){
+                                            alert("Valor no permitido");
+                                            return;
+                                        }
+
                                         var nuevaClase = { value: $scope.nuevaClase };
+
 
                                         if (! containsObject( nuevaClase , $scope.classes ) ){
                                             $scope.classes.push( nuevaClase );
@@ -88,6 +120,15 @@ timsaControllers.controller('tarifaController', [ '$scope', 'TarifaAgencia', '$r
                                         else{
                                             alert("La clase ya existe.");
                                         }
+                                    }
+
+                                    $scope.addTarifa = true;
+                                    $scope.showAddTarifa = function(){
+                                        $scope.addTarifa = ! $scope.addTarifa;
+                                    }
+                                    $scope.addTarifaMenu = true;
+                                    $scope.showAddTarifaMenu = function(){
+                                        $scope.addTarifaMenu = ! $scope.addTarifaMenu;
                                     }
 
                                 }

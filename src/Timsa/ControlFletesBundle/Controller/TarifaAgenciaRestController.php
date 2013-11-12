@@ -23,11 +23,32 @@ use JMS\Serializer\SerializationContext;
 
 class TarifaAgenciaRestController extends FOSRestController{
 
-    public function cuotaAction($agencia){
+    public function cuotaAgenciaAction($agencia){
 
         $data = $this->getDoctrine()
             ->getRepository('TimsaControlFletesBundle:TarifaAgencia')
             ->findTarifaByAgencia($agencia);
+
+        $view = View::create()->setStatusCode(200)->setData($data)->setFormat('json');
+
+        return $this->handleView($view);
+    }
+
+    public function tarifaAction(){
+        $data = $this->getDoctrine()
+                ->getRepository('TimsaControlFletesBundle:Tarifa')
+                ->findTarifas();
+
+        $view = View::create()->setStatusCode(200)->setData($data)->setFormat('json');
+
+        return $this->handleView($view);
+    }
+
+
+    public function cuotaAction(){
+        $data = $this->getDoctrine()
+            ->getRepository('TimsaControlFletesBundle:Cuota')
+            ->findCuotas();
 
         $view = View::create()->setStatusCode(200)->setData($data)->setFormat('json');
 
