@@ -126,9 +126,23 @@ timsaControllers.controller('tarifaController', [ '$scope', 'TarifaAgencia', '$r
                                     $scope.showAddTarifa = function(){
                                         $scope.addTarifa = ! $scope.addTarifa;
                                     }
+
                                     $scope.addTarifaMenu = true;
+                                    $scope.showAddNewTarifaMenu = function(){
+                                        $scope.addTarifaMenu = false;
+                                    }
                                     $scope.showAddTarifaMenu = function(){
-                                        $scope.addTarifaMenu = ! $scope.addTarifaMenu;
+                                        $scope.addTarifaMenu = true;
+                                    }
+
+                                    $scope.nuevaTarifa = function(){
+                                        postData = {
+                                            "id": 42,
+                                            "title": "The Hitchhiker's Guide to the Galaxy",
+                                            "authors": ["Douglas Adams"]
+                                        }
+
+                                        Tarifa.save({}, postData);
                                     }
 
                                 }

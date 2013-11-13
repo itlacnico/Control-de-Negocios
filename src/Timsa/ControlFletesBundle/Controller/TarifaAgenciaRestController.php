@@ -20,6 +20,7 @@ use Symfony\Bundle\FrameworkBundle\Templating\TemplateReference,
 
 use Doctrine\Common\Cache\Cache;
 use JMS\Serializer\SerializationContext;
+use Symfony\Component\HttpFoundation\Request;
 
 class TarifaAgenciaRestController extends FOSRestController{
 
@@ -52,6 +53,12 @@ class TarifaAgenciaRestController extends FOSRestController{
 
         $view = View::create()->setStatusCode(200)->setData($data)->setFormat('json');
 
+        return $this->handleView($view);
+    }
+
+    public function nuevaCuotaAction(Request $request){
+        $mensaje = "Se accedio al rest de tipo post de las cuotas " . $request->request->get("id");
+        $view = View::create()->setStatusCode(200)->setData($mensaje)->setFormat('json');
         return $this->handleView($view);
     }
 
