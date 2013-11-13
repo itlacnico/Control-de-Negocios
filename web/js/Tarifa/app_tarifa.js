@@ -78,9 +78,26 @@ timsaControllers.controller('tarifaController', [ '$scope', 'TarifaAgencia', '$r
                                         $scope.clase = $scope.classes[0].value;
                                     });
 
-                                    $scope.tarifasAvalibles = Tarifa.get();
+                                    $scope.tarifasAvalibles = Tarifa.get({}, function(){
+                                        if(  $scope.tarifasAvalibles.length > 0 ){
+                                            $scope.tarifa_nueva.tarifa = $scope.tarifasAvalibles[0].id;
+                                        }
+                                        else{
+                                            $scope.tarifa_nueva.tarifa = "Sin tarifas disponibles";
+                                            $('#enviar').attr("disabled", "disabled");
+                                        }
 
-                                    $scope.cuotasAvalibles = Cuota.get();
+                                    });
+
+                                    $scope.cuotasAvalibles = Cuota.get({}, function(){
+                                        if(  $scope.cuotasAvalibles.length > 0 ){
+                                            $scope.tarifa_nueva.cuota = $scope.cuotasAvalibles[0].id;
+                                        }
+                                        else{
+                                            $scope.tarifa_nueva.cuota = "Sin cuotas disponibles, cree una nueva.";
+                                        }
+
+                                    });
 
                                     $scope.setClasificacion = function(evt, clase){
                                         evt.preventDefault();
@@ -127,22 +144,39 @@ timsaControllers.controller('tarifaController', [ '$scope', 'TarifaAgencia', '$r
                                         $scope.addTarifa = ! $scope.addTarifa;
                                     }
 
-                                    $scope.addTarifaMenu = true;
+                                    $scope.addTarifaMenu = false;
                                     $scope.showAddNewTarifaMenu = function(){
                                         $scope.addTarifaMenu = false;
+                                        $scope.tarifa_nueva.reutilizarCuota = false;
                                     }
                                     $scope.showAddTarifaMenu = function(){
                                         $scope.addTarifaMenu = true;
+                                        $scope.tarifa_nueva.reutilizarCuota = true;
+                                    }
+
+                                    $scope.$watch("clase", function() {
+                                        $scope.tarifa_nueva.clase = $scope.clase;
+                                    });
+
+
+                                    $scope.tarifa_nueva = {
+                                        agencia: $routeParams.agenciaID,
+                                        tarifa : "" ,
+                                        reutilizarCuota: false,
+                                        clase: "",
+                                        cuota: "",
+                                        nombreCuota: "",
+                                        importacionSencillo: "",
+                                        importacionFull: "",
+                                        exportacionSencillo: "",
+                                        exportacionFull: "",
+                                        reutilizadoSencillo: "",
+                                        reutilizadoFull: ""
                                     }
 
                                     $scope.nuevaTarifa = function(){
-                                        postData = {
-                                            "id": 42,
-                                            "title": "The Hitchhiker's Guide to the Galaxy",
-                                            "authors": ["Douglas Adams"]
-                                        }
 
-                                        Tarifa.save({}, postData);
+                                        Tarifa.save({}, { nuevaTarifa : $scope.tarifa_nueva } );
                                     }
 
                                 }

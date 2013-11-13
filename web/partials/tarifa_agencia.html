@@ -17,7 +17,7 @@
                        <input type="text" class="form-control" name="numero" placeholder="Año" ng-model="nuevaClase">
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="button" ng-click="appendInputClase()"> <span class="glyphicon glyphicon-ok-sign"></span> Añadir </button>
-                         </span>
+                        </span>
                    </div>
                </div>
            </div>
@@ -27,9 +27,7 @@
     <div class="col-lg-10">
 <div ng-show="load">
     <div ng-show="addTarifa">
-
         <div class="input-group col-lg-offset-5">
-
             <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
             <input type="text" class="form-control" placeholder="Tarifa" ng-model="filtroTarifa">
         </div>
@@ -85,7 +83,7 @@
         <div  class="form-group">
             <div class="col-lg-offset-9">
                 <button id="cancelarSucursal" class="btn btn-danger" ng-click="showAddTarifa()">Cancelar</button>
-                <button class="btn btn-primary" ng-click="nuevaTarifa()" >
+                <button class="btn btn-primary" ng-click="nuevaTarifa()" id="enviar">
                     <span class="glyphicon glyphicon-ok-sign"></span> Enviar
                 </button>
             </div>
@@ -94,7 +92,7 @@
         <div class="form-group">
             <label class="col-lg-2 control-label" for="tarifaAvalible">Tarifa</label>
             <div class="col-lg-10">
-                <select id="tarifaAvalible" class="form-control">
+                <select id="tarifaAvalible" class="form-control" ng-model="tarifa_nueva.tarifa">
                     <option value="{[{ tarifaAvalible.id }]}" ng-repeat="tarifaAvalible in tarifasAvalibles"> {[{ tarifaAvalible.nombre }]} </option>
                 </select>
             </div>
@@ -102,10 +100,10 @@
         <div class="form-group">
             <div class="col-lg-2"></div>
             <div class="btn-group" data-toggle="buttons">
-                <label class="btn btn-info active" ng-click="showAddTarifaMenu()">
+                <label class="btn btn-info" ng-click="showAddTarifaMenu()">
                     <input type="radio" value="importacion" name="viaje" id="importacion" > Reutilizar cuota
                 </label>
-                <label class="btn btn-info" ng-click="showAddNewTarifaMenu()">
+                <label class="btn btn-info active" ng-click="showAddNewTarifaMenu()">
                     <input type="radio" value="exportacion" name="viaje" id="exportacion"  > Definir nueva cuota
                 </label>
             </div>
@@ -114,18 +112,19 @@
         <div class="form-group" ng-show="addTarifaMenu">
             <label class="col-lg-2 control-label" for="tarifa">Listado de cuotas actuales</label>
             <div class="col-lg-10">
-                <select id="tarifa" class="form-control">
+                <select id="tarifa" class="form-control" ng-model="tarifa_nueva.cuota">
                     <option value="{[{cuota.id}]}" ng-repeat="cuota in cuotasAvalibles">
                         {[{ cuota.nombre  }]}
                     </option>
                 </select>
             </div>
         </div>
+
         <div ng-hide="addTarifaMenu">
             <div class="form-group">
                 <label class="col-lg-2 control-label" for="tarifa">Nombre de la nueva cuota</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" ng-model="tarifa_nueva.nombreCuota">
                 </div>
             </div>
 
@@ -134,17 +133,17 @@
                 <br/>
                 <label class="col-lg-2 control-label" for="tarifa">Importacion</label>
                 <div class="col-lg-2">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" ng-model="tarifa_nueva.importacionSencillo">
                 </div>
 
                 <label class="col-lg-2 control-label" for="tarifa">Exportacion</label>
                 <div class="col-lg-2">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" ng-model="tarifa_nueva.exportacionSencillo">
                 </div>
 
                 <label class="col-lg-2 control-label" for="tarifa">Reutilizado</label>
                 <div class="col-lg-2">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" ng-model="tarifa_nueva.reutilizadoSencillo">
                 </div>
 
             </div>
@@ -155,17 +154,17 @@
                 <br/>
                 <label class="col-lg-2 control-label" for="tarifa">Importacion</label>
                 <div class="col-lg-2">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" ng-model="tarifa_nueva.importacionFull">
                 </div>
 
                 <label class="col-lg-2 control-label" for="tarifa">Exportacion</label>
                 <div class="col-lg-2">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control"  ng-model="tarifa_nueva.exportacionFull">
                 </div>
 
                 <label class="col-lg-2 control-label" for="tarifa">Reutilizado</label>
                 <div class="col-lg-2">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control"  ng-model="tarifa_nueva.reutilizadoFull">
                 </div>
             </div>
         </div>
