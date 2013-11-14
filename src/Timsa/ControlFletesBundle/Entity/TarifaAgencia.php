@@ -44,7 +44,6 @@ class TarifaAgencia{
 	 * @ORM\ManyToOne(targetEntity="Cuota", inversedBy="tarifa_agencia")
 	 *
 	 */
-
 	private $cuota;
 
     /**

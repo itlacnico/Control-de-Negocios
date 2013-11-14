@@ -63,20 +63,24 @@ timsaControllers.controller('tarifaController', [ '$scope', 'TarifaAgencia', '$r
 
                                     $scope.classes = [];
 
-                                    $scope.tarifas = TarifaAgencia.get( { agenciaID: $routeParams.agenciaID } ,function(){
-                                        $scope.load = true;
+                                    $scope.getTarifas = function(){
+                                        $scope.tarifas = TarifaAgencia.get( { agenciaID: $routeParams.agenciaID } ,function(){
+                                            $scope.load = true;
 
-                                        angular.forEach( $scope.tarifas , function( value, key ){
-                                            clasificacion = { value : value.clasificacion };
+                                            angular.forEach( $scope.tarifas , function( value, key ){
+                                                clasificacion = { value : value.clasificacion };
 
-                                           if (! containsObject( clasificacion, $scope.classes ) ){
-                                               $scope.classes.push( clasificacion );
-                                           }
+                                                if (! containsObject( clasificacion, $scope.classes ) ){
+                                                    $scope.classes.push( clasificacion );
+                                                }
 
+                                            });
+
+                                            $scope.clase = $scope.classes[  $scope.classes.length-1 ].value;
                                         });
+                                    }
 
-                                        $scope.clase = $scope.classes[0].value;
-                                    });
+                                    $scope.getTarifas();
 
                                     $scope.tarifasAvalibles = Tarifa.get({}, function(){
                                         if(  $scope.tarifasAvalibles.length > 0 ){
@@ -123,7 +127,8 @@ timsaControllers.controller('tarifaController', [ '$scope', 'TarifaAgencia', '$r
 
                                     $scope.appendInputClase = function(){
                                         if( ! $scope.nuevaClase ){
-                                            alert("Valor no permitido");
+                                            $scope.mensaje = "Valor no permitido";
+                                            $scope.muestra_mensaje = true;
                                             return;
                                         }
 
@@ -133,9 +138,12 @@ timsaControllers.controller('tarifaController', [ '$scope', 'TarifaAgencia', '$r
                                         if (! containsObject( nuevaClase , $scope.classes ) ){
                                             $scope.classes.push( nuevaClase );
                                             $scope.nuevaClase = "";
+                                            $scope.clase = nuevaClase.value;
+
                                         }
                                         else{
-                                            alert("La clase ya existe.");
+                                            $scope.mensaje = "La clase ya existe";
+                                            $scope.muestra_mensaje = true;
                                         }
                                     }
 
@@ -174,9 +182,94 @@ timsaControllers.controller('tarifaController', [ '$scope', 'TarifaAgencia', '$r
                                         reutilizadoFull: ""
                                     }
 
-                                    $scope.nuevaTarifa = function(){
+                                    $scope.muestra_mensaje = false;
+                                    $scope.mensaje = "";
 
-                                        Tarifa.save({}, { nuevaTarifa : $scope.tarifa_nueva } );
+                                    $scope.nuevaTarifa = function(){
+                                        if(!$scope.clase){
+                                            $scope.muestra_mensaje = true;
+                                            $scope.mensaje = "Agrega una clase para poder continuar";
+                                            return;
+                                        }
+                                        else if( $scope.tarifa_nueva.reutilizarCuota ){
+
+                                        }
+                                        else if (! $scope.tarifa_nueva.reutilizarCuota  ){
+
+                                            if( ! $scope.tarifa_nueva.nombreCuota  ){
+                                                $scope.mensaje = "Introduce un nombre para la cuota";
+                                                $scope.muestra_mensaje = true;
+                                                return;
+                                            }
+
+                                            if(! $scope.tarifa_nueva.importacionSencillo
+                                                || ! $scope.tarifa_nueva.importacionFull
+                                                || ! $scope.tarifa_nueva.exportacionSencillo
+                                                || ! $scope.tarifa_nueva.exportacionFull
+                                                || ! $scope.tarifa_nueva.reutilizadoFull
+                                                || ! $scope.tarifa_nueva.reutilizadoSencillo
+                                                ){
+                                                $scope.mensaje = "Alguno de los campos de las cuotas falta de rellenarse";
+                                                $scope.muestra_mensaje = true;
+                                                return;
+                                            }
+                                            else{
+                                                if(! $.isNumeric($scope.tarifa_nueva.importacionSencillo)){
+                                                    $scope.valorNoEntero();
+                                                    return;
+                                                }
+                                                if(! $.isNumeric($scope.tarifa_nueva.exportacionSencillo) ){
+                                                    $scope.valorNoEntero();
+                                                    return;
+                                                }
+                                                if(! $.isNumeric($scope.tarifa_nueva.exportacionFull) ){
+                                                    $scope.valorNoEntero();
+                                                    return;
+                                                }
+                                                if(! $.isNumeric($scope.tarifa_nueva.importacionFull) ){
+                                                    $scope.valorNoEntero();
+                                                    return;
+                                                }
+                                                if(! $.isNumeric($scope.tarifa_nueva.reutilizadoFull) ){
+                                                    $scope.valorNoEntero();
+                                                    return;
+                                                }
+                                                if(! $.isNumeric($scope.tarifa_nueva.reutilizadoSencillo) ){
+                                                    $scope.valorNoEntero();
+                                                    return;
+                                                }
+                                            }
+                                        }
+
+                                        Tarifa.save({}, { nuevaTarifa : $scope.tarifa_nueva }, function(data){
+
+                                            if( data.resultado ){
+                                                $('#mensaje').removeClass("alert-danger").addClass("alert-success");
+                                            }
+                                            else{
+                                                $('#mensaje').removeClass("alert-success").addClass("alert-danger");
+                                            }
+
+                                            $scope.mensaje = data.mensaje;
+                                            $scope.muestra_mensaje = true;
+                                            $scope.getTarifas();
+
+                                        } );
+
+                                        $scope.load = false;
+                                        $scope.addTarifa = true;
+
+
+
+                                    }
+
+                                    $(document.body).click(function(e){
+                                        $scope.muestra_mensaje = false;
+                                    });
+
+                                    $scope.valorNoEntero = function(){
+                                        $scope.mensaje = "Compruebe sus datos, al parecer no son numeros";
+                                        $scope.muestra_mensaje = true;
                                     }
 
                                 }

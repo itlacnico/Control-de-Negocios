@@ -1,17 +1,23 @@
 <div>
+
+    <div class="alert alert-danger" ng-show="muestra_mensaje" id="mensaje">
+         {[{ mensaje }]}
+    </div>
+
     <div class="centerImage text-center" id="load">
         <img  ng-src="{[{ loadImage }]}" ng-hide="load">
     </div>
 
     <div class="col-lg-2">
+        <div ng-show="load" >
         <div class="list-group text-center">
             <a href="#" ng-click="setClasificacion($event, '{[{class.value}]}' )" ng-class="{ active : isSelected('{[{class.value}]}') }" class="list-group-item" ng-repeat="class in classes">
                 {[{ class.value }]}
             </a>
             <br><br>
 
-           <div ng-show="load" >
-               <button class="btn col-lg-12" ng-click="mostrarInputClase()"> <span class="glyphicon glyphicon-plus"></span> Nueva</button>
+
+               <button id="boton_nueva_clase" class="btn col-lg-12" ng-click="mostrarInputClase()"> <span class="glyphicon glyphicon-plus"></span> Nueva</button>
                <div ng-show="addClase">
                    <div class="input-group">
                        <input type="text" class="form-control" name="numero" placeholder="Año" ng-model="nuevaClase">

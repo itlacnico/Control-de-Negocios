@@ -33,37 +33,37 @@ class Cuota{
 	protected $statusA = true;
 
 	/**
-	 * @ORM\Column(name="reutilizadoSencillo", type="integer")
+	 * @ORM\Column(name="reutilizadoSencillo", type="decimal", scale=2)
 	 */
 
 	protected $reutilizadoSencillo;
 
 	/**
-	 * @ORM\Column(name="reutilizadoFull", type="integer")
+	 * @ORM\Column(name="reutilizadoFull", type="decimal", scale=2)
 	 */
 
 	protected $reutilizadoFull;
 
 	/**
-	 * @ORM\Column(name="importacionSencillo", type="integer")
+	 * @ORM\Column(name="importacionSencillo", type="decimal", scale=2)
 	 */
 
 	protected $importacionSencillo;
 
 	/**
-	 * @ORM\Column(name="importacionFull", type="integer")
+	 * @ORM\Column(name="importacionFull", type="decimal", scale=2)
 	 */
 
 	protected $importacionFull;
 
 	/**
-	 * @ORM\Column(name="exportacionSencillo", type="integer")
+	 * @ORM\Column(name="exportacionSencillo", type="decimal", scale=2)
 	 */
 
 	protected $exportacionSencillo;
 
 	/**
-	 * @ORM\Column(name="exportacionFull", type="integer")
+	 * @ORM\Column(name="exportacionFull", type="decimal", scale=2)
 	 */
 
 	protected $exportacionFull;
@@ -116,7 +116,7 @@ class Cuota{
     /**
      * Set reutilizadoSencillo
      *
-     * @param integer $reutilizadoSencillo
+     * @param decimal $reutilizadoSencillo
      * @return Cuota
      */
     public function setReutilizadoSencillo($reutilizadoSencillo)
@@ -139,7 +139,7 @@ class Cuota{
     /**
      * Set reutilizadoFull
      *
-     * @param integer $reutilizadoFull
+     * @param decimal $reutilizadoFull
      * @return Cuota
      */
     public function setReutilizadoFull($reutilizadoFull)
@@ -152,7 +152,7 @@ class Cuota{
     /**
      * Get reutilizadoFull
      *
-     * @return integer 
+     * @return decimal
      */
     public function getReutilizadoFull()
     {
@@ -162,7 +162,7 @@ class Cuota{
     /**
      * Set importacionSencillo
      *
-     * @param integer $importacionSencillo
+     * @param decimal $importacionSencillo
      * @return Cuota
      */
     public function setImportacionSencillo($importacionSencillo)
@@ -175,7 +175,7 @@ class Cuota{
     /**
      * Get importacionSencillo
      *
-     * @return integer 
+     * @return decimal
      */
     public function getImportacionSencillo()
     {
@@ -185,7 +185,7 @@ class Cuota{
     /**
      * Set importacionFull
      *
-     * @param integer $importacionFull
+     * @param decimal $importacionFull
      * @return Cuota
      */
     public function setImportacionFull($importacionFull)
@@ -198,7 +198,7 @@ class Cuota{
     /**
      * Get importacionFull
      *
-     * @return integer 
+     * @return decimal
      */
     public function getImportacionFull()
     {
@@ -208,7 +208,7 @@ class Cuota{
     /**
      * Set exportacionSencillo
      *
-     * @param integer $exportacionSencillo
+     * @param decimal $exportacionSencillo
      * @return Cuota
      */
     public function setExportacionSencillo($exportacionSencillo)
@@ -221,7 +221,7 @@ class Cuota{
     /**
      * Get exportacionSencillo
      *
-     * @return integer 
+     * @return decimal
      */
     public function getExportacionSencillo()
     {
@@ -231,7 +231,7 @@ class Cuota{
     /**
      * Set exportacionFull
      *
-     * @param integer $exportacionFull
+     * @param decimal $exportacionFull
      * @return Cuota
      */
     public function setExportacionFull($exportacionFull)
@@ -244,7 +244,7 @@ class Cuota{
     /**
      * Get exportacionFull
      *
-     * @return integer 
+     * @return decimal
      */
     public function getExportacionFull()
     {

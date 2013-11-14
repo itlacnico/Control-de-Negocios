@@ -20,6 +20,7 @@ use Symfony\Bundle\FrameworkBundle\Templating\TemplateReference,
 
 use Doctrine\Common\Cache\Cache;
 use JMS\Serializer\SerializationContext;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 
 use Timsa\ControlFletesBundle\Entity\Cuota,
@@ -77,8 +78,10 @@ class TarifaAgenciaRestController extends FOSRestController{
         }
         else{
         // Aun debo afrontar el problema de los choques de tarifas.
+            try{
+
             $cuota = new Cuota();
-            $cuota->setNombre($nueva_tarifa['nombre']);
+            $cuota->setNombre($nueva_tarifa['nombreCuota']);
 
             $cuota->setExportacionSencillo($nueva_tarifa['exportacionSencillo']);
             $cuota->setExportacionFull($nueva_tarifa['exportacionFull']);
@@ -102,9 +105,21 @@ class TarifaAgenciaRestController extends FOSRestController{
 
             $em->flush();
 
+            $log = "Tarifa agregada correctamente";
+            $resultado = true;
+
+            }catch (Exception $e){
+                $log = "No se pudo agregar la Tarifa.";
+                $resultado = false;
+            }
+
         }
 
-        $mensaje = "Se realizo una nueva inclusion ";
+        $mensaje = array(
+            "resultado" => $resultado,
+            "mensaje" => $log
+        );
+
 
         $view = View::create()->setStatusCode(200)->setData($mensaje)->setFormat('json');
         return $this->handleView($view);
