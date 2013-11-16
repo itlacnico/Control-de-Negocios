@@ -1,0 +1,238 @@
+{% extends 'TimsaControlFletesBundle::layout.html.twig' %}
+
+{% block header %}
+
+    <div class="page-header">
+        <h1>Crear Flete</h1>
+    </div>
+
+{% endblock %}
+
+ {% block content %}
+
+     <ul class="nav nav-tabs nav-justified" id="tabla">
+         <li class="active" ><a id="viajetab" class="text-danger" href="#eco" data-toggle="tab"> Viaje <span id="viaje_icon" class="glyphicon glyphicon-remove-circle"></span> </a>  </li>
+         <li><a id="workordertab" class="text-danger" href="#soc" data-toggle="tab"><span  id="workorder_icon" class="glyphicon glyphicon-remove-circle"></span> WorkOrder </a> </li>
+         <li><a href="#listado" data-toggle="tab"> Listado </a></li>
+     </ul>
+
+     <div class="tab-content">
+     <div class="tab-pane col-lg-12 active" id="eco">
+         <br/>
+         <div class="col-lg-8">
+             <br/>
+             <div class="form-group">
+                 <label class="col-lg-2 control-label" for="economico">Economico</label>
+                 <div class="col-lg-8">
+                     <div class="input-group">
+                         <input  id="economico" type="text" class="form-control" name="economico">
+                     </div>
+                 </div>
+                 <div class="col-lg-1">
+                     <span class="glyphicon glyphicon-ok-sign"></span>
+                 </div>
+             </div>
+         </div>
+
+         <div class="col-lg-8 active">
+             <br>
+             <div class="form-group">
+                 <label class="col-lg-2 control-label" for="operador">Operador</label>
+                 <div class="col-lg-8">
+                         <select class="form-control">
+
+                         </select>
+                 </div>
+                 <div class="col-lg-1">
+                     <span class="glyphicon glyphicon-ok-sign"></span>
+                 </div>
+             </div>
+         </div>
+
+         <br/><br/>
+
+         <div class="col-lg-8 active">
+             <br/><br/>
+             <div class="form-group">
+                 <label class="col-lg-2 control-label" for="agencia">Agencia</label>
+                 <div class="col-lg-8">
+                     <div class="input-group">
+                         <select class="form-control" name="agencia" id="agencia" required>
+                         </select>
+                     </div>
+                 </div>
+             </div>
+             <br><br>
+             <div class="form-group">
+                 <label class="col-lg-2 control-label" for="cliente">Cliente</label>
+                 <div class="col-lg-8">
+                         <select name="cliente" class="form-control">
+                             </select>
+                 </div>
+                 <div class="col-lg-1">
+                     <span class="glyphicon glyphicon-ok-sign"></span>
+                 </div>
+             </div>
+
+             <br><br>
+             <div class="form-group">
+                 <label class="col-lg-2 control-label" for="sucursal">Sucursal</label>
+                 <div class="col-lg-8">
+                         <select name="sucursal" class="form-control">
+                         </select>
+                 </div>
+                 <div class="col-lg-1">
+                     <span class="glyphicon glyphicon-ok-sign"></span>
+                 </div>
+             </div>
+         </div>
+
+     </div>
+
+     <div class="tab-pane col-lg-12" id="soc">
+         <br><br>
+         <div class="col-lg-12">
+             <div class="titulo col-lg-8">
+                 <br><br>
+                 <h3>Contenedores</h3>
+                 <br><br>
+             </div>
+
+             <div class="panel panel-default pull-left col-lg-4">
+                 <div class="panel-body">
+                     <div class="btn-group" data-toggle="buttons">
+                         <label class="btn btn-info">
+                             <input  type="radio" value="importacion" name="viaje" id="importacion"> Importacion
+                         </label>
+                         <label class="btn btn-info">
+                             <input type="radio" value="exportacion" name="viaje" id="exportacion"> Exportacion
+                         </label>
+                     </div>
+
+                     <div class="btn-group" data-toggle="buttons">
+                         <label class="btn btn-primary">
+                             <input  type="radio" value="sencillo" name="trafico" id="sencillo" class="viaje"> Sencillo
+                         </label>
+                         <label class="btn btn-primary">
+                             <input type="radio"  value="full" name="trafico" id="full" class="viaje"> Full
+                         </label>
+                     </div>
+                 </div>
+                 <div class="checkbox">
+                     <label><input type="checkbox" name="contenedores_boolean" id="boleano" value="true">Dejar Pendiente el registro de contenedores</label>
+                 </div>
+             </div>
+
+             <div class="panel panel-default">
+                 <div class="panel-body" ng-App>
+
+                     <div id="contenedor1">
+                         <div class="col-lg-8">
+
+                             <div class="form-group">
+                                 <label class="col-lg-2 control-label" for="workorder1">WorkOrder</label>
+                                 <div class="col-lg-10">
+                                     <input id="workorder1" type="text" class="form-control col-lg-4" name="workorder1">
+                                 </div> 			  	 </div>
+                             <br><br>
+                             <div class="form-group">
+                                 <label class="col-lg-2 control-label" for="booking1">Booking</label>
+                                 <div class="col-lg-10">
+                                     <input id="booking1" type="text" class="form-control col-lg-4" name="booking1">
+                                 </div>
+                             </div>
+                             <br><br>
+                             <div class="form-group">
+                                 <label class="col-lg-2 control-label" for="contenedor1">Contenedor</label>
+                                 <div class="col-lg-10">
+                                     <input id="contenedor1" type="text" class="form-control col-lg-4" name="contenedor1">
+                                 </div>
+                             </div>
+                             <br><br>
+                             <div class="form-group">
+                                 <label class="col-lg-2 control-label" for="contenedor1">Size</label>
+                                 <div class="col-lg-10">
+                                     <select name="contenedor_tipo1" class="form-control">
+                                         <option>40HC</option>
+                                         <option>40DC</option>
+                                         <option>20HC</option>
+                                         <option>20DC</option>
+                                     </select>
+                                 </div>
+                             </div>
+
+                         </div>
+                         <div id="sellos1" class="col-lg-4" ng>
+                             <ul class="list-group">
+                                 <li class="list-group-item">
+                                     <input type="text" class="form-control">
+                                 </li>
+                             </ul>
+                             <button type="button" class="btn btn-success">Agregar Sello</button>
+                         </div>
+                     </div>
+
+                     <br><br><br>
+                     <div id="contenedor2">
+                         <div  class="col-lg-8">
+                             <br><br>
+                             <div class="form-group">
+                                 <label class="col-lg-2 control-label" for="workorder2">WorkOrder</label>
+                                 <div class="col-lg-10">
+                                     <input id="workorder2" type="text" class="form-control col-lg-4" name="workorder2">
+                                 </div>
+                             </div>
+
+                             <br><br>
+                             <div class="form-group">
+                                 <label class="col-lg-2 control-label" for="booking2">Booking</label>
+                                 <div class="col-lg-10">
+                                     <input id="booking2" type="text" class="form-control col-lg-4" name="booking2">
+                                 </div>
+                             </div>
+
+                             <br><br>
+                             <div class="form-group">
+                                 <label class="col-lg-2 control-label" for="contenedor2">Contenedor</label>
+                                 <div class="col-lg-10">
+                                     <input id="contenedor2" type="text" class="form-control col-lg-4" name="contenedor2">
+                                 </div>
+                             </div>
+                             <br><br>
+                             <div class="form-group">
+                                 <label class="col-lg-2 control-label" for="contenedor1">Size</label>
+                                 <div class="col-lg-10">
+                                     <select name="contenedor_tipo2" class="form-control">
+                                         <option>40HC</option>
+                                         <option>40DC</option>
+                                         <option>20HC</option>
+                                         <option>20DC</option>
+                                     </select>
+                                 </div>
+                             </div>
+                         </div>
+
+                         <div id="sellos2" class="col-lg-4">
+                             <br><br>
+                             <ul class="list-group" id="lista_sellos2">
+                                 <li class="list-group-item">
+                                     <input type="text" class="form-control">
+                                 </li>
+                             </ul>
+                             <button type="button" class="btn btn-success">Agregar Sello</button>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+     <div>
+     </div>
+
+
+
+ {% endblock %}
+
+ {% block javascripts %}
+     {{ parent() }}
+{% endblock %}

@@ -38,4 +38,8 @@ class FleteRestController extends FOSRestController{
 
 		 return $this->handleView($view);
 	}
+
+    public function createAction(){
+        return $this->render("TimsaControlFletesBundle:FleteRest:create.html.twig");
+    }
 }
