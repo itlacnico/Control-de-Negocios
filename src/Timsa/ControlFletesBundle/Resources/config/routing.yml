@@ -136,8 +136,14 @@ _tarifaCuotaRest:
       _method: GET
 
 _tarifaCreateRestPost:
+    pattern: /main/rest/tarifa
+    defaults: { _controller: TimsaControlFletesBundle:TarifaAgenciaRest:nuevaCuota, format: ~ }
+    requirements:
+       _method: POST
+
+_tarifaAgenciaRestDelete:
    pattern: /main/rest/tarifa
-   defaults: { _controller: TimsaControlFletesBundle:TarifaAgenciaRest:nuevaCuota, format: ~ }
+   defaults: { _controller: TimsaControlFletesBundle:TarifaAgenciaRest:deleteTarifaAgencia, format: ~ }
    requirements:
-      _method: POST
+      _method: DELETE
 

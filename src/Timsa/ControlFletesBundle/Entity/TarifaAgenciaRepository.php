@@ -98,7 +98,8 @@ class TarifaAgenciaRepository extends EntityRepository
 										c.importacionSencillo as importacions, c.reutilizadoSencillo as reutilizados,
 										c.exportacionFull as exportacionf, c.importacionFull as importacionf,
 										c.reutilizadoFull as reutilizadof,
-										ta.clasificacion
+										ta.clasificacion, c.nombre as nombre_cuota,
+										ta.fecha_ingreso as fecha, ta.id as cuota, ta.id as id
 									   FROM
 
 									   TimsaControlFletesBundle:TarifaAgencia ta
@@ -111,6 +112,52 @@ class TarifaAgenciaRepository extends EntityRepository
                                      )
                         ->getResult();
         }
+
+    public function deshabilitarTarifa($clase, $tarifa, $agencia){
+        return $this->getEntityManager()
+            ->createQuery(" UPDATE
+                            TimsaControlFletesBundle:TarifaAgencia ta SET ta.statusA = false
+                            WHERE
+                            ta.statusA = true
+                            AND
+                            ta.tarifa = $tarifa
+                            AND
+                            ta.agencia = $agencia
+                            AND
+                            ta.clasificacion =  $clase
+                            ")
+            ->getResult();
+    }
+
+    public function eliminarTarifaPorAgencia($clase, $tarifa, $agencia, $cuota){
+        return $this->getEntityManager()
+            ->createQuery(" UPDATE
+                            TimsaControlFletesBundle:TarifaAgencia ta SET ta.statusA = false
+                            WHERE
+                            ta.statusA = true
+                            AND
+                            ta.tarifa = $tarifa
+                            AND
+                            ta.agencia = $agencia
+                            AND
+                            ta.clasificacion =  $clase
+                            AND
+                            ta.cuota = $cuota
+                            ")
+            ->getResult();
+    }
+
+    public function removeTarifaPorAgencia($id){
+        return $this->getEntityManager()
+            ->createQuery(" UPDATE
+                            TimsaControlFletesBundle:TarifaAgencia ta SET ta.statusA = false
+                            WHERE
+                            ta.statusA = true
+                            AND
+                            ta.id = $id
+                            ")
+            ->getResult();
+    }
 /*
 		public function findTarifaPorAgencia($agencia){
 

@@ -69,13 +69,11 @@
                 <td>
                     <div class="btn-group">
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-
                             <span class="glyphicon glyphicon-wrench"></span>
-
                         </button>
                         <ul class="dropdown-menu">
-                            <li> <a href="#"><span class="glyphicon glyphicon-remove"></span>  Eliminar </a></li>
-                            <li><a href="#"> <span class="glyphicon glyphicon-pencil"></span> Modificar </a></li>
+                            <li><a href="" ng-click="informationAction(tarifa)"> <span class="glyphicon glyphicon-exclamation-sign"></span> Examinar </a></li>
+                            <li> <a href="" ng-click="deleteTarifaAgencia(tarifa)"><span class="glyphicon glyphicon-remove"></span>  Eliminar </a></li>
                         </ul>
                     </div>
                 </td>
@@ -176,6 +174,49 @@
         </div>
     </form>
     </div>
+    </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel"> {[{ modal.titulo }]} </h4>
+                </div>
+                <div class="modal-body">
+                    <dl  class="dl-horizontal">
+                        <dt> Nombre de la cuota asiganada </dt>
+                        <dd> {[{ modal.nombre_cuota }]} </dd>
+
+                        <dt> Fecha de definicion </dt>
+                        <dd> {[{ modal.fecha }]} </dd>
+                    </dl>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"> Cerrar </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalConfirmacion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="dimissConfirmacion"> Confirmacion </h4>
+                </div>
+                <div class="modal-body">
+                    <dl  class="dl-horizontal">
+                        ¿ Esta seguro que desea eliminar la tarifa ?
+                    </dl>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="removeTarifa()"> Si </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"> No </button>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>

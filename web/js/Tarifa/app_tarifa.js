@@ -75,8 +75,9 @@ timsaControllers.controller('tarifaController', [ '$scope', 'TarifaAgencia', '$r
                                                 }
 
                                             });
-
-                                            $scope.clase = $scope.classes[  $scope.classes.length-1 ].value;
+                                            if(!  $scope.clase ){
+                                                $scope.clase = $scope.classes[  $scope.classes.length-1 ].value;
+                                            }
                                         });
                                     }
 
@@ -193,6 +194,7 @@ timsaControllers.controller('tarifaController', [ '$scope', 'TarifaAgencia', '$r
                                         }
                                         else if( $scope.tarifa_nueva.reutilizarCuota ){
 
+
                                         }
                                         else if (! $scope.tarifa_nueva.reutilizarCuota  ){
 
@@ -254,13 +256,45 @@ timsaControllers.controller('tarifaController', [ '$scope', 'TarifaAgencia', '$r
                                             $scope.muestra_mensaje = true;
                                             $scope.getTarifas();
 
+
                                         } );
 
                                         $scope.load = false;
                                         $scope.addTarifa = true;
 
+                                    }
 
+                                    $scope.modal = { titulo: "", nombre_cuota: "", fecha: "" }
 
+                                    $scope.informationAction = function(tarifa){
+                                        $scope.modal.titulo = tarifa.tarifa;
+                                        $scope.modal.nombre_cuota = tarifa.nombre_cuota;
+                                        $scope.modal.fecha = tarifa.fecha;
+                                        $('#myModal').modal('show')
+                                    }
+
+                                    $scope.tarifa_eliminar = { value: "" };
+
+                                    $scope.deleteTarifaAgencia = function( tarifa ){
+                                        $scope.tarifa_eliminar.value = tarifa.id;
+                                        $('#modalConfirmacion').modal('show');
+                                    }
+
+                                    $scope.removeTarifa = function(){
+
+                                        Tarifa.delete( { tarifaAgencia : $scope.tarifa_eliminar.value } , function(data){
+                                            $scope.muestra_mensaje = true;
+                                            if( data.resultado ){
+                                                $('#mensaje').removeClass("alert-danger").addClass("alert-success");
+                                            }
+                                            else{
+                                                $('#mensaje').removeClass("alert-success").addClass("alert-danger");
+                                            }
+                                            $scope.mensaje = data.mensaje;
+                                            $scope.getTarifas();
+                                        } );
+
+                                        $scope.load = false;
                                     }
 
                                     $(document.body).click(function(e){

@@ -72,14 +72,52 @@ class TarifaAgenciaRestController extends FOSRestController{
                         ->getRepository('TimsaControlFletesBundle:Tarifa')
                         ->find($nueva_tarifa['tarifa']);
 
+        $em = $this->getDoctrine()->getManager();
+
         // Si debe reutilizarse la cuota, de lo contrario se creara una con los datos proporcionados.
         if($nueva_tarifa['reutilizarCuota']){
-            $nueva_tarifa['cuota'];
-        }
-        else{
-        // Aun debo afrontar el problema de los choques de tarifas.
-            try{
 
+            $em->getConnection()->beginTransaction(); // inicia la transaccion.
+
+            try{
+                // Se obtiene la cuota que el usuario especifico.
+                $cuota = $this->getDoctrine()
+                    ->getRepository('TimsaControlFletesBundle:Cuota')
+                    ->find($nueva_tarifa['cuota']);
+
+                // Se procede a pasar a un status de no-activo ( Si existe ) a la anterior tarifa para agencia cuyo nombre de tarifa sea el mismo.
+
+                $this->getDoctrine()->getRepository("TimsaControlFletesBundle:TarifaAgencia")
+                    ->deshabilitarTarifa($clasificacion, $tarifa->getId(), $agencia->getId());
+
+                // Se crea la nueva tarifa para agencia
+
+                $em->persist( $this->createTarifaAgencia($cuota, $agencia, $clasificacion, $tarifa ) );
+                $em->flush();
+                $em->getConnection()->commit();
+
+                $resultado = true;
+                $log = "Tarifa Agregada correctamente";
+
+            }catch (Exception $e){
+                $em->getConnection()->rollback();
+                $log = "No se pudo agregar la Tarifa.";
+                $resultado = false;
+            }
+
+
+        }
+        else{  // Si el usuario quiere utilizar una nueva cuota, se realiza el siguiente bloque para insertarla.
+
+            $em->getConnection()->beginTransaction(); // inicia la transaccion.
+
+            try{
+                // Se procede a pasar a un status de no-activo ( Si existe ) a la anterior tarifa para agencia cuyo nombre de tarifa sea el mismo.
+
+                $this->getDoctrine()->getRepository("TimsaControlFletesBundle:TarifaAgencia")
+                    ->deshabilitarTarifa($clasificacion, $tarifa->getId(), $agencia->getId());
+
+            //
             $cuota = new Cuota();
             $cuota->setNombre($nueva_tarifa['nombreCuota']);
 
@@ -92,23 +130,19 @@ class TarifaAgenciaRestController extends FOSRestController{
             $cuota->setReutilizadoSencillo($nueva_tarifa['reutilizadoSencillo']);
             $cuota->setReutilizadoFull($nueva_tarifa['reutilizadoFull']);
 
-            $em = $this->getDoctrine()->getManager();
+
             $em->persist($cuota);
 
-            $tarifa_agencia = new TarifaAgencia();
-            $tarifa_agencia->setAgencia( $agencia );
-            $tarifa_agencia->setClasificacion($clasificacion);
-            $tarifa_agencia->setCuota($cuota);
-            $tarifa_agencia->setTarifa( $tarifa );
-
-            $em->persist($tarifa_agencia);
+                $em->persist( $this->createTarifaAgencia($cuota, $agencia, $clasificacion, $tarifa) );
 
             $em->flush();
+                $em->getConnection()->commit();  // Termina la transaccion.
 
             $log = "Tarifa agregada correctamente";
             $resultado = true;
 
             }catch (Exception $e){
+                $em->getConnection()->rollback();
                 $log = "No se pudo agregar la Tarifa.";
                 $resultado = false;
             }
@@ -124,5 +158,48 @@ class TarifaAgenciaRestController extends FOSRestController{
         $view = View::create()->setStatusCode(200)->setData($mensaje)->setFormat('json');
         return $this->handleView($view);
     }
+
+
+    public function deleteTarifaAgenciaAction(Request $request){
+        $tarifaAgencia = $request->query->get( 'tarifaAgencia' , 0);
+
+        if( $tarifaAgencia == 0 ){
+            $resultado = false;
+            $log = "No parametros";
+        }
+        else{
+            try{
+                $this->getDoctrine()
+                    ->getRepository('TimsaControlFletesBundle:TarifaAgencia')
+                    ->removeTarifaPorAgencia( $tarifaAgencia );
+
+                $resultado = true;
+                $log = "La tarifa se elimino correctamente";
+
+            }catch (Exception $e){
+                $resultado = false;
+                $log = "La tarifa no pudo ser eliminada";
+            }
+        }
+
+        $mensaje = array(
+            "resultado" => $resultado,
+            "mensaje" => $log
+        );
+
+        $view = View::create()->setStatusCode(200)->setData($mensaje)->setFormat('json');
+        return $this->handleView($view);
+    }
+
+    public function createTarifaAgencia($cuota, $agencia, $clasificacion, $tarifa){
+        $tarifa_agencia = new TarifaAgencia();
+        $tarifa_agencia->setAgencia( $agencia );
+        $tarifa_agencia->setClasificacion($clasificacion);
+        $tarifa_agencia->setCuota($cuota);
+        $tarifa_agencia->setTarifa( $tarifa );
+
+        return $tarifa_agencia;
+    }
+
 
 } 
