@@ -47,4 +47,14 @@ class OperadorRepository extends EntityRepository
 											ORDER BY p.nombre")
 					->getResult();
 	}
+
+    public function getAll(){
+        return $this->getEntityManager()
+            ->createQuery("SELECT op.id, op.nombre, a.id
+                            FROM TimsaControlFletesBundle:Operador op
+                                 JOIN op.actividad a
+                            WHERE op.statusA = true
+                            ORDER BY op.nombre")
+            ->getResult();
+    }
 }

@@ -37,4 +37,21 @@ class RelacionRepository extends EntityRepository
 					->createQuery( $query )
 					->getResult();
 	}
+
+    public function findRelaciones(){
+        return $this->getEntityManager()
+            ->createQuery(" SELECT op.id as operadorID, op.nombre as operador,ao.id as actividad_operador,
+                                   e.id as economicoID, e.numero as economico, ae.id as actividad_economico,
+                                   s.id as socioID, s.nombre as socio,
+                                   r.id as ID
+                            FROM TimsaControlFletesBundle:Relacion r
+                            JOIN r.operador op
+                            JOIN op.actividad ao
+                            JOIN r.economico e
+                            JOIN e.actividad ae
+                            JOIN r.socio s
+                            WHERE r.statusA = true
+                            ")
+            ->getResult();
+    }
 }

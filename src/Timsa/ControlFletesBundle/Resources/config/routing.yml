@@ -151,3 +151,18 @@ flete_create:
    pattern: /main/flete/create
    defaults: { _controller: TimsaControlFletesBundle:FleteRest:create, format: ~ }
 
+relaciones:
+   pattern: /main/rest/relacion
+   defaults: { _controller: TimsaControlFletesBundle:FleteRest:relaciones, format: ~ }
+   requirements:
+     _method: GET
+
+operadores:
+   pattern: /main/rest/operador
+   defaults: { _controller: TimsaControlFletesBundle:OperadorRest:getAll, format: ~ }
+   requirements:
+     _method: GET
+
+
+
+

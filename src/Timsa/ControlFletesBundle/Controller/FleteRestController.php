@@ -42,4 +42,15 @@ class FleteRestController extends FOSRestController{
     public function createAction(){
         return $this->render("TimsaControlFletesBundle:FleteRest:create.html.twig");
     }
+
+    public function relacionesAction(){
+
+        $data = $this->getDoctrine()
+            ->getRepository('TimsaControlFletesBundle:Relacion')
+            ->findRelaciones();
+
+        $view = View::create()->setStatusCode(200)->setData($data)->setFormat('json');
+
+        return $this->handleView($view);
+    }
 }

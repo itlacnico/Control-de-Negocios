@@ -9,15 +9,19 @@
 {% endblock %}
 
  {% block content %}
+    <div ng-app="fleteApp" ng-controller="createController">
 
      <ul class="nav nav-tabs nav-justified" id="tabla">
          <li class="active" ><a id="viajetab" class="text-danger" href="#eco" data-toggle="tab"> Viaje <span id="viaje_icon" class="glyphicon glyphicon-remove-circle"></span> </a>  </li>
-         <li><a id="workordertab" class="text-danger" href="#soc" data-toggle="tab"><span  id="workorder_icon" class="glyphicon glyphicon-remove-circle"></span> WorkOrder </a> </li>
+         <li><a id="workordertab" class="text-danger" href="#soc" data-toggle="tab">WorkOrder<span  id="workorder_icon" class="glyphicon glyphicon-remove-circle"></span> </a> </li>
          <li><a href="#listado" data-toggle="tab"> Listado </a></li>
      </ul>
 
-     <div class="tab-content">
-     <div class="tab-pane col-lg-12 active" id="eco">
+     <div class="tab-content" >
+     <div ng-hide="load" class="text-center">
+         <img ng-src="{[{ loadImage }]}" >
+     </div>
+     <div class="tab-pane col-lg-12 active" id="eco" ng-show="load">
          <br/>
          <div class="col-lg-8">
              <br/>
@@ -25,11 +29,11 @@
                  <label class="col-lg-2 control-label" for="economico">Economico</label>
                  <div class="col-lg-8">
                      <div class="input-group">
-                         <input  id="economico" type="text" class="form-control" name="economico">
+                         <input  id="economico" type="text" class="form-control" name="economico" ng-model="economico" >
                      </div>
                  </div>
                  <div class="col-lg-1">
-                     <span class="glyphicon glyphicon-ok-sign"></span>
+                     <span class="" id="economicoTest"></span>
                  </div>
              </div>
          </div>
@@ -40,11 +44,24 @@
                  <label class="col-lg-2 control-label" for="operador">Operador</label>
                  <div class="col-lg-8">
                          <select class="form-control">
-
+                            <option ng-repeat="operador in operadoresList">
+                                {[{ operador.nombre }]}
+                            </option>
                          </select>
+                     <br>
+                     <button ng-show="operadores_ready" class="btn btn-xs btn-info" id="list_operadores"> Seleccionar otro operador  <span class="glyphicon glyphicon-chevron-right"> </span> </button>
+                     <div class="popover">
+                         <div id="popover-head" > Lista de operadores </div>
+                         <div id="popover-content">
+                             <ul>
+                                 <li ng-repeat="operador in operadores"> {[{ operador.nombre }]} </li>
+                             </ul>
+                         </div>
+                     </div>
+
                  </div>
                  <div class="col-lg-1">
-                     <span class="glyphicon glyphicon-ok-sign"></span>
+                     <span id="operadorTest" class=""></span>
                  </div>
              </div>
          </div>
@@ -228,11 +245,17 @@
      </div>
      <div>
      </div>
-
+     </div>
 
 
  {% endblock %}
 
  {% block javascripts %}
      {{ parent() }}
+     <script type="text/javascript" src="http://code.angularjs.org/1.2.0-rc.3/angular.js"></script>
+     <script type="text/javascript" src="http://code.angularjs.org/1.2.0-rc.3/angular-route.min.js"></script>
+     <script type="text/javascript" src="http://code.angularjs.org/1.2.0-rc.3/angular-resource.min.js"></script>
+     <script type="text/javascript" src="http://code.angularjs.org/1.2.0-rc.3/angular-animate.min.js"></script>
+     <script src="{{ asset('js/flete/app_createflete.js') }}" > </script>
+
 {% endblock %}
