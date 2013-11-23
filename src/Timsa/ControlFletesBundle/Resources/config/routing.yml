@@ -163,6 +163,12 @@ operadores:
    requirements:
      _method: GET
 
+tarifa_agencia_por_flete:
+   pattern: /main/rest/tarifa_agencia
+   defaults: { _controller: TimsaControlFletesBundle:TarifaRest:getTarifasAgencia, format: ~ }
+   requirements:
+     _method: GET
+
 
 
 

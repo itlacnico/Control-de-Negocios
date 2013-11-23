@@ -29,7 +29,7 @@
                  <label class="col-lg-2 control-label" for="economico">Economico</label>
                  <div class="col-lg-8">
                      <div class="input-group">
-                         <input  id="economico" type="text" class="form-control" name="economico" ng-model="economico" >
+                         <input  id="economico" type="number" class="form-control" name="economico" ng-model="economico" >
                      </div>
                  </div>
                  <div class="col-lg-1">
@@ -37,25 +37,35 @@
                  </div>
              </div>
          </div>
+         <div class="col-lg-3" ng-class="{' alert alert-success' : isLibre( '{[{ economico }]}', 'economico' ), ' alert alert-danger' : isOcupado( '{[{ economico }]}', 'economico' )  }">
+             {[{ mensajeEconomico  }]}
+         </div>
 
          <div class="col-lg-8 active">
              <br>
              <div class="form-group">
                  <label class="col-lg-2 control-label" for="operador">Operador</label>
                  <div class="col-lg-8">
-                         <select class="form-control">
-                            <option ng-repeat="operador in operadoresList">
+                         <select class="form-control" ng-model="operador_seleccionado">
+                            <option value="{[{ operador.id}]}" ng-repeat="operador in operadoresList">
                                 {[{ operador.nombre }]}
                             </option>
                          </select>
                      <br>
                      <button ng-show="operadores_ready" class="btn btn-xs btn-info" id="list_operadores"> Seleccionar otro operador  <span class="glyphicon glyphicon-chevron-right"> </span> </button>
                      <div class="popover">
-                         <div id="popover-head" > Lista de operadores </div>
+                         <div id="popover-head" >
+                                 <div class="input-group">
+                                     <input type="text" class="form-control" ng-model="operadoresFilter">
+                                     <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+                                 </div>
+                         </div>
                          <div id="popover-content">
-                             <ul>
-                                 <li ng-repeat="operador in operadores"> {[{ operador.nombre }]} </li>
-                             </ul>
+                             <select multiple  >
+                                 <option value="{[{ operador.id }]}" ng-repeat="operador in operadores">
+                                     {[{ operador.nombre }]}
+                                 </option>
+                             </select>
                          </div>
                      </div>
 
@@ -64,6 +74,9 @@
                      <span id="operadorTest" class=""></span>
                  </div>
              </div>
+         </div>
+         <div class="col-lg-3" ng-class="{' alert alert-success' : isLibre( '{[{ operador_seleccionado }]}', 'operador' ), ' alert alert-danger' : isOcupado( '{[{ operador_seleccionado }]}', 'operador' )  }">
+             {[{ mensajeOperador  }]}
          </div>
 
          <br/><br/>
@@ -103,7 +116,6 @@
                  </div>
              </div>
          </div>
-
      </div>
 
      <div class="tab-pane col-lg-12" id="soc">
